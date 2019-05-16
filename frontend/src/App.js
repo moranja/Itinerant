@@ -1,5 +1,6 @@
 import React from 'react'
 import Itinerary from './containers/Itinerary'
+import MyMapComponent from './components/MyMapComponent'
 
 class App extends React.Component {
 
@@ -20,10 +21,17 @@ class App extends React.Component {
     console.log(this.state)
     return (
       <div>
-        <h1>Itinerant</h1>
+        <h1>ITINERANT</h1>
         {!!Object.keys(this.state).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
         ? (
-          <Itinerary {...this.state} />
+          <div style={{display: "flex"}}>
+            <div style={{flex: "1"}}>
+              <MyMapComponent isMarkerShown={false} />
+            </div>
+            <div style={{flex: "1"}}>
+              <Itinerary {...this.state} />
+            </div>
+          </div>
           )
         : (<h2>loading...</h2>)
         }

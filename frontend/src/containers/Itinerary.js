@@ -4,7 +4,6 @@ import City from '../components/City'
 export default class Itinerary extends React.Component {
 
   render() {
-    console.log(this.props.cities)
     return (
       <div>
         <h2>{this.props.details.title}</h2>

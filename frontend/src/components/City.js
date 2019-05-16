@@ -2,9 +2,7 @@ import React from 'react'
 import Plan from './Plan'
 import Area from './Area'
 
-const City = (props) => {
-  console.log(props)
-  return (
+const City = (props) => (
   <div>
     <h2>{props.name}, {props.country}, {props.key}</h2>
       <ul>
@@ -13,6 +11,6 @@ const City = (props) => {
       <br />
       {props.areas.map(a => <Area {...a} />)}
   </div>
-)}
+)
 
 export default City

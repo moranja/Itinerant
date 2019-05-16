@@ -1,5 +1,6 @@
 class AttractionsController < ApplicationController
   def index
-    render json: Attraction.all
+    itin = Itinerary.first
+    render json: itin.full_itinerary #testing
   end
 end

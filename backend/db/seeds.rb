@@ -51,22 +51,22 @@ tokyo = City.create(itinerary: japan_itinerary, name: cities[1][:name], country:
 osaka = City.create(itinerary: japan_itinerary, name: cities[2][:name], country: cities[2][:country], content: cities[2][:content])
 hakone = City.create(itinerary: japan_itinerary, name: cities[3][:name], country: cities[3][:country], content: cities[3][:content])
 
-# Create the brief schedule
-Plan.create(city: osaka, brief: true, date: "2017-10-21")
-Plan.create(city: kyoto, brief: true, date: "2017-10-21")
-Plan.create(city: kyoto, brief: true, date: "2017-10-22")
-Plan.create(city: kyoto, brief: true, date: "2017-10-23")
-Plan.create(city: kyoto, brief: true, date: "2017-10-24")
-Plan.create(city: kyoto, brief: true, date: "2017-10-25")
-Plan.create(city: tokyo, brief: true, date: "2017-10-25")
-Plan.create(city: tokyo, brief: true, date: "2017-10-26")
-Plan.create(city: tokyo, brief: true, date: "2017-10-27")
-Plan.create(city: tokyo, brief: true, date: "2017-10-28")
-Plan.create(city: tokyo, brief: true, date: "2017-10-29")
-Plan.create(city: hakone, brief: true, date: "2017-10-29")
-Plan.create(city: hakone, brief: true, date: "2017-10-30")
-Plan.create(city: osaka, brief: true, date: "2017-10-30")
-Plan.create(city: osaka, brief: true, date: "2017-10-31")
+# # Create the brief schedule
+# Plan.create(city: osaka, brief: true, date: "2017-10-21")
+# Plan.create(city: kyoto, brief: true, date: "2017-10-21")
+# Plan.create(city: kyoto, brief: true, date: "2017-10-22")
+# Plan.create(city: kyoto, brief: true, date: "2017-10-23")
+# Plan.create(city: kyoto, brief: true, date: "2017-10-24")
+# Plan.create(city: kyoto, brief: true, date: "2017-10-25")
+# Plan.create(city: tokyo, brief: true, date: "2017-10-25")
+# Plan.create(city: tokyo, brief: true, date: "2017-10-26")
+# Plan.create(city: tokyo, brief: true, date: "2017-10-27")
+# Plan.create(city: tokyo, brief: true, date: "2017-10-28")
+# Plan.create(city: tokyo, brief: true, date: "2017-10-29")
+# Plan.create(city: hakone, brief: true, date: "2017-10-29")
+# Plan.create(city: hakone, brief: true, date: "2017-10-30")
+# Plan.create(city: osaka, brief: true, date: "2017-10-30")
+# Plan.create(city: osaka, brief: true, date: "2017-10-31") Unnecessary, brief probably unnecessary as well
 
 # Create the detailed schedule
 Plan.create(city: tokyo, brief: false, date: "2017-10-25", time: "afternoon", content: "Shibuya crossing and street food")

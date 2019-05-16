@@ -36,11 +36,13 @@ ActiveRecord::Schema.define(version: 2019_05_15_191915) do
   end
 
   create_table "cities", force: :cascade do |t|
+    t.integer "itinerary_id"
     t.string "name"
     t.string "country"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["itinerary_id"], name: "index_cities_on_itinerary_id"
   end
 
   create_table "itineraries", force: :cascade do |t|
@@ -54,7 +56,6 @@ ActiveRecord::Schema.define(version: 2019_05_15_191915) do
 
   create_table "plans", force: :cascade do |t|
     t.integer "city_id"
-    t.integer "itinerary_id"
     t.boolean "brief"
     t.date "date"
     t.string "time"
@@ -62,7 +63,6 @@ ActiveRecord::Schema.define(version: 2019_05_15_191915) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_plans_on_city_id"
-    t.index ["itinerary_id"], name: "index_plans_on_itinerary_id"
   end
 
   create_table "user_itineraries", force: :cascade do |t|

@@ -14,7 +14,7 @@ class Itinerary < ApplicationRecord
       city.areas.each do |area|
         area_array.push({name: area.name, content: area.content, attractions: area.attractions})
       end
-      itinerary_hash[:cities].push(name: city.name, country: city.country, content: city.content, areas: area_array, plans: city.plans)
+      itinerary_hash[:cities].push(id: city.id, name: city.name, country: city.country, content: city.content, areas: area_array, plans: city.plans)
     end
     itinerary_hash
   end

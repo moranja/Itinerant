@@ -69,7 +69,7 @@ hakone = City.create(itinerary: japan_itinerary, name: cities[3][:name], country
 # Plan.create(city: osaka, brief: true, date: "2017-10-31") Unnecessary, brief probably unnecessary as well
 
 # Create the detailed schedule
-Plan.create(city: tokyo, brief: false, date: "2017-10-25", time: "afternoon", content: "Shibuya crossing and street food")
+Plan.create(city: tokyo, brief: false, date: "2017-10-25", time: "midday", content: "Shibuya crossing and street food")
 Plan.create(city: tokyo, brief: false, date: "2017-10-25", time: "afternoon", content: "Shop along Omote-sando")
 Plan.create(city: tokyo, brief: false, date: "2017-10-25", time: "evening", content: "Harajuku people watching and dinner")
 Plan.create(city: tokyo, brief: false, date: "2017-10-25", time: "night", content: "Barhopping in Golden Gai, Shinjuku")

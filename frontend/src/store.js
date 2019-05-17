@@ -5,8 +5,13 @@ import ReduxThunk from 'redux-thunk'
 // const initialState = {
 // }
 
-const reducer = (state = {}, action) => {
+const reducer = (state = {
+  itineraries: [],
+  selected_itinerary: {}
+}, action) => {
   switch(action.type){
+    case "LOAD_SELECTED_ITINERARY":
+      return {...state, selected_itinerary: action.payload}
     default:
       return state
   }

@@ -25,6 +25,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     state = {
     }
 
+    onPlacesChanged = () => {
+      console.log("test")
+    }
+
     componentDidMount() {
       this.props.loadItinerary()
     }
@@ -38,7 +42,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           ? (
             <div style={{display: "flex"}}>
               <div style={{flex: "1"}}>
-                <MyMapComponent isMarkerShown={false} />
+                <MyMapComponent isMarkerShown={false} onPlacesChanged={this.onPlacesChanged} />
               </div>
               <div style={{flex: "1"}}>
                 <Itinerary {...this.props.itinerary} />

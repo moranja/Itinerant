@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Itinerary from './containers/Itinerary'
+import ItineraryList from './containers/ItineraryList'
 import MyMapComponent from './components/MyMapComponent'
 
 const mapStateToProps = (state) => ({
@@ -10,7 +11,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   loadItinerary: (id) => {
     return dispatch => {
-      fetch("http://localhost:3000/attractions") // change this to request from the selected itinerary eventually....
+      fetch("http://localhost:3000/itineraries/3") // change this to request from the selected itinerary eventually....
       .then(res => res.json())
       .then(itinerary => {
         dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: itinerary })
@@ -42,13 +43,6 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
   class App extends React.Component {
 
-    state = {
-    }
-
-    onPlacesChanged = () => {
-      console.log("test")
-    }
-
     componentDidMount() {
       this.props.loadItinerary()
     }
@@ -75,6 +69,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
+      console.log(this.props)
       return (
         <div>
           <h1>ITINERANT</h1>
@@ -94,6 +89,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               <div style={{flex: "1"}}>
                 <Itinerary {...this.props.itinerary} />
               </div>
+              <ItineraryList />
             </div>
             )
           : (<h2>loading...</h2>)

@@ -10,6 +10,8 @@ const reducer = (state = {
   switch(action.type){
     case "LOAD_SELECTED_ITINERARY":
       return {...state, selected_itinerary: action.payload}
+    case "ITINERARY_LIST":
+      return {...state, itineraries: [...action.payload]}
     // case "ADD_ATTRACTION":
     //   console.log(action.payload)
     //   const newAttraction = {

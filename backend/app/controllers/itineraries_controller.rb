@@ -1,4 +1,13 @@
 class ItinerariesController < ApplicationController
+
+  def index
+    render json: Itinerary.all
+  end
+
+  def show
+    render json: Itinerary.find(params[:id]).full_itinerary
+  end
+
   def update
     itinerary = Itinerary.find(params[:id])
     area = itinerary.cities.find{|c| c.name == city_params[:city].titleize}.areas.find{|a| a.name == area_params[:area].titleize}

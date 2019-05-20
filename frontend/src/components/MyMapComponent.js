@@ -43,8 +43,7 @@ const MapWithASearchBox = compose(
           refs.searchBox = ref;
         },
         onPlacesChanged: () => {
-          const places = refs.searchBox.getPlaces();
-          console.log(places)
+          const places = refs.searchBox.getPlaces()
           this.props.addAnAttraction(places) // Add logic here to scrape the places object for the information I want
 
           // const bounds = new google.maps.LatLngBounds();

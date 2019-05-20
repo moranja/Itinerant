@@ -17,7 +17,14 @@ const mapDispatchToProps = {
       })
     }
   }
+  ,
+  addAttraction: payload => ({ type: "ADD_ATTRACTION", payload })
 }
+
+//
+// const mapDispatchToProps = dispatch => ({
+//   addAttraction: payload => dispatch({ type: "ADD_ATTRACTION", payload })
+// })
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   class App extends React.Component {
@@ -33,8 +40,28 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       this.props.loadItinerary()
     }
 
+    addAnAttraction = (place_info) => {
+      this.setState({attraction: place_info[0]})
+    }
+
+    handleChange = (e) => {
+      this.setState({[`${e.target.id}`]: e.target.value})
+    }
+
+    handleSubmit = (e) => {
+      e.persist()
+      e.preventDefault()
+      let payload = {
+        ...this.state.attraction,
+        city: this.state.city,
+        area: this.state.area
+      }
+      this.props.addAttraction(payload)
+    }
+
     render() {
       console.log(this.props.itinerary)
+      console.log(this.state)
       return (
         <div>
           <h1>ITINERANT</h1>
@@ -42,7 +69,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           ? (
             <div style={{display: "flex"}}>
               <div style={{flex: "1"}}>
-                <MyMapComponent isMarkerShown={false} onPlacesChanged={this.onPlacesChanged} />
+                <MyMapComponent isMarkerShown={false} addAnAttraction={this.addAnAttraction}/>
+                <form onSubmit={this.handleSubmit}>
+                  <input type="text" placeholder="City" id="city" onChange={this.handleChange} />
+                  <input type="text" placeholder="Area" id="area" onChange={this.handleChange} />
+                  <input type="submit"/>
+                </form>
               </div>
               <div style={{flex: "1"}}>
                 <Itinerary {...this.props.itinerary} />
@@ -52,7 +84,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           : (<h2>loading...</h2>)
           }
         </div>
-      )
+      ) // The form here should be a find or create style dropdown...
     }
   }
 )

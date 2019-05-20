@@ -1,4 +1,5 @@
 import React from 'react'
+// import { connect } from 'react-redux'
 
 const _ = require("lodash");
 const { compose, withProps, lifecycle } = require("recompose");
@@ -10,7 +11,6 @@ const {
 } = require("react-google-maps");
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 
-// let google
 
 const MapWithASearchBox = compose(
   withProps({
@@ -18,6 +18,7 @@ const MapWithASearchBox = compose(
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `400px` }} />,
     mapElement: <div style={{ height: `100%` }} />,
+    // addAttraction: (places) => {console.log(places)}
   }),
   lifecycle({
     componentWillMount() {
@@ -44,6 +45,8 @@ const MapWithASearchBox = compose(
         onPlacesChanged: () => {
           const places = refs.searchBox.getPlaces();
           console.log(places)
+          this.props.addAnAttraction(places) // Add logic here to scrape the places object for the information I want
+
           // const bounds = new google.maps.LatLngBounds();
 
           // places.forEach(place => {

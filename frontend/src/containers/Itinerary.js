@@ -1,7 +1,9 @@
 import React from 'react'
 import City from '../components/City'
 
-const Itinerary = (props) => (
+const Itinerary = (props) => {
+  console.log(props)
+  return (
   <div>
     <h2>{props.details.title}</h2>
     <ul>
@@ -13,6 +15,6 @@ const Itinerary = (props) => (
     <h4>{props.details.helpful_info}</h4>
     <h4>{props.details.notes}</h4>
   </div>
-)
+)}
 
 export default Itinerary

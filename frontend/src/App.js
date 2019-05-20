@@ -75,8 +75,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      console.log(this.props.itinerary)
-      console.log(this.state)
       return (
         <div>
           <h1>ITINERANT</h1>

@@ -1,7 +1,7 @@
 class ItinerariesController < ApplicationController
   def update
     itinerary = Itinerary.find(params[:id])
-    area = itinerary.cities.filter{ |c| c.name == city_params[:city] }.first.areas.filter{ |a| a.name == area_params[:area] }.first
+    area = itinerary.cities.find{|c| c.name == city_params[:city].titleize}.areas.find{|a| a.name == area_params[:area].titleize}
 
     new_attraction = Attraction.new(attraction_params)
     new_attraction.classification = new_attraction.classification.titleize

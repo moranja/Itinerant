@@ -6,7 +6,7 @@ const Area = (props) => (
     <h3>{props.name}</h3>
     <p>{props.content}</p>
     <ul>
-      {props.attractions.map(a => <Attraction {...a}/>)}
+      {props.attractions.map(a => <Attraction {...a} key={a.id}/>)}
     </ul>
   </React.Fragment>
 )

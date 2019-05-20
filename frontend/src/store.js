@@ -2,8 +2,6 @@ import { createStore, compose, applyMiddleware } from 'redux'
 import ReduxThunk from 'redux-thunk'
 // import history from './history'
 
-// const initialState = {
-// }
 
 const reducer = (state = {
   itineraries: [],
@@ -12,26 +10,26 @@ const reducer = (state = {
   switch(action.type){
     case "LOAD_SELECTED_ITINERARY":
       return {...state, selected_itinerary: action.payload}
-    case "ADD_ATTRACTION":
-      console.log(action.payload)
-      const newAttraction = {
-        city: action.payload.city,
-        area: action.payload.area,
-        name: action.payload.name,
-        classification: action.payload.types[0],
-        description: action.payload.description
-      }
-      fetch(`http://localhost:3000/itineraries/${action.payload.itineraryId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          ...newAttraction
-        })
-      })
-      .then(res => res.json())
-      .then(res => { return {...state, selected_itinerary: res}})
+    // case "ADD_ATTRACTION":
+    //   console.log(action.payload)
+    //   const newAttraction = {
+    //     city: action.payload.city,
+    //     area: action.payload.area,
+    //     name: action.payload.name,
+    //     classification: action.payload.types[0],
+    //     description: action.payload.description
+    //   }
+    //   fetch(`http://localhost:3000/itineraries/${action.payload.itineraryId}`, {
+    //     method: "PATCH",
+    //     headers: {
+    //       "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //       ...newAttraction
+    //     })
+    //   })
+    //   .then(res => res.json())
+    //   .then(res => { return {...state, selected_itinerary: res}})
 
 
       // return {...state, selected_itinerary: {

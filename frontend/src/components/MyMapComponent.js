@@ -29,7 +29,7 @@ const MapWithASearchBox = compose(
         center: {
           lat: 41.9, lng: -87.624
         },
-        markers: [],
+        markers: [], // **?????
         onMapMounted: ref => {
           refs.map = ref;
         },

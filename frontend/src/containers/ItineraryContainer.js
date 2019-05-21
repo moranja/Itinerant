@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  addAttraction: attraction_info => dispatch => {
+  addAttractionFromMap: attraction_info => dispatch => {
     const newAttraction = {
       city: attraction_info.city,
       area: attraction_info.area,
@@ -55,7 +55,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         description: this.state.description,
         itineraryId: this.props.itinerary.details.id
       }
-      this.props.addAttraction(payload)
+      this.props.addAttractionFromMap(payload)
     }
 
     render () {

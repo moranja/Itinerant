@@ -79,7 +79,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
             ?
               this.setState({
                 cityId: this.props.itinerary.cities[0].id,
-                areaId: this.props.itinerary.cities[0].areas[0].id
+                areaId: !!this.props.itinerary.cities[0].areas.length ? this.props.itinerary.cities[0].areas[0].id : ""
               })
             :
             (

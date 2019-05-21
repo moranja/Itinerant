@@ -32,11 +32,9 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps) (
   class ItineraryContainer extends React.Component {
 
-    componentDidMount() {
-      this.setState({
-        cityId: this.props.itinerary.cities,
-        areaId: this.props.itinerary.cities
-      })
+    state = {
+      cityId: "",
+      areaId: ""
     }
 
     addAnAttraction = (place_info) => {
@@ -72,12 +70,19 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     render () {
-      console.log(this.props)
       return (
         <div>
           <h1>ITINERANT</h1>
           {!!Object.keys(this.props.itinerary).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
-          ? (
+          ?
+            this.state.cityId === ""
+            ?
+              this.setState({
+                cityId: this.props.itinerary.cities[0].id,
+                areaId: this.props.itinerary.cities[0].areas[0].id
+              })
+            :
+            (
             <div>
               <div style={{display: "flex"}}>
                 <div style={{flex: "1"}}>

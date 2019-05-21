@@ -8,11 +8,11 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  addAreaFromItinerary: attraction_info => dispatch => {
-    const newAttraction = {
-      city_id: attraction_info.cityId,
-      name: attraction_info.name,
-      content: attraction_info.content
+  addAreaFromItinerary: area_info => dispatch => {
+    const newArea = {
+      city_id: area_info.cityId,
+      name: area_info.name,
+      content: area_info.content
     }
     fetch(`http://localhost:3000/areas`, {
       method: "POST",
@@ -20,7 +20,7 @@ const mapDispatchToProps = {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        ...newAttraction
+        ...newArea
       })
     })
     .then(res => res.json())

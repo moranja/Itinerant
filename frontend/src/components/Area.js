@@ -9,10 +9,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   addAttractionFromItinerary: attraction_info => dispatch => {
     const newAttraction = {
-      city: attraction_info.city,
-      area: attraction_info.area,
+      area_id: attraction_info.areaId,
       name: attraction_info.name,
-      classification: attraction_info.types[0],
+      classification: attraction_info.classification,
       description: attraction_info.description
     }
     fetch(`http://localhost:3000/itineraries/${attraction_info.itineraryId}`, {
@@ -40,13 +39,13 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       e.persist()
       e.preventDefault()
       let payload = {
-        ...this.state.attraction,
-        city: this.state.city,
-        area: this.state.area,
+        areaId: this.props.id,
+        name: this.state.name,
+        classification: this.state.classification,
         description: this.state.description,
         itineraryId: this.props.itinerary.details.id
       }
-      this.props.addAttractionFromMap(payload)
+      this.props.addAttractionFromItinerary(payload)
     }
 
     render() {

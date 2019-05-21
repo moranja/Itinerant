@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Itinerary from './containers/Itinerary'
+import ItineraryContainer from './containers/ItineraryContainer'
 import ItineraryList from './containers/ItineraryList'
 import MyMapComponent from './components/MyMapComponent'
 
@@ -60,7 +60,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      console.log(this.props)
       return (
         <div>
           <h1>ITINERANT</h1>
@@ -79,7 +78,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                   </form>
                 </div>
                 <div style={{flex: "1"}}>
-                  <Itinerary {...this.props.itinerary} />
+                  <ItineraryContainer />
                 </div>
               </div>
             </div>

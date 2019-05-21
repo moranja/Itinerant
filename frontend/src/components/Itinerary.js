@@ -1,5 +1,5 @@
 import React from 'react'
-import City from '../components/City'
+import City from './City'
 
 const Itinerary = (props) => {
   return (

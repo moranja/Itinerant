@@ -18,18 +18,7 @@ class ItinerariesController < ApplicationController
   end
 
   private
-    def itinerary_id_params
-      params.permit(:id)
-    end
-
-    def city_params
-      params.permit(:city)
-    end
-
-    def area_params
-      params.permit(:area)
-    end
-
+  
     def attraction_params
       params.permit(:area_id, :name, :classification, :description)
     end

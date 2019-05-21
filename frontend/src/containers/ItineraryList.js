@@ -27,6 +27,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
+      console.log(this.props)
       return (
         <div>
           {!!Object.keys(this.props.itineraries).length //Tests if this.state has any keys, if not the fetch hasn't completed yet

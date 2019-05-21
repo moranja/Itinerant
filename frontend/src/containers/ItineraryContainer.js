@@ -15,8 +15,8 @@ const mapDispatchToProps = {
       classification: attraction_info.types[0],
       description: attraction_info.description
     }
-    fetch(`http://localhost:3000/itineraries/${attraction_info.itineraryId}`, {
-      method: "PATCH",
+    fetch(`http://localhost:3000/attractions/`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
@@ -31,9 +31,6 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps) (
   class ItineraryContainer extends React.Component {
-
-    state = {
-    }
 
     componentDidMount() {
       this.setState({

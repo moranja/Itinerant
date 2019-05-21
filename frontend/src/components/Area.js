@@ -14,8 +14,8 @@ const mapDispatchToProps = {
       classification: attraction_info.classification,
       description: attraction_info.description
     }
-    fetch(`http://localhost:3000/itineraries/${attraction_info.itineraryId}`, {
-      method: "PATCH",
+    fetch(`http://localhost:3000/attractions/`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },

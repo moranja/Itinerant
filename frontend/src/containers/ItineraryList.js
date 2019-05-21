@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Itinerary from './Itinerary'
+// import Itinerary from './Itinerary'
 import ItineraryItem from '../components/ItineraryItem'
 
 const mapStateToProps = (state) => ({
@@ -30,14 +30,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       console.log(this.props)
       return (
         <div>
-          <h1>ITINERANT</h1>
           {!!Object.keys(this.props.itineraries).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
           ? (
             <ul>
               {this.props.itineraries.map(i => <ItineraryItem {...i}/>)}
             </ul>
             )
-          : (<h2>loading...</h2>)
+          : (<h2>...</h2>)
           }
         </div>
       ) // The form here should be a find or create style dropdown...

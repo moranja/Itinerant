@@ -9,15 +9,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  loadItinerary: (id) => {
-    return dispatch => {
-      fetch("http://localhost:3000/itineraries/3") // change this to request from the selected itinerary eventually....
-      .then(res => res.json())
-      .then(itinerary => {
-        dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: itinerary })
-      })
-    }
-  },
   addAttraction: attraction_info => dispatch => {
     const newAttraction = {
       city: attraction_info.city,
@@ -44,7 +35,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   class App extends React.Component {
 
     componentDidMount() {
-      this.props.loadItinerary()
+      // this.props.loadItinerary(4)
     }
 
     addAnAttraction = (place_info) => {
@@ -75,25 +66,27 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           <h1>ITINERANT</h1>
           {!!Object.keys(this.props.itinerary).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
           ? (
-            <div style={{display: "flex"}}>
-              <div style={{flex: "1"}}>
-                <MyMapComponent isMarkerShown={false} addAnAttraction={this.addAnAttraction}/>
-                <form onSubmit={this.handleSubmit}>
-                  <input type="text" placeholder="City" id="city" onChange={this.handleChange} />
-                  <input type="text" placeholder="Area" id="area" onChange={this.handleChange} />
-                  <br />
-                  <input type="text" placeholder="Description" id="description" onChange={this.handleChange} />
-                  <input type="submit"/>
-                </form>
+            <div>
+              <div style={{display: "flex"}}>
+                <div style={{flex: "1"}}>
+                  <MyMapComponent isMarkerShown={false} addAnAttraction={this.addAnAttraction}/>
+                  <form onSubmit={this.handleSubmit}>
+                    <input type="text" placeholder="City" id="city" onChange={this.handleChange} />
+                    <input type="text" placeholder="Area" id="area" onChange={this.handleChange} />
+                    <br />
+                    <input type="text" placeholder="Description" id="description" onChange={this.handleChange} />
+                    <input type="submit"/>
+                  </form>
+                </div>
+                <div style={{flex: "1"}}>
+                  <Itinerary {...this.props.itinerary} />
+                </div>
               </div>
-              <div style={{flex: "1"}}>
-                <Itinerary {...this.props.itinerary} />
-              </div>
-              <ItineraryList />
             </div>
             )
           : (<h2>loading...</h2>)
           }
+          <ItineraryList />
         </div>
       ) // The form here should be a find or create style dropdown...
     }

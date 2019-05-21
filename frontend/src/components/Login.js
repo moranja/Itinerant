@@ -9,14 +9,16 @@ class Login extends React.Component {
         'Content-Type':'application/json'
       },
       body: JSON.stringify({
-        name: this.state.name,
+        username: this.state.username,
         password: this.state.password
       })
     })
-      .then( res => res.json())
-      .then( user => {
-        localStorage.setItem('token', user.auth_token)
-      })
+    .then( res => res.json())
+    .then( res => {
+      console.log(res)
+      localStorage.setItem('token', res.auth_token)
+      localStorage.setItem('username', res.username)
+    })
   }
 
   handleChange = e => {
@@ -28,8 +30,8 @@ class Login extends React.Component {
   render(){
    return (
      <form>
-       <label>Name</label>
-       <input onChange={this.handleChange} name="name" type="text" />
+       <label>Username</label>
+       <input onChange={this.handleChange} name="username" type="text" />
        <label>Password</label>
        <input onChange={this.handleChange} name="password" type="text" />
        <input type="submit" onClick={this.handleSubmit} />

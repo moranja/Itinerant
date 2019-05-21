@@ -4,7 +4,11 @@ import { connect } from 'react-redux'
 const mapDispatchToProps = {
   loadItinerary: (id) => {
     return dispatch => {
-      fetch(`http://localhost:3000/itineraries/${id}`) // change this to request from the selected itinerary eventually....
+      fetch(`http://localhost:3000/itineraries/${id}`, {
+        headers: {
+          "Authorization": `Bearer ${localStorage.token}`
+        }
+      }) // change this to request from the selected itinerary eventually....
       .then(res => res.json())
       .then(itinerary => {
         dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: itinerary })

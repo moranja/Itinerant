@@ -10,7 +10,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   loadItineraries: () => {
     return dispatch => {
-      fetch("http://localhost:3000/itineraries/") // change this to request from the selected itinerary eventually....
+      fetch("http://localhost:3000/itineraries/", {
+        headers: {
+          "Authorization": `Bearer ${localStorage.token}`
+        }
+      }) // change this to request from the selected itinerary eventually....
       .then(res => res.json())
       .then(itineraries => {
         dispatch({ type: "ITINERARY_LIST", payload: itineraries })

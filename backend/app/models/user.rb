@@ -6,4 +6,13 @@ class User < ActiveRecord::Base
 
   validates :username, uniqueness: true
   validates :name, presence: true
+
+
+  def auth_token
+    JWT.encode({ id: self.id }, 'super-secret-password')
+  end
+
+  def as_json(*)
+    super.except('password_digest')
+  end
 end

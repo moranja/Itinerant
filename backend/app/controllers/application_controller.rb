@@ -11,4 +11,32 @@ class ApplicationController < ActionController::Base
   # def set_user
   #   @user = User.find_by(id: session[:current_user_id])
   # end
+
+  attr_reader :current_user
+
+  before_action :logged_in?
+
+  def logged_in?
+    begin
+      token = request.headers['Authorization'].split(' ')[1]
+      payload = JWT.decode(token, 'super-secret-password')[0]
+
+      @current_user = User.find(payload['id'])
+
+      if @current_user
+        return true
+      else
+        render json: {
+          error: true,
+          message: 'User does not exist'
+        }
+      end
+    rescue
+      # They are not
+      render json: {
+        error: true,
+        message: 'Invalid Authentication'
+      }
+    end
+  end
 end

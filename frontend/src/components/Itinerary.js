@@ -17,7 +17,7 @@ const mapDispatchToProps = {
     fetch(`http://localhost:3000/cities`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", 
+        "Content-Type": "application/json",
         "Authorization": `Bearer ${localStorage.token}`
       },
       body: JSON.stringify({
@@ -48,10 +48,42 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       this.props.addCityFromItinerary(payload)
     }
 
+    search = (e) => {
+      e.persist()
+      e.preventDefault()
+
+    }
+
+    handleSearch = (e) => {
+      let searchTerm = e.target.value
+      console.log(searchTerm)
+      let searchedItinerary = {...this.props.itinerary}
+      // searchedItinerary.cities = searchedItinerary.cities.filter(c => c.name.toLowerCase().includes(searchTerm))
+      let test = searchedItinerary.cities.map(c => {
+        if (c.name.toLowerCase().includes(searchTerm)) {
+          console.log(c.name.toLowerCase())
+          return c
+        } else {
+          let city = {...c}
+          let filteredCity = []
+          filteredCity = city.areas.filter(a => a.name.toLowerCase().includes(searchTerm))
+          console.log(filteredCity)
+          if (filteredCity.length !== 0) {
+            return filteredCity
+          }
+        }
+      })
+      console.log({...searchedItinerary, cities: [...test]}) // getting there...
+    }
+
     render() {
-      console.log(this.props)
+      console.log(this.state)
       return (
         <div>
+          <form onSubmit={this.search}>
+            <input type="text" placeholder="Search Itinerary" id="searchTerm" onChange={this.handleSearch} />
+            <input type="submit" />
+          </form>
           <h2>{this.props.details.title}</h2>
           <ul>
             {Object.keys(this.props.schedule).map((d,index) => (<li key={index}>{d}</li>))}

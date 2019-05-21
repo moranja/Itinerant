@@ -32,7 +32,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
   class City extends React.Component {
 
     handleChange = (e) => {
-      this.setState({[`${e.target.id}`]: e.target.value})
+      this.setState({[e.target.id]: e.target.value})
     }
 
     handleSubmit = (e) => {

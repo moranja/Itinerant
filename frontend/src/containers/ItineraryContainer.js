@@ -42,7 +42,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     handleChange = (e) => {
-      this.setState({[`${e.target.id}`]: e.target.value})
+      this.setState({[e.target.id]: e.target.value})
     }
 
     handleCityChange = (e) => {
@@ -52,7 +52,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         : null
       )
       this.setState({
-        [`${e.target.id}`]: parseInt(e.target.value),
+        [e.target.id]: parseInt(e.target.value),
         areaId: areaId
       })
     } // had to make a custom changer so it would set the areaId when you switch cities to the first area in that city

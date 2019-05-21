@@ -1,12 +1,16 @@
 import React from 'react'
-import ItineraryContainer from './containers/ItineraryContainer'
-import ItineraryList from './containers/ItineraryList'
+import { Router, Route, Switch } from 'react-router-dom'
+import HomePage from './containers/HomePage'
+import Login from './components/Login'
+import history from './history'
 
 const App = () => (
-  <React.Fragment>
-    <ItineraryContainer />
-    <ItineraryList />
-  </React.Fragment>
+  <Router history={history}>
+    <Switch>
+      <Route path="/login" component={Login} />
+      <Route path="/" component={HomePage} />
+    </Switch>
+  </Router>
 )
 
 export default App

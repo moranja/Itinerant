@@ -10,8 +10,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   addAttractionFromMap: attraction_info => dispatch => {
     const newAttraction = {
-      city: attraction_info.city,
-      area: attraction_info.area,
+      area_id: attraction_info.areaId,
       name: attraction_info.name,
       classification: attraction_info.types[0],
       description: attraction_info.description
@@ -33,8 +32,14 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps) (
   class ItineraryContainer extends React.Component {
 
+    state = {
+    }
+
     componentDidMount() {
-      // this.props.loadItinerary(4)
+      this.setState({
+        cityId: this.props.itinerary.cities,
+        areaId: this.props.itinerary.cities
+      })
     }
 
     addAnAttraction = (place_info) => {
@@ -45,13 +50,24 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       this.setState({[`${e.target.id}`]: e.target.value})
     }
 
+    handleCityChange = (e) => {
+      let areaId = (
+        !!this.props.itinerary.cities.find(c => c.id === parseInt(e.target.value)).areas.length
+        ? this.props.itinerary.cities.find(c => c.id === parseInt(e.target.value)).areas[0].id
+        : null
+      )
+      this.setState({
+        [`${e.target.id}`]: parseInt(e.target.value),
+        areaId: areaId
+      })
+    } // had to make a custom changer so it would set the areaId when you switch cities to the first area in that city
+
     handleSubmit = (e) => {
       e.persist()
       e.preventDefault()
       let payload = {
         ...this.state.attraction,
-        city: this.state.city,
-        area: this.state.area,
+        areaId: this.state.areaId,
         description: this.state.description,
         itineraryId: this.props.itinerary.details.id
       }
@@ -59,6 +75,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     render () {
+      console.log(this.props)
       return (
         <div>
           <h1>ITINERANT</h1>
@@ -69,8 +86,16 @@ export default connect(mapStateToProps, mapDispatchToProps) (
                 <div style={{flex: "1"}}>
                   <MyMapComponent isMarkerShown={false} addAnAttraction={this.addAnAttraction}/>
                   <form onSubmit={this.handleSubmit}>
-                    <input type="text" placeholder="City" id="city" onChange={this.handleChange} />
-                    <input type="text" placeholder="Area" id="area" onChange={this.handleChange} />
+                    <select id="cityId" onChange={this.handleCityChange} >
+                      {this.props.itinerary.cities.map(c => (<option value={c.id}>{c.name}</option>))}
+                    </select>
+                    {
+                      !this.state.cityId
+                      ? this.setState({ cityId: this.props.itinerary.cities[0].id})
+                      : (<select id="areaId" onChange={this.handleChange} >
+                          {this.props.itinerary.cities.find(c => c.id === this.state.cityId).areas.map(a => (<option value={a.id}>{a.name}</option>))}
+                        </select>)
+                    }
                     <br />
                     <input type="text" placeholder="Description" id="description" onChange={this.handleChange} />
                     <input type="submit"/>

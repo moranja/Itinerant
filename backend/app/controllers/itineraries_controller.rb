@@ -10,12 +10,9 @@ class ItinerariesController < ApplicationController
 
   def update
     itinerary = Itinerary.find(params[:id])
-    area = itinerary.cities.find{|c| c.name == city_params[:city].titleize}.areas.find{|a| a.name == area_params[:area].titleize}
-
-    new_attraction = Attraction.new(attraction_params)
-    new_attraction.classification = new_attraction.classification.titleize
-    new_attraction.area_id = area.id
-    new_attraction.save
+    new_attraction = Attraction.create(attraction_params)
+    # new_attraction.classification = new_attraction.classification.titleize
+    # new_attraction.save
 
     render json: itinerary.full_itinerary
   end
@@ -34,6 +31,6 @@ class ItinerariesController < ApplicationController
     end
 
     def attraction_params
-      params.permit(:name, :classification, :description)
+      params.permit(:area_id, :name, :classification, :description)
     end
 end

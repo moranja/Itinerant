@@ -31,7 +31,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps) (
   class Attraction extends React.Component {
     render() {
-      console.log(this.props)
+      // console.log(this.props)
       return (
         <React.Fragment>
           <li>{`${this.props.name} (${this.props.classification}): ${this.props.description}`}</li>

@@ -1,11 +1,11 @@
 import React from 'react'
 import ItineraryContainer from '../containers/ItineraryContainer'
-import ItineraryList from '../containers/ItineraryList'
+import ItineraryIndex from '../containers/ItineraryIndex'
 
 const HomePage = () => (
   <React.Fragment>
     <ItineraryContainer />
-    <ItineraryList />
+    <ItineraryIndex />
   </React.Fragment>
 )
 

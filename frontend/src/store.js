@@ -5,13 +5,19 @@ import ReduxThunk from 'redux-thunk'
 
 const reducer = (state = {
   itineraries: [],
-  selected_itinerary: {}
+  users: [],
+  selected_itinerary: {},
+  user: {}
 }, action) => {
   switch(action.type){
-    case "LOAD_SELECTED_ITINERARY":
-      return {...state, selected_itinerary: action.payload}
     case "ITINERARY_LIST":
       return {...state, itineraries: [...action.payload]}
+    case "LOAD_SELECTED_ITINERARY":
+      return {...state, selected_itinerary: action.payload}
+    case "USER_LIST":
+      return {...state, users: [...action.payload], user: {}}
+    case "SELECT_USER":
+      return {...state, user: action.payload}
     // case "ADD_ATTRACTION":
     //   console.log(action.payload)
     //   const newAttraction = {

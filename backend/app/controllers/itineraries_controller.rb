@@ -1,4 +1,5 @@
 class ItinerariesController < ApplicationController
+  skip_before_action  :logged_in?, only: [ :index, :show ]
 
   def index
     render json: Itinerary.all

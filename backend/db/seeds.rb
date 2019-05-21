@@ -11,6 +11,10 @@ alexa = User.create(username: "lexietx", name: "Alexa")
 alexa.password = "password"
 alexa.save
 
+adam = User.create(username: "jamoran", name: "Adam")
+adam.password = "password"
+adam.save
+
 # Create Japan Itinerary
 japan_itinerary = Itinerary.create(title: "10 days in Japan!", vital_info: "Flight info, hotel reservations, etc", helpful_info: "train tables, tour reservations", notes: "Check out this New York Times article...")
 

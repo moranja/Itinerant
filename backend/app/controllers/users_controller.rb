@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   #skip_before_action :authenticate, only: [:new, :create]
 
-  # before_action :define_selected_user
+  before_action :define_selected_user
 
   skip_before_action  :logged_in?, only: [ :authenticate ]
 

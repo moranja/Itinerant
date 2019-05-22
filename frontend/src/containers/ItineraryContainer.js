@@ -40,6 +40,26 @@ const mapDispatchToProps = {
         dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: itinerary })
       })
     }
+  },
+  addCollaborator: payload => dispatch => {
+    fetch(`http://localhost:3000/user_itineraries/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.token}`
+      },
+      body: JSON.stringify({
+        ...payload
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.error) {
+        console.log(res.message)
+      } else {
+        dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
+      }
+    })
   }
 }
 
@@ -83,19 +103,37 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       this.props.addAttractionFromMap(payload)
     }
 
+    handleAddUser = (e) => {
+      e.persist()
+      e.preventDefault()
+      this.props.addCollaborator({
+        username: this.state.username,
+        itineraryId: this.props.itinerary.details.id
+      })
+    }
+
     componentDidMount() {
       this.props.loadItinerary(this.props.match.params.id)
     }
 
     canEdit = () => {
       if (!!this.props.itinerary.users.filter(u => u.id === parseInt(localStorage.userId)).length) {
-        return (<h4>Welcome {localStorage.username}, you may edit this page</h4>)
+        return (
+          <div>
+            <h4>Welcome {localStorage.username}, you may edit this page</h4>
+            <form onSubmit={this.handleAddUser}>
+              <label>Enter another user's username to add them as a collaborator: </label>
+              <input type="text" placeholder="Enter Username" id="username" onChange={this.handleChange} />
+            </form>
+          </div>
+        )
       } else {
         return (<h4>You may not edit this page</h4>)
       }
     } // flesh this out
 
     render() {
+      console.log(this.state)
       return (
         <div>
           {!!Object.keys(this.props.itinerary).length //Tests if this.state has any keys, if not the fetch hasn't completed yet

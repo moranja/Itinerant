@@ -2,7 +2,6 @@ class CitiesController < ApplicationController
   def create
     itinerary = Itinerary.find_by(id: params[:itinerary_id])
 
-    byebug
     if itinerary.users.map{|u| u.id}.include?(@current_user.id)
       new_city = City.create(city_params)
       render json: new_city.itinerary.full_itinerary

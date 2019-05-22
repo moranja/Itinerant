@@ -124,6 +124,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
             <form onSubmit={this.handleAddUser}>
               <label>Enter another user's username to add them as a collaborator: </label>
               <input type="text" placeholder="Enter Username" id="username" onChange={this.handleChange} />
+              <input type="submit" />
             </form>
           </div>
         )
@@ -133,7 +134,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     } // flesh this out
 
     render() {
-      console.log(this.state)
       return (
         <div>
           {!!Object.keys(this.props.itinerary).length //Tests if this.state has any keys, if not the fetch hasn't completed yet

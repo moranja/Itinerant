@@ -65,7 +65,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     searchedItinerary = () => {
-      const searchTerm = this.state.searchTerm
+      const searchTerm = this.state.searchTerm.toLowerCase()
       let searchedCities = this.props.itinerary.cities.map(c => {
         if (c.name.toLowerCase().includes(searchTerm)) {
           return c // If the city name matches, return the whole city
@@ -111,9 +111,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       let itinerary = this.searchedItinerary()
       return (
         <div>
-          <form>
-            <input type="text" placeholder="Search Itinerary" id="searchTerm" onChange={this.handleSearch} />
-          </form>
+          <input type="text" placeholder="Search Itinerary" id="searchTerm" onChange={this.handleSearch} />
           <h2>{itinerary.details.title}</h2>
           <ul>
             {Object.keys(itinerary.schedule).map((d,index) => (<li key={index}>{d}</li>))}

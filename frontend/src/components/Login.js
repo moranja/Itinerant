@@ -15,7 +15,6 @@ class Login extends React.Component {
     })
     .then( res => res.json())
     .then( res => {
-      console.log(res)
       if (res.error) {
         console.log(res.message)
       } else {
@@ -33,15 +32,33 @@ class Login extends React.Component {
     })
   }
 
+  logout = () => {
+    localStorage.clear()
+    this.setState({}) // Is this bad? lol
+  }
+
   render(){
    return (
-     <form>
-       <label>Username</label>
-       <input onChange={this.handleChange} name="username" type="text" />
-       <label>Password</label>
-       <input onChange={this.handleChange} name="password" type="text" />
-       <input type="submit" onClick={this.handleSubmit} />
-     </form>
+     <React.Fragment>
+     {
+       !localStorage.token
+       ? (
+         <form>
+           <label>Username</label>
+           <input onChange={this.handleChange} name="username" type="text" />
+           <label>Password</label>
+           <input onChange={this.handleChange} name="password" type="text" />
+           <input type="submit" onClick={this.handleSubmit} />
+         </form>
+       )
+       : (
+         <React.Fragment>
+         <h4>You're already logged in!</h4>
+         <button onClick={this.logout}>Logout</button>
+         </React.Fragment>
+       )
+     }
+     </React.Fragment>
    )
   }
 }

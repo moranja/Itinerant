@@ -25,7 +25,13 @@ const mapDispatchToProps = {
       })
     })
     .then(res => res.json())
-    .then(res => { dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})})
+    .then(res => {
+      if (res.error) {
+        console.log(res.message)
+      } else {
+        dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
+      }
+    })
   }
 }
 

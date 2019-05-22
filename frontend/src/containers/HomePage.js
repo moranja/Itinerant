@@ -1,11 +1,9 @@
 import React from 'react'
-import ItineraryContainer from '../containers/ItineraryContainer'
 import ItineraryIndex from '../containers/ItineraryIndex'
 
-const HomePage = () => (
+const HomePage = (props) => (
   <React.Fragment>
-    <ItineraryContainer />
-    <ItineraryIndex />
+    <ItineraryIndex history={props.history}/>
   </React.Fragment>
 )
 

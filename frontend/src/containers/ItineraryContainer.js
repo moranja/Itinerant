@@ -27,6 +27,19 @@ const mapDispatchToProps = {
     })
     .then(res => res.json())
     .then(res => { dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})})
+  },
+  loadItinerary: (id) => {
+    return dispatch => {
+      fetch(`http://localhost:3000/itineraries/${id}`, {
+        headers: {
+          "Authorization": `Bearer ${localStorage.token}`
+        }
+      }) // change this to request from the selected itinerary eventually....
+      .then(res => res.json())
+      .then(itinerary => {
+        dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: itinerary })
+      })
+    }
   }
 }
 
@@ -70,10 +83,13 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       this.props.addAttractionFromMap(payload)
     }
 
-    render () {
+    componentDidMount() {
+      this.props.loadItinerary(this.props.match.params.id)
+    }
+
+    render() {
       return (
         <div>
-          <h1>ITINERANT</h1>
           {!!Object.keys(this.props.itinerary).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
           ?
             this.state.cityId === ""

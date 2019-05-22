@@ -21,6 +21,7 @@ class Login extends React.Component {
       } else {
         localStorage.setItem('token', res.auth_token)
         localStorage.setItem('username', res.username)
+        localStorage.setItem('userId', res.id)
         this.props.history.push('/home')
       }
     })
@@ -33,7 +34,6 @@ class Login extends React.Component {
   }
 
   render(){
-    console.log(this.props)
    return (
      <form>
        <label>Username</label>

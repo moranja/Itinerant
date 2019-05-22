@@ -8,6 +8,7 @@ class Itinerary < ApplicationRecord
     itinerary_hash = {}
     itinerary_hash[:details] = self
     itinerary_hash[:schedule] = self.plans.group_by{|i| i.date}
+    itinerary_hash[:users] = self.users
     itinerary_hash[:cities] = []
     self.cities.each do |city|
       area_array = []

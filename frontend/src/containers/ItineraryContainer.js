@@ -87,6 +87,14 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       this.props.loadItinerary(this.props.match.params.id)
     }
 
+    canEdit = () => {
+      if (!!this.props.itinerary.users.filter(u => u.id === parseInt(localStorage.userId)).length) {
+        return (<h4>Welcome {localStorage.username}, you may edit this page</h4>)
+      } else {
+        return (<h4>You may not edit this page</h4>)
+      }
+    } // flesh this out
+
     render() {
       return (
         <div>
@@ -101,6 +109,10 @@ export default connect(mapStateToProps, mapDispatchToProps) (
             :
             (
             <div>
+
+            <div>
+              {this.canEdit()}
+            </div>
               <div style={{display: "flex"}}>
                 <div style={{flex: "1"}}>
                   <MyMapComponent isMarkerShown={false} addAnAttraction={this.addAnAttraction}/>

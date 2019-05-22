@@ -33,7 +33,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
   class Itinerary extends React.Component {
 
     state = {
-      searchedItinerary: {...this.props.itinerary}
+      searchTerm: ""
     }
 
     handleChange = (e) => {
@@ -52,55 +52,68 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       this.props.addCityFromItinerary(payload)
     }
 
-    search = (e) => {
-      e.persist()
-      e.preventDefault()
-
-    }
-
     handleSearch = (e) => {
-      if (e === undefined) {
-        return this.props.itinerary
-      } else {
-        console.log(e)
-        let searchTerm = e.target.value
-        console.log(searchTerm)
-        let searchedItinerary = {...this.props.itinerary}
-        // searchedItinerary.cities = searchedItinerary.cities.filter(c => c.name.toLowerCase().includes(searchTerm))
-        let test = searchedItinerary.cities.map(c => {
-          if (c.name.toLowerCase().includes(searchTerm)) {
-            console.log(c.name.toLowerCase())
-            return c
-          } else {
-            let city = {...c}
-            let filteredAreas = []
-            filteredAreas = city.areas.filter(a => a.name.toLowerCase().includes(searchTerm))
-            console.log(filteredAreas)
-            if (filteredAreas.length !== 0) {
-              return {...city, areas: [...filteredAreas]}
-            }
-          }
-        })
-        console.log({...searchedItinerary, cities: [...test]}) // getting there...
-        let newItinerary = {...searchedItinerary, cities: [...test].filter(Boolean)}
-        this.setState({searchedItinerary: newItinerary})
+      if (e !== undefined) { // Checks for no search term
+        this.setState({searchTerm: e.target.value})
       }
     }
 
+    searchedItinerary = () => {
+      const searchTerm = this.state.searchTerm
+      let searchedCities = this.props.itinerary.cities.map(c => {
+        if (c.name.toLowerCase().includes(searchTerm)) {
+          return c // If the city name matches, return the whole city
+        } else {
+          let city = {...c}
+          let searchedAreas = city.areas.map(a => {
+            if (a.name.toLowerCase().includes(searchTerm)) {
+              return a
+            } else {
+              let area = {...a}
+              let searchedAttractions = area.attractions.map(at => {
+                if (
+                  at.name.toLowerCase().includes(searchTerm)
+                  || at.classification.toLowerCase().includes(searchTerm)
+                  || at.description.toLowerCase().includes(searchTerm)
+                ) {
+                  return at
+                } else {
+                  return null
+                }
+              })
+              let filteredAttractions = searchedAttractions.filter(Boolean)
+              if (filteredAttractions.length !== 0) {
+                return {...area, attractions: [...filteredAttractions]} // If we get any hits on attraction, return the city, area, and attraction
+              } else {
+                return null
+              }
+            }
+          })
+          let filteredAreas = searchedAreas.filter(Boolean)
+          if (filteredAreas.length !== 0) {
+            return {...city, areas: [...filteredAreas]} // If we get any hits on area name, return the city and those areas
+          } else {
+            return null
+          }
+        }
+      })
+      let filteredCities = searchedCities.filter(Boolean)
+      return {...this.props.itinerary, cities: [...filteredCities]}
+    }
+
     render() {
-      console.log(this.handleSearch())
+      let itinerary = this.searchedItinerary()
       return (
         <div>
-          <form onSubmit={this.search}>
+          <form>
             <input type="text" placeholder="Search Itinerary" id="searchTerm" onChange={this.handleSearch} />
-            <input type="submit" />
           </form>
-          <h2>{this.state.searchedItinerary.details.title}</h2>
+          <h2>{itinerary.details.title}</h2>
           <ul>
-            {Object.keys(this.state.searchedItinerary.schedule).map((d,index) => (<li key={index}>{d}</li>))}
+            {Object.keys(itinerary.schedule).map((d,index) => (<li key={index}>{d}</li>))}
           </ul>
-          <h4>{this.state.searchedItinerary.details.vital_info}</h4>
-          {this.state.searchedItinerary.cities.map((c,index) => <City {...c} key={c.id}/>)}
+          <h4>{itinerary.details.vital_info}</h4>
+          {itinerary.cities.map((c,index) => <City {...c} key={c.id}/>)}
 
 
           <form onSubmit={this.handleSubmit}>
@@ -112,8 +125,8 @@ export default connect(mapStateToProps, mapDispatchToProps) (
             <input type="submit" />
           </form>
 
-          <h4>{this.state.searchedItinerary.details.helpful_info}</h4>
-          <h4>{this.state.searchedItinerary.details.notes}</h4>
+          <h4>{itinerary.details.helpful_info}</h4>
+          <h4>{itinerary.details.notes}</h4>
         </div>
       )
     }

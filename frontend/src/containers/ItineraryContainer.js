@@ -90,13 +90,13 @@ export default connect(mapStateToProps, mapDispatchToProps) (
                   <MyMapComponent isMarkerShown={false} addAnAttraction={this.addAnAttraction}/>
                   <form onSubmit={this.handleSubmit}>
                     <select id="cityId" onChange={this.handleCityChange} >
-                      {this.props.itinerary.cities.map(c => (<option value={c.id}>{c.name}</option>))}
+                      {this.props.itinerary.cities.map(c => (<option key={c.id} value={c.id}>{c.name}</option>))}
                     </select>
                     {
                       !this.state.cityId
                       ? this.setState({ cityId: this.props.itinerary.cities[0].id})
                       : (<select id="areaId" onChange={this.handleChange} >
-                          {this.props.itinerary.cities.find(c => c.id === this.state.cityId).areas.map(a => (<option value={a.id}>{a.name}</option>))}
+                          {this.props.itinerary.cities.find(c => c.id === this.state.cityId).areas.map(a => (<option key={a.id} value={a.id}>{a.name}</option>))}
                         </select>)
                     }
                     <br />

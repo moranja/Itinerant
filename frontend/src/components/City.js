@@ -44,7 +44,6 @@ export default connect(null, mapDispatchToProps) (
     }
 
     render() {
-      console.log(this.props)
       return (
         <React.Fragment>
           <div>

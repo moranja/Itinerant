@@ -20,11 +20,14 @@ class UsersController < ApplicationController
 
   def authenticate
     user = User.find_by(username: params[:username])
-
-    if user.authenticate(params[:password])
-      render json: user, methods: [ :auth_token ]
+    if user
+      if user.authenticate(params[:password])
+        render json: user, methods: [ :auth_token ]
+      else
+        render json: { error: true, message: 'Invalid Password' }
+      end
     else
-      render json: { error: true, message: 'Login Failed' }
+      render json: { error: true, message: 'Invalid Username' }
     end
   end
 

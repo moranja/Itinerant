@@ -16,8 +16,13 @@ class Login extends React.Component {
     .then( res => res.json())
     .then( res => {
       console.log(res)
-      localStorage.setItem('token', res.auth_token)
-      localStorage.setItem('username', res.username)
+      if (res.error) {
+        console.log(res.message)
+      } else {
+        localStorage.setItem('token', res.auth_token)
+        localStorage.setItem('username', res.username)
+        this.props.history.push('/home')
+      }
     })
   }
 

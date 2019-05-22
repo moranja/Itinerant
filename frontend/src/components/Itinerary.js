@@ -32,6 +32,10 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps) (
   class Itinerary extends React.Component {
 
+    state = {
+      searchedItinerary: {...this.props.itinerary}
+    }
+
     handleChange = (e) => {
       this.setState({[e.target.id]: e.target.value})
     }
@@ -55,41 +59,48 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     handleSearch = (e) => {
-      let searchTerm = e.target.value
-      console.log(searchTerm)
-      let searchedItinerary = {...this.props.itinerary}
-      // searchedItinerary.cities = searchedItinerary.cities.filter(c => c.name.toLowerCase().includes(searchTerm))
-      let test = searchedItinerary.cities.map(c => {
-        if (c.name.toLowerCase().includes(searchTerm)) {
-          console.log(c.name.toLowerCase())
-          return c
-        } else {
-          let city = {...c}
-          let filteredCity = []
-          filteredCity = city.areas.filter(a => a.name.toLowerCase().includes(searchTerm))
-          console.log(filteredCity)
-          if (filteredCity.length !== 0) {
-            return filteredCity
+      if (e === undefined) {
+        return this.props.itinerary
+      } else {
+        console.log(e)
+        let searchTerm = e.target.value
+        console.log(searchTerm)
+        let searchedItinerary = {...this.props.itinerary}
+        // searchedItinerary.cities = searchedItinerary.cities.filter(c => c.name.toLowerCase().includes(searchTerm))
+        let test = searchedItinerary.cities.map(c => {
+          if (c.name.toLowerCase().includes(searchTerm)) {
+            console.log(c.name.toLowerCase())
+            return c
+          } else {
+            let city = {...c}
+            let filteredAreas = []
+            filteredAreas = city.areas.filter(a => a.name.toLowerCase().includes(searchTerm))
+            console.log(filteredAreas)
+            if (filteredAreas.length !== 0) {
+              return {...city, areas: [...filteredAreas]}
+            }
           }
-        }
-      })
-      console.log({...searchedItinerary, cities: [...test]}) // getting there...
+        })
+        console.log({...searchedItinerary, cities: [...test]}) // getting there...
+        let newItinerary = {...searchedItinerary, cities: [...test].filter(Boolean)}
+        this.setState({searchedItinerary: newItinerary})
+      }
     }
 
     render() {
-      console.log(this.state)
+      console.log(this.handleSearch())
       return (
         <div>
           <form onSubmit={this.search}>
             <input type="text" placeholder="Search Itinerary" id="searchTerm" onChange={this.handleSearch} />
             <input type="submit" />
           </form>
-          <h2>{this.props.details.title}</h2>
+          <h2>{this.state.searchedItinerary.details.title}</h2>
           <ul>
-            {Object.keys(this.props.schedule).map((d,index) => (<li key={index}>{d}</li>))}
+            {Object.keys(this.state.searchedItinerary.schedule).map((d,index) => (<li key={index}>{d}</li>))}
           </ul>
-          <h4>{this.props.details.vital_info}</h4>
-          {this.props.cities.map((c,index) => <City {...c} key={c.id}/>)}
+          <h4>{this.state.searchedItinerary.details.vital_info}</h4>
+          {this.state.searchedItinerary.cities.map((c,index) => <City {...c} key={c.id}/>)}
 
 
           <form onSubmit={this.handleSubmit}>
@@ -101,8 +112,8 @@ export default connect(mapStateToProps, mapDispatchToProps) (
             <input type="submit" />
           </form>
 
-          <h4>{this.props.details.helpful_info}</h4>
-          <h4>{this.props.details.notes}</h4>
+          <h4>{this.state.searchedItinerary.details.helpful_info}</h4>
+          <h4>{this.state.searchedItinerary.details.notes}</h4>
         </div>
       )
     }

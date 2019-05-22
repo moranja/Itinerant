@@ -3,10 +3,6 @@ import Plan from './Plan'
 import Area from './Area'
 import { connect } from 'react-redux'
 
-const mapStateToProps = (state) => ({
-  itinerary: state.selected_itinerary
-})
-
 const mapDispatchToProps = {
   addAreaFromItinerary: area_info => dispatch => {
     const newArea = {
@@ -29,7 +25,7 @@ const mapDispatchToProps = {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (
+export default connect(null, mapDispatchToProps) (
   class City extends React.Component {
 
     handleChange = (e) => {
@@ -48,6 +44,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     render() {
+      console.log(this.props)
       return (
         <React.Fragment>
           <div>

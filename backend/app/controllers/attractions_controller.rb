@@ -1,8 +1,8 @@
 class AttractionsController < ApplicationController
 
   def create
-    byebug
     area = Area.find_by(id: params[:area_id])
+    byebug
 
     if area.city.itinerary.users.map{|u| u.id}.include?(@current_user.id)
       new_attraction = Attraction.create(attraction_params)

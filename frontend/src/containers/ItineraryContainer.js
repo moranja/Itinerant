@@ -167,14 +167,42 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       }
     } // flesh this out
 
+    renderForm() {
+      if (this.props.itinerary.cities.length === 0) {
+        return (
+          <h3>Add a City and an Area to get started adding attractions from the map</h3>
+        )
+      } else {
+        return (
+          <form onSubmit={this.handleSubmit}>
+            <select id="cityId" onChange={this.handleCityChange} >
+              {this.props.itinerary.cities.map(c => (<option key={c.id} value={c.id}>{c.name}</option>))}
+            </select>
+            {
+              !this.state.cityId
+              ? (<select id="areaId" onChange={this.handleChange} >
+                  {this.props.itinerary.cities[0].areas.map(a => (<option key={a.id} value={a.id}>{a.name}</option>))}
+                </select>)
+              : (<select id="areaId" onChange={this.handleChange} >
+                  {this.props.itinerary.cities.find(c => c.id === this.state.cityId).areas.map(a => (<option key={a.id} value={a.id}>{a.name}</option>))}
+                </select>)
+            }
+            <br />
+            <input type="text" placeholder="Description" id="description" onChange={this.handleChange} />
+            <input type="submit"/>
+          </form>
+        )
+      }
+    }
+
     render() {
-      console.log(this.props.itinerary)
+      console.log(this.state)
       return (
         <div>
           {!!Object.keys(this.props.itinerary).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
           ?
             this.state.cityId === ""
-            ?
+            ? // this feels not react-y
               this.setState({
                 cityId: this.props.itinerary.cities[0].id,
                 areaId: !!this.props.itinerary.cities[0].areas.length ? this.props.itinerary.cities[0].areas[0].id : ""
@@ -182,28 +210,13 @@ export default connect(mapStateToProps, mapDispatchToProps) (
             :
             (
             <div>
-
-            <div>
-              {this.canEdit()}
-            </div>
+              <div>
+                {this.canEdit()}
+              </div>
               <div style={{display: "flex"}}>
                 <div style={{flex: "1"}}>
                   <MyMapComponent isMarkerShown={false} addAnAttraction={this.addAnAttraction}/>
-                  <form onSubmit={this.handleSubmit}>
-                    <select id="cityId" onChange={this.handleCityChange} >
-                      {this.props.itinerary.cities.map(c => (<option key={c.id} value={c.id}>{c.name}</option>))}
-                    </select>
-                    {
-                      !this.state.cityId
-                      ? this.setState({ cityId: this.props.itinerary.cities[0].id})
-                      : (<select id="areaId" onChange={this.handleChange} >
-                          {this.props.itinerary.cities.find(c => c.id === this.state.cityId).areas.map(a => (<option key={a.id} value={a.id}>{a.name}</option>))}
-                        </select>)
-                    }
-                    <br />
-                    <input type="text" placeholder="Description" id="description" onChange={this.handleChange} />
-                    <input type="submit"/>
-                  </form>
+                  {this.renderForm()}
                 </div>
                 <div style={{flex: "1"}}>
                   <Itinerary {...this.props.itinerary} />
@@ -218,3 +231,10 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
   }
 )
+
+
+
+  // <input type="text" placeholder="City" id="city" list="citiesList" onChange={this.handleChange}/>
+  // <datalist id="citiesList">
+  //   {this.props.itinerary.cities.map(c => (<option key={c.id} id={c.id} value={c.name}/>))}
+  // </datalist>

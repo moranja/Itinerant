@@ -66,49 +66,54 @@ export default connect(mapStateToProps, mapDispatchToProps) (
 
     searchedItinerary = () => {
       const searchTerm = this.state.searchTerm.toLowerCase()
-      let searchedCities = this.props.itinerary.cities.map(c => {
-        if (c.name.toLowerCase().includes(searchTerm)) {
-          return c // If the city name matches, return the whole city
-        } else {
-          let city = {...c}
-          let searchedAreas = city.areas.map(a => {
-            if (a.name.toLowerCase().includes(searchTerm)) {
-              return a
-            } else {
-              let area = {...a}
-              let searchedAttractions = area.attractions.map(at => {
-                if (
-                  at.name.toLowerCase().includes(searchTerm)
-                  || at.classification.toLowerCase().includes(searchTerm)
-                  || at.description.toLowerCase().includes(searchTerm)
-                ) {
-                  return at
+      if (searchTerm === "") {
+        return this.props.itinerary
+      } else {
+        let searchedCities = this.props.itinerary.cities.map(c => {
+          if (c.name.toLowerCase().includes(searchTerm)) {
+            return {...c, plans: []} // If the city name matches, return the whole city
+          } else {
+            let city = {...c, plans: []}
+            let searchedAreas = city.areas.map(a => {
+              if (a.name.toLowerCase().includes(searchTerm)) {
+                return a
+              } else {
+                let area = {...a}
+                let searchedAttractions = area.attractions.map(at => {
+                  if (
+                    at.name.toLowerCase().includes(searchTerm)
+                    || at.classification.toLowerCase().includes(searchTerm)
+                    || at.description.toLowerCase().includes(searchTerm)
+                  ) {
+                    return at
+                  } else {
+                    return null
+                  }
+                })
+                let filteredAttractions = searchedAttractions.filter(Boolean)
+                if (filteredAttractions.length !== 0) {
+                  return {...area, attractions: [...filteredAttractions]} // If we get any hits on attraction, return the city, area, and attraction
                 } else {
                   return null
                 }
-              })
-              let filteredAttractions = searchedAttractions.filter(Boolean)
-              if (filteredAttractions.length !== 0) {
-                return {...area, attractions: [...filteredAttractions]} // If we get any hits on attraction, return the city, area, and attraction
-              } else {
-                return null
               }
+            })
+            let filteredAreas = searchedAreas.filter(Boolean)
+            if (filteredAreas.length !== 0) {
+              return {...city, areas: [...filteredAreas]} // If we get any hits on area name, return the city and those areas
+            } else {
+              return null
             }
-          })
-          let filteredAreas = searchedAreas.filter(Boolean)
-          if (filteredAreas.length !== 0) {
-            return {...city, areas: [...filteredAreas]} // If we get any hits on area name, return the city and those areas
-          } else {
-            return null
           }
-        }
-      })
-      let filteredCities = searchedCities.filter(Boolean)
-      return {...this.props.itinerary, cities: [...filteredCities]}
+        })
+        let filteredCities = searchedCities.filter(Boolean)
+        return {schedule: [], details: {id: this.props.itinerary.details.id, title: this.props.itinerary.details.title}, cities: [...filteredCities]}
+      }
     }
 
     render() {
       let itinerary = this.searchedItinerary()
+      console.log(itinerary)
       return (
         <div>
           <input type="text" placeholder="Search Itinerary" id="searchTerm" onChange={this.handleSearch} />

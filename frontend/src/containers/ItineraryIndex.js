@@ -25,30 +25,47 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
   class ItineraryIndex extends React.Component {
 
+    handleSubmit = (e) => {
+      e.preventDefault()
+      fetch('http://localhost:3000/itineraries/', {
+        method: 'POST',
+        headers:{
+          'Content-Type':'application/json',
+          "Authorization": `Bearer ${localStorage.token}`
+        },
+        body: JSON.stringify({
+          title: this.state.title
+        })
+      })
+      .then( res => res.json())
+      .then( res => {
+        this.props.history.push(`/itineraries/${res.details.id}`)
+      })
+    }
+
+    handleChange = e => {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
+
     componentDidMount() {
       this.props.loadItineraries()
     }
 
     render() {
       return (
-        <ul>
-          {this.props.itineraries.map((i,index) => <li key={index} onClick={() => history.push(`/itineraries/${i.id}`)}>{i.title}</li>)}
-        </ul>
+        <React.Fragment>
+          <ul>
+            {this.props.itineraries.map((i,index) => <li key={index} onClick={() => history.push(`/itineraries/${i.id}`)}>{i.title}</li>)}
+          </ul>
+          <form>
+            <label>Title:&nbsp;</label>
+            <input onChange={this.handleChange} name="title" type="text" />
+            <input type="submit" onClick={this.handleSubmit} />
+          </form>
+        </React.Fragment>
       )
     }
-    // render() {
-    //   return (
-    //     <div>
-    //       {!!Object.keys(this.props.itineraries).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
-    //       ? (
-    //         <ul>
-    //           {this.props.itineraries.map((i,index) => <li key={index} onClick={() => history.push(`/itineraries/${i.id}`)}>{i.title}</li>)}
-    //         </ul>
-    //         )
-    //       : (<h2>...</h2>)
-    //       }
-    //     </div>
-    //   )
-    // } Probably unnecessary...
   }
 )

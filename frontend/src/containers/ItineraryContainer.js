@@ -10,9 +10,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   addAttractionFromMap: attraction_info => dispatch => {
+    console.log(attraction_info)
     const newAttraction = {
       area_id: attraction_info.areaId,
       name: attraction_info.name,
+      place_id: attraction_info.place_id,
+      address: attraction_info.formatted_address,
+      hours: attraction_info.opening_hours.weekday_text.join(' |'),
+      cost: attraction_info.price_level,
       classification: attraction_info.types[0],
       description: attraction_info.description
     }

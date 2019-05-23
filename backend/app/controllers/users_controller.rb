@@ -3,11 +3,17 @@ class UsersController < ApplicationController
 
   before_action :define_selected_user
 
-  skip_before_action  :logged_in?, only: [ :authenticate ]
+  skip_before_action  :logged_in?, only: [ :authenticate, :create ]
 
   def create
-    user = User.create(user_params)
-    render json: user
+    user = User.new(user_params)
+    user.password = params[:password]
+    if user.valid?
+      user.save
+      render json: user, methods: [ :auth_token ]
+    else
+      render json: { error: true, message: 'Invalid Username or Password' }
+    end
   end
 
   def index
@@ -31,19 +37,19 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
-    selected_user.update(user_params)
-    render json: selected_user
-  end
-
-  def destroy
-    selected_user.destroy
-    render json: selected_user
-  end
-
-  def user_params
-    params.permit(:name, :password)
-  end
+  # def update
+  #   selected_user.update(user_params)
+  #   render json: selected_user
+  # end
+  #
+  # def destroy
+  #   selected_user.destroy
+  #   render json: selected_user
+  # end
+  #
+  # def user_params
+  #   params.permit(:name, :password)
+  # end
 
   def define_selected_user
     if params[:id]

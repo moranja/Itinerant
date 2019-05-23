@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import history from '../history'
 
 const mapStateToProps = (state) => ({
   users: state.users,
@@ -16,6 +17,7 @@ const mapDispatchToProps = {
       }) // change this to request from the selected itinerary eventually....
       .then(res => res.json())
       .then(users => {
+        console.log(users)
         dispatch({ type: "USER_LIST", payload: users })
       })
     }
@@ -51,7 +53,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               (!!Object.keys(this.props.users).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
               ? (
                 <ul>
-                  {this.props.users.map((u,index) => <li key={index} onClick={() => this.props.selectUser(u.id)}>{u.username}</li>)}
+                  {this.props.users.map((u,index) => <li key={index} onClick={() => history.push(`/users/${u.id}`)}>{u.username}</li>)}
                 </ul>
                 )
               : (<h2>...</h2>))

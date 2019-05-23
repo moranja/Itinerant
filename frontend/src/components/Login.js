@@ -43,13 +43,16 @@ class Login extends React.Component {
      {
        !localStorage.token
        ? (
-         <form>
-           <label>Username</label>
-           <input onChange={this.handleChange} name="username" type="text" />
-           <label>Password</label>
-           <input onChange={this.handleChange} name="password" type="text" />
-           <input type="submit" onClick={this.handleSubmit} />
-         </form>
+         <div>
+           <form>
+             <label>Username</label>
+             <input onChange={this.handleChange} name="username" type="text" />
+             <label>Password</label>
+             <input onChange={this.handleChange} name="password" type="text" />
+             <input type="submit" onClick={this.handleSubmit} />
+           </form>
+           <button onClick={() => this.props.history.push('/create_user')}>Create an account</button>
+         </div>
        )
        : (
          <React.Fragment>

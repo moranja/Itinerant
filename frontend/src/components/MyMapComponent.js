@@ -86,7 +86,7 @@ const MapWithASearchBox = compose(
     >
       <input
         type="text"
-        placeholder="Customized your placeholder"
+        placeholder="Customize your placeholder"
         style={{
           boxSizing: `border-box`,
           border: `1px solid transparent`,

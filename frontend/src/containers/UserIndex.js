@@ -20,7 +20,7 @@ const mapDispatchToProps = {
       })
     }
   },
-  loadItinerary: (id) => {
+  selectUser: (id) => {
     return dispatch => {
       fetch(`http://localhost:3000/users/${id}`, {
         headers: {
@@ -51,7 +51,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
               (!!Object.keys(this.props.users).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
               ? (
                 <ul>
-                  {this.props.users.map((u,index) => <li key={index} onClick={() => this.props.loadItinerary(u.id)}>{u.username}</li>)}
+                  {this.props.users.map((u,index) => <li key={index} onClick={() => this.props.selectUser(u.id)}>{u.username}</li>)}
                 </ul>
                 )
               : (<h2>...</h2>))

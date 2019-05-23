@@ -4,6 +4,7 @@ import HomePage from './containers/HomePage'
 import Login from './components/Login'
 import UserIndex from './containers/UserIndex'
 import ItineraryContainer from './containers/ItineraryContainer'
+import UserContainer from './containers/UserContainer'
 import history from './history'
 
 const App = () => (
@@ -21,6 +22,7 @@ const App = () => (
     <Link to={'/login'}>Login</Link>&nbsp;
     {/* Routes */}
     <Switch>
+      <Route path="/users/:id" component={UserContainer} />
       <Route path="/users" component={UserIndex} />
       <Route path="/itineraries/:id" component={ItineraryContainer} />
       <Route path="/login" component={Login} />

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Itinerary from '../components/Itinerary'
 import MyMapComponent from '../components/MyMapComponent'
+import history from '../history'
 
 const mapStateToProps = (state) => ({
   itinerary: state.selected_itinerary
@@ -59,6 +60,29 @@ const mapDispatchToProps = {
       } else {
         dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
       }
+    })
+  },
+  copyItinerary: payload => dispatch => {
+    console.log(payload)
+    fetch(`http://localhost:3000/copyItinerary/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.token}`
+      },
+      body: JSON.stringify({
+        id: payload
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      // console.log(res.details.id)
+      // history.push(`/itineraries/${res.details.id}`)
+      //
+      // This doesn't work the way I'd expect, creates the new page and changes the path, but doesn't actually load it...
+      //
+      history.push(`/users/${localStorage.userId}`)
+      // also breaking?
     })
   }
 }
@@ -129,11 +153,17 @@ export default connect(mapStateToProps, mapDispatchToProps) (
           </div>
         )
       } else {
-        return (<h4>You may not edit this page</h4>)
+        return (
+          <div>
+            <h4>You may not edit this page</h4>
+            <button onClick={() => this.props.copyItinerary(this.props.itinerary.details.id)}>Click here to copy</button>
+          </div>
+        )
       }
     } // flesh this out
 
     render() {
+      console.log(this.props.itinerary)
       return (
         <div>
           {!!Object.keys(this.props.itinerary).length //Tests if this.state has any keys, if not the fetch hasn't completed yet

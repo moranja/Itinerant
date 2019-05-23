@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: selected_user
+    render json: User.find(params[:id])
   end
 
   def authenticate

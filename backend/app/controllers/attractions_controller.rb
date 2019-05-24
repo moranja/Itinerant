@@ -2,7 +2,6 @@ class AttractionsController < ApplicationController
 
   def create
     area = Area.find_by(id: params[:area_id])
-    byebug
 
     if area.city.itinerary.users.map{|u| u.id}.include?(@current_user.id)
       new_attraction = Attraction.create(attraction_params)
@@ -21,6 +20,6 @@ class AttractionsController < ApplicationController
   private
 
     def attraction_params
-      params.permit(:area_id, :name, :place_id, :address, :hours, :cost, :classification, :description)
+      params.permit(:area_id, :name, :longitude, :latitude, :place_id, :address, :hours, :cost, :classification, :description)
     end
 end

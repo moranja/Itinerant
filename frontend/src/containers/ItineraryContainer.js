@@ -11,12 +11,15 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   addAttractionFromMap: attraction_info => dispatch => {
     console.log(attraction_info)
+    console.log(attraction_info.geometry.location.lat(), attraction_info.geometry.location.lng(), attraction_info.place_id)
     const newAttraction = {
       area_id: attraction_info.areaId,
       name: attraction_info.name,
+      latitude: attraction_info.geometry.location.lat(),
+      longitude: attraction_info.geometry.location.lng(),
       place_id: attraction_info.place_id,
       address: attraction_info.formatted_address,
-      hours: attraction_info.opening_hours.weekday_text.join(' |'),
+      // hours: attraction_info.opening_hours.weekday_text.join(' |'),
       cost: attraction_info.price_level,
       classification: attraction_info.types[0],
       description: attraction_info.description

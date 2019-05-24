@@ -113,6 +113,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
 
     render() {
       let itinerary = this.searchedItinerary()
+      console.log(itinerary)
       return (
         <div>
           <input type="text" placeholder="Search Itinerary" id="searchTerm" onChange={this.handleSearch} />

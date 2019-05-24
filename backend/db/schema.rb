@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2019_05_15_191915) do
   create_table "attractions", force: :cascade do |t|
     t.integer "area_id"
     t.string "name"
+    t.string "latitude"
+    t.string "longitude"
     t.string "place_id"
     t.string "address"
     t.string "hours"

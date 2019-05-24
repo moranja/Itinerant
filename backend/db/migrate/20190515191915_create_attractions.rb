@@ -3,6 +3,8 @@ class CreateAttractions < ActiveRecord::Migration[5.2]
     create_table :attractions do |t|
       t.belongs_to :area, foreign_key: true
       t.string :name
+      t.string :latitude
+      t.string :longitude
       t.string :place_id
       t.string :address
       t.string :hours

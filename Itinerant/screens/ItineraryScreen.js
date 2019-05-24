@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
   AsyncStorage
@@ -20,7 +21,62 @@ export default class ItineraryScreen extends React.Component {
   };
 
   state = {
-    cities: []
+    cities: [],
+    searchTerm: ""
+  }
+
+  handleSearch = (e) => {
+    console.log(e)
+    if (e !== undefined) { // Checks for no search term
+      this.setState({searchTerm: e})
+    }
+  }
+
+  searchedItinerary = () => {
+    const searchTerm = this.state.searchTerm.toLowerCase()
+    if (searchTerm === "") {
+      return {...this.state, ...this.props.itinerary}
+    } else {
+      let searchedCities = this.state.cities.map(c => {
+        if (c.name.toLowerCase().includes(searchTerm)) {
+          return {...c, plans: []} // If the city name matches, return the whole city
+        } else {
+          let city = {...c, plans: []}
+          let searchedAreas = city.areas.map(a => {
+            if (a.name.toLowerCase().includes(searchTerm)) {
+              return a
+            } else {
+              let area = {...a}
+              let searchedAttractions = area.attractions.map(at => {
+                if (
+                  at.name.toLowerCase().includes(searchTerm)
+                  || at.classification.toLowerCase().includes(searchTerm)
+                  || at.description.toLowerCase().includes(searchTerm)
+                ) {
+                  return at
+                } else {
+                  return null
+                }
+              })
+              let filteredAttractions = searchedAttractions.filter(Boolean)
+              if (filteredAttractions.length !== 0) {
+                return {...area, attractions: [...filteredAttractions]} // If we get any hits on attraction, return the city, area, and attraction
+              } else {
+                return null
+              }
+            }
+          })
+          let filteredAreas = searchedAreas.filter(Boolean)
+          if (filteredAreas.length !== 0) {
+            return {...city, areas: [...filteredAreas]} // If we get any hits on area name, return the city and those areas
+          } else {
+            return null
+          }
+        }
+      })
+      let filteredCities = searchedCities.filter(Boolean)
+      return {schedule: [], details: {id: this.state.details.id, title: this.state.details.title}, cities: [...filteredCities]}
+    }
   }
 
   componentDidMount() {
@@ -47,11 +103,20 @@ export default class ItineraryScreen extends React.Component {
   }
 
   render() {
+    let itinerary = this.searchedItinerary()
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <View>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Search Itinerary"
+            value={this.state.searchTerm}
+            onChangeText={this.handleSearch}
+          />
+          </View>
           <View style={styles.getStartedContainer}>
-            {this.state.cities.map( c => (
+            {itinerary.cities.map( c => (
               <View>
                 <City {...c}/>
               </View>

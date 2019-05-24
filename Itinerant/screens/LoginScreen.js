@@ -32,7 +32,7 @@ export default class LoginScreen extends React.Component {
 
   handleSubmit = (e) => {
     console.log(this.state.username)
-    fetch('http://10.185.6.199:3000/login', {
+    fetch('http://10.185.0.155:3000/login', {
       method: 'POST',
       headers:{
         'Content-Type':'application/json'

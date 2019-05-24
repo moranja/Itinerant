@@ -13,6 +13,8 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
+import { showLocation } from 'react-native-map-link'
+
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
     title: "profile",
@@ -27,18 +29,35 @@ export default class ProfileScreen extends React.Component {
     this.props.navigation.navigate('Itinerary')
   }
 
+  logOut = () => {
+    AsyncStorage.removeItem('user')
+    .then(res => {
+      this.props.navigation.navigate('Login')
+    })
+  }
+
+  openInMaps = (place_id) => {
+    showLocation({
+        latitude: 29.744950,
+        longitude: -95.392837,
+        title: 'Hay Merchant',  // optional
+        googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
+        googlePlaceId: place_id,  // optionally specify the google-place-id
+        appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
+        app: 'google-maps'  // optionally specify specific app to use
+    })
+  }
+
   componentDidMount() {
     AsyncStorage.getItem('user').then( res => {
       user_info = JSON.parse(res)
-      console.log(user_info, user_info.id, user_info.auth_token)
-      fetch(`http://10.185.6.199:3000/users/${user_info.id}`, {
+      fetch(`http://10.185.0.155:3000/users/${user_info.id}`, {
         headers:{
           "Authorization": `Bearer ${user_info.auth_token}`
         }
       })
       .then( res => res.json())
       .then( res => {
-        console.log(res)
         this.setState({
           username: res.username,
           itineraries: res.itinerary_list
@@ -57,18 +76,39 @@ export default class ProfileScreen extends React.Component {
             </View>
 
             {this.state.itineraries.map( i => (
-              <View>
-                <Text key={i.id} style={styles.getStartedText}>
+              <View key={i.id}>
+                <Text style={styles.getStartedText}>
                   {i.title}
                 </Text>
                 <TouchableOpacity
                   style={styles.saveButton}
                   onPress={() => this.handleSubmit(i.id)}
                 >
-                  <Text style={styles.saveButtonText}>Save</Text>
+                  <Text style={styles.saveButtonText}>Open</Text>
                 </TouchableOpacity>
               </View>
+
             ))}
+
+            <View>
+
+            <TouchableOpacity
+              style={styles.saveButton}
+              onPress={() => this.logOut()}
+            >
+              <Text style={styles.saveButtonText}>Log Out</Text>
+            </TouchableOpacity>
+            </View>
+            <View>
+            <TouchableOpacity
+              style={styles.saveButton}
+              onPress={() => this.openInMaps("ChIJdQrzw2G_QIYRv_sE6sJslYo")}
+            >
+              <Text style={styles.saveButtonText}>Testing</Text>
+              <Text style={styles.saveButtonText}>Testing</Text>
+              <Text style={styles.saveButtonText}>Testing</Text>
+            </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
       </View>

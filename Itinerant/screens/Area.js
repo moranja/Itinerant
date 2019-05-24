@@ -16,7 +16,7 @@ export default class Area extends React.Component {
         </Text>
         {this.props.attractions.map( a => (
           <View>
-            <Attraction {...a}/>
+            <Attraction {...a} key={a.id}/>
           </View>
         ))}
       </View>

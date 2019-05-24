@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  AsyncStorage
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -16,6 +17,17 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
+
+  componentDidMount() {
+    AsyncStorage.getItem('user').then( res => {
+      console.log(res)
+      if (res !== null) {
+        this.props.navigation.navigate('Profile')
+      } else {
+        this.props.navigation.navigate('Login')
+      }
+    })
+  }
 
   render() {
     return (

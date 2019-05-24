@@ -16,7 +16,7 @@ export default class City extends React.Component {
         </Text>
         {this.props.areas.map( a => (
           <View>
-            <Area {...a}/>
+            <Area {...a} key={a.id}/>
           </View>
         ))}
       </View>

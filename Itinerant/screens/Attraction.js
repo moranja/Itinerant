@@ -13,11 +13,11 @@ export default class Attraction extends React.Component {
 
   openInMaps = (place_id) => {
     showLocation({
-        latitude: 29.744950,
-        longitude: -95.392837,
-        title: 'Hay Merchant',  // optional
+        latitude: parseInt(this.props.latitude),
+        longitude: parseInt(this.props.longitude),
+        title: this.props.name,  // optional
         googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
-        googlePlaceId: place_id,  // optionally specify the google-place-id
+        googlePlaceId: this.props.place_id,  // optionally specify the google-place-id
         appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
         app: 'google-maps'  // optionally specify specific app to use
     })

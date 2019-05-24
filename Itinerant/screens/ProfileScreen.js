@@ -45,15 +45,24 @@ export default class ProfileScreen extends React.Component {
       })
       .then( res => res.json())
       .then( res => {
-        this.setState({
-          username: res.username,
-          itineraries: res.itinerary_list
-        })
+        if (res.error) {
+          console.log(res.error)
+          AsyncStorage.removeItem('user')
+          .then(res => {
+            this.props.navigation.navigate('Login')
+          })
+        } else {
+          this.setState({
+            username: res.username,
+            itineraries: res.itinerary_list
+          })
+        }
       })
     })
   }
 
   render() {
+    console.log(this.state)
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>

@@ -46,6 +46,7 @@ export default class LoginScreen extends React.Component {
     .then( res => {
       if (res.error) {
         console.log(res.error)
+        AsyncStorage.removeItem('user')
         this.setState({ error: res.message })
       } else {
         AsyncStorage.setItem('user', JSON.stringify(res))

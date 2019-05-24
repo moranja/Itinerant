@@ -91,12 +91,19 @@ export default class ItineraryScreen extends React.Component {
         })
         .then( res => res.json())
         .then( res => {
-          console.log(res)
-          this.setState({
-            cities: res.cities,
-            details: res.details,
-            schedule: res.schedule
-          })
+          if (res.error) {
+            console.log(res.error)
+            AsyncStorage.removeItem('user')
+            .then(res => {
+              this.props.navigation.navigate('Login')
+            })
+          } else {
+            this.setState({
+              cities: res.cities,
+              details: res.details,
+              schedule: res.schedule
+            })
+          }
         })
       })
     })

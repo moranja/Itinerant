@@ -18,7 +18,8 @@ export default class LoginScreen extends React.Component {
 
   state = {
     name: "",
-    password: ""
+    password: "",
+    error: "test"
   }
 
   handleNameChange = (username) => {
@@ -31,7 +32,7 @@ export default class LoginScreen extends React.Component {
 
   handleSubmit = (e) => {
     console.log(this.state.username)
-    fetch('http://10.185.2.168:3000/login', {
+    fetch('http://10.185.6.199:3000/login', {
       method: 'POST',
       headers:{
         'Content-Type':'application/json'
@@ -44,9 +45,11 @@ export default class LoginScreen extends React.Component {
     .then( res => res.json())
     .then( res => {
       if (res.error) {
-        console.log(res.message)
+        console.log(res.error)
+        this.setState({ error: res.message })
       } else {
-        AsyncStorage.setItem('userId', `${res.id}`)
+        AsyncStorage.setItem('user', JSON.stringify(res))
+        this.props.navigation.navigate('Profile')
       }
     })
   }
@@ -56,7 +59,6 @@ export default class LoginScreen extends React.Component {
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.inputContainer}>
-
           <TextInput
             style={styles.textInput}
             placeholder="Username"
@@ -77,6 +79,11 @@ export default class LoginScreen extends React.Component {
           >
             <Text style={styles.saveButtonText}>Save</Text>
           </TouchableOpacity>
+        </View>
+        <View>
+          <Text>
+            {this.state.error}
+          </Text>
         </View>
       </ScrollView>
     )

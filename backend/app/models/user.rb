@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
   validates :name, presence: true
 
+  def itinerary_list
+    return self.itineraries.map{|i| {id: i.id, title: i.title}}
+  end
+
 
   def auth_token
     JWT.encode({ id: self.id }, 'super-secret-password')

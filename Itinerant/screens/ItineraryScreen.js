@@ -7,28 +7,55 @@ import {
   Text,
   TouchableOpacity,
   View,
+  AsyncStorage
 } from 'react-native';
 import { WebBrowser } from 'expo';
+import City from './City'
 
 import { MonoText } from '../components/StyledText';
 
-export default class HomeScreen extends React.Component {
+export default class ItineraryScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: "Itinerary",
   };
+
+  state = {
+    cities: []
+  }
+
+  componentDidMount() {
+    AsyncStorage.getItem('user').then( user_res => {
+      user_info = JSON.parse(user_res)
+      AsyncStorage.getItem('itinerary').then( itinerary_res => {
+        console.log(itinerary_res)
+        fetch(`http://10.185.6.199:3000/itineraries/${itinerary_res}`, {
+          headers:{
+            "Authorization": `Bearer ${user_info.auth_token}`
+          }
+        })
+        .then( res => res.json())
+        .then( res => {
+          console.log(res)
+          this.setState({
+            cities: res.cities,
+            details: res.details,
+            schedule: res.schedule
+          })
+        })
+      })
+    })
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.getStartedContainer}>
-            <View>
-              <MonoText style={styles.codeHighlightText}>Whoaaaa</MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Whoa
-            </Text>
+            {this.state.cities.map( c => (
+              <View>
+                <City {...c}/>
+              </View>
+            ))}
           </View>
         </ScrollView>
       </View>

@@ -7,15 +7,45 @@ import {
   Text,
   TouchableOpacity,
   View,
+  AsyncStorage
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-export default class HomeScreen extends React.Component {
+export default class ProfileScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: "profile",
   };
+
+  state = {
+    itineraries: []
+  }
+
+  handleSubmit = (id) => {
+    AsyncStorage.setItem('itinerary', `${id}`)
+    this.props.navigation.navigate('Itinerary')
+  }
+
+  componentDidMount() {
+    AsyncStorage.getItem('user').then( res => {
+      user_info = JSON.parse(res)
+      console.log(user_info, user_info.id, user_info.auth_token)
+      fetch(`http://10.185.6.199:3000/users/${user_info.id}`, {
+        headers:{
+          "Authorization": `Bearer ${user_info.auth_token}`
+        }
+      })
+      .then( res => res.json())
+      .then( res => {
+        console.log(res)
+        this.setState({
+          username: res.username,
+          itineraries: res.itinerary_list
+        })
+      })
+    })
+  }
 
   render() {
     return (
@@ -26,9 +56,19 @@ export default class HomeScreen extends React.Component {
               <MonoText style={styles.codeHighlightText}>Whoaaaa</MonoText>
             </View>
 
-            <Text style={styles.getStartedText}>
-              Whoa
-            </Text>
+            {this.state.itineraries.map( i => (
+              <View>
+                <Text key={i.id} style={styles.getStartedText}>
+                  {i.title}
+                </Text>
+                <TouchableOpacity
+                  style={styles.saveButton}
+                  onPress={() => this.handleSubmit(i.id)}
+                >
+                  <Text style={styles.saveButtonText}>Save</Text>
+                </TouchableOpacity>
+              </View>
+            ))}
           </View>
         </ScrollView>
       </View>

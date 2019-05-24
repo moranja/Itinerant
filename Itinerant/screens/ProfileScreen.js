@@ -13,8 +13,6 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-import { showLocation } from 'react-native-map-link'
-
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
     title: "profile",
@@ -36,17 +34,6 @@ export default class ProfileScreen extends React.Component {
     })
   }
 
-  openInMaps = (place_id) => {
-    showLocation({
-        latitude: 29.744950,
-        longitude: -95.392837,
-        title: 'Hay Merchant',  // optional
-        googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
-        googlePlaceId: place_id,  // optionally specify the google-place-id
-        appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
-        app: 'google-maps'  // optionally specify specific app to use
-    })
-  }
 
   componentDidMount() {
     AsyncStorage.getItem('user').then( res => {
@@ -97,16 +84,6 @@ export default class ProfileScreen extends React.Component {
               onPress={() => this.logOut()}
             >
               <Text style={styles.saveButtonText}>Log Out</Text>
-            </TouchableOpacity>
-            </View>
-            <View>
-            <TouchableOpacity
-              style={styles.saveButton}
-              onPress={() => this.openInMaps("ChIJdQrzw2G_QIYRv_sE6sJslYo")}
-            >
-              <Text style={styles.saveButtonText}>Testing</Text>
-              <Text style={styles.saveButtonText}>Testing</Text>
-              <Text style={styles.saveButtonText}>Testing</Text>
             </TouchableOpacity>
             </View>
           </View>

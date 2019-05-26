@@ -55,8 +55,10 @@ const MapWithASearchBox = compose(
           //     bounds.extend(place.geometry.location)
           //   }
           // });
+          console.log(places)
           const nextMarkers = places.map(place => ({
             position: place.geometry.location,
+            place_info: place
           }));
           const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
 
@@ -66,12 +68,28 @@ const MapWithASearchBox = compose(
           });
           // refs.map.fitBounds(bounds);
         },
+        markerWasClicked: (markers, marker) => {
+          const placesWithoutSelected = markers.filter(m => m.place_info.place_id !== marker.place_info.place_id).map(m => m.place_info)
+          const info = marker.place_info
+          const places = [info, ...placesWithoutSelected]
+          this.props.addAnAttraction(places)
+
+          const nextMarkers = places.map(place => ({
+            position: place.geometry.location,
+            place_info: place
+          }));
+          const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
+          this.setState({
+            center: nextCenter,
+            markers: nextMarkers
+          })
+        }
       })
     },
   }),
   withScriptjs,
   withGoogleMap
-)(props =>
+)((props) =>
   <GoogleMap
     ref={props.onMapMounted}
     defaultZoom={12}
@@ -103,7 +121,7 @@ const MapWithASearchBox = compose(
       />
     </SearchBox>
     {props.markers.map((marker, index) =>
-      <Marker key={index} position={marker.position} />
+      <Marker key={index} position={marker.position} onClick={() => props.markerWasClicked(props.markers, marker)}/>
     )}
   </GoogleMap>
 );

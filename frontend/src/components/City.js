@@ -108,7 +108,6 @@ export default connect(null, mapDispatchToProps) (
     }
 
     render() {
-      console.log(this.state)
       return (
         <React.Fragment>
           <div>

@@ -8,6 +8,7 @@ const {
   withGoogleMap,
   GoogleMap,
   Marker,
+  InfoWindow
 } = require("react-google-maps");
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 
@@ -127,7 +128,23 @@ const MapWithASearchBox = compose(
       />
     </SearchBox>
     {props.markers.map((marker, index) =>
-      <Marker key={index} position={marker.position} onClick={() => props.markerWasClicked(props.markers, marker)}/>
+      <Marker
+        key={index}
+        position={marker.position}
+        onClick={() => props.markerWasClicked(props.markers, marker)}
+      >
+        {
+          index === 0
+          ? (<InfoWindow onCloseClick={props.onToggleOpen}>
+            <div>
+              {marker.place_info.name}
+              <br />
+              {marker.place_info.formatted_address}
+            </div>
+          </InfoWindow>)
+          : null // only display the info about the first place
+        }
+      </Marker>
     )}
   </GoogleMap>
 );

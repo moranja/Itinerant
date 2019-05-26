@@ -10,8 +10,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   addAttractionFromMap: attraction_info => dispatch => {
-    console.log(attraction_info)
-    console.log(attraction_info.geometry.location.lat(), attraction_info.geometry.location.lng(), attraction_info.place_id)
     const newAttraction = {
       area_id: attraction_info.areaId,
       name: attraction_info.name,
@@ -127,6 +125,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     handleSubmit = (e) => {
       e.persist()
       e.preventDefault()
+      console.log(this.state.attraction)
       let payload = {
         ...this.state.attraction,
         areaId: this.state.areaId,

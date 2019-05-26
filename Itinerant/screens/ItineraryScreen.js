@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import City from './City'
+import path from '../components/path'
 
 import { MonoText } from '../components/StyledText';
 
@@ -84,7 +85,7 @@ export default class ItineraryScreen extends React.Component {
       user_info = JSON.parse(user_res)
       AsyncStorage.getItem('itinerary').then( itinerary_res => {
         console.log(itinerary_res)
-        fetch(`http://192.168.1.85:3000/itineraries/${itinerary_res}`, {
+        fetch(`http://${path}:3000/itineraries/${itinerary_res}`, {
           headers:{
             "Authorization": `Bearer ${user_info.auth_token}`
           }

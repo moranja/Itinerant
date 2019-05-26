@@ -39,6 +39,11 @@ const MapWithASearchBox = compose(
             center: refs.map.getCenter(),
           })
         },
+        onCenterChanged: () => {
+          this.setState({
+            center: refs.map.getCenter()
+          })
+        },
         onSearchBoxMounted: ref => {
           refs.searchBox = ref;
         },
@@ -95,6 +100,7 @@ const MapWithASearchBox = compose(
     defaultZoom={12}
     center={props.center}
     onBoundsChanged={props.onBoundsChanged}
+    onCenterChanged={props.onCenterChanged} // lol this is why the map wouldn't drag
   >
     <SearchBox
       ref={props.onSearchBoxMounted}

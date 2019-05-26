@@ -48,7 +48,7 @@ class Login extends React.Component {
              <label>Username</label>
              <input onChange={this.handleChange} name="username" type="text" />
              <label>Password</label>
-             <input onChange={this.handleChange} name="password" type="text" />
+             <input onChange={this.handleChange} name="password" type="password" />
              <input type="submit" onClick={this.handleSubmit} />
            </form>
            <button onClick={() => this.props.history.push('/create_user')}>Create an account</button>

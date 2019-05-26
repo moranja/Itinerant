@@ -84,7 +84,7 @@ export default class ItineraryScreen extends React.Component {
       user_info = JSON.parse(user_res)
       AsyncStorage.getItem('itinerary').then( itinerary_res => {
         console.log(itinerary_res)
-        fetch(`http://10.185.0.155:3000/itineraries/${itinerary_res}`, {
+        fetch(`http://192.168.1.85:3000/itineraries/${itinerary_res}`, {
           headers:{
             "Authorization": `Bearer ${user_info.auth_token}`
           }

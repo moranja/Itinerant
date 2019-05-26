@@ -38,7 +38,7 @@ export default class ProfileScreen extends React.Component {
   componentDidMount() {
     AsyncStorage.getItem('user').then( res => {
       user_info = JSON.parse(res)
-      fetch(`http://10.185.0.155:3000/users/${user_info.id}`, {
+      fetch(`http://192.168.1.85:3000/users/${user_info.id}`, {
         headers:{
           "Authorization": `Bearer ${user_info.auth_token}`
         }

@@ -21,7 +21,7 @@ const mapDispatchToProps = {
       address: attraction_info.formatted_address,
       // hours: attraction_info.opening_hours.weekday_text.join(' |'),
       cost: attraction_info.price_level,
-      classification: attraction_info.types[0],
+      classification: attraction_info.classification,
       description: attraction_info.description
     }
     fetch(`http://localhost:3000/attractions/`, {
@@ -100,7 +100,8 @@ export default connect(mapStateToProps, mapDispatchToProps) (
 
     state = {
       cityId: "",
-      areaId: ""
+      areaId: "",
+      classification: "Food and Drink"
     }
 
     addAnAttraction = (place_info) => {
@@ -130,7 +131,8 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         ...this.state.attraction,
         areaId: this.state.areaId,
         description: this.state.description,
-        itineraryId: this.props.itinerary.details.id
+        itineraryId: this.props.itinerary.details.id,
+        classification: this.state.classification
       }
       this.props.addAttractionFromMap(payload)
     }
@@ -190,6 +192,13 @@ export default connect(mapStateToProps, mapDispatchToProps) (
                   {this.props.itinerary.cities.find(c => c.id === this.state.cityId).areas.map(a => (<option key={a.id} value={a.id}>{a.name}</option>))}
                 </select>)
             }
+            <select id="classification" onChange={this.handleChange} >
+              <option value="Food and Drink">Food and Drink</option>
+              <option value="Attraction">Attraction</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Nightlife">Nightlife</option>
+              <option value="Other">Other</option>
+            </select>
             <br />
             <input type="text" placeholder="Description" id="description" onChange={this.handleChange} />
             <input type="submit"/>

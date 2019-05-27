@@ -1,4 +1,5 @@
 import React from 'react'
+import SignUp from './SignUp'
 
 class CreateUser extends React.Component {
   handleSubmit = (e) => {
@@ -33,21 +34,27 @@ class CreateUser extends React.Component {
     })
   }
 
-  render(){
-   return (
-     <React.Fragment>
-       <form>
-         <label>Username</label>
-         <input onChange={this.handleChange} name="username" type="text" />
-         <label>Name</label>
-         <input onChange={this.handleChange} name="name" type="text" />
-         <label>Password</label>
-         <input onChange={this.handleChange} name="password" type="text" />
-         <input type="submit" onClick={this.handleSubmit} />
-       </form>
-     </React.Fragment>
-   )
+  render() {
+    console.log(this.state)
+    return (
+      <SignUp handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+    )
   }
 }
 
 export default CreateUser
+
+
+
+// 
+// <React.Fragment>
+//   <form>
+//     <label>Username</label>
+//     <input onChange={this.handleChange} name="username" type="text" />
+//     <label>Name</label>
+//     <input onChange={this.handleChange} name="name" type="text" />
+//     <label>Password</label>
+//     <input onChange={this.handleChange} name="password" type="text" />
+//     <input type="submit" onClick={this.handleSubmit} />
+//   </form>
+// </React.Fragment>

@@ -1,5 +1,5 @@
 import React from 'react'
-import SignInSide from './SignInSide'
+import SignIn from './SignIn'
 
 class Login extends React.Component {
   handleSubmit = (e) => {
@@ -38,35 +38,40 @@ class Login extends React.Component {
     this.setState({}) // Is this bad? lol
   }
 
-  render(){
-    console.log(this.state)
+  componentDidMount() {
+    localStorage.clear()
+    this.setState({}) // Is this bad? lol
+  }
+
+  render() {
     return (
-      <React.Fragment>
-        {
-          !localStorage.token
-          ? (
-            <div>
-              <form>
-                <label>Username</label>
-                <input onChange={this.handleChange} name="username" type="text" />
-                <label>Password</label>
-                <input onChange={this.handleChange} name="password" type="password" />
-                <input type="submit" onClick={this.handleSubmit} />
-              </form>
-              <button onClick={() => this.props.history.push('/create_user')}>Create an account</button>
-            </div>
-          )
-          : (
-            <React.Fragment>
-              <h4>You're already logged in!</h4>
-              <button onClick={this.logout}>Logout</button>
-            </React.Fragment>
-          )
-        }
-        <SignInSide handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-      </React.Fragment>
+      <SignIn handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
     )
   }
 }
 
 export default Login
+
+
+  //
+  // {
+  //   !localStorage.token
+  //   ? (
+  //     <div>
+  //       <form>
+  //         <label>Username</label>
+  //         <input onChange={this.handleChange} name="username" type="text" />
+  //         <label>Password</label>
+  //         <input onChange={this.handleChange} name="password" type="password" />
+  //         <input type="submit" onClick={this.handleSubmit} />
+  //       </form>
+  //       <button onClick={() => this.props.history.push('/create_user')}>Create an account</button>
+  //     </div>
+  //   )
+  //   : (
+  //     <React.Fragment>
+  //       <h4>You're already logged in!</h4>
+  //       <button onClick={this.logout}>Logout</button>
+  //     </React.Fragment>
+  //   )
+  // }

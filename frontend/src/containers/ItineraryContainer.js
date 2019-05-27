@@ -10,6 +10,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   addAttractionFromMap: attraction_info => dispatch => {
+    console.log(attraction_info)
     const newAttraction = {
       area_id: attraction_info.areaId,
       name: attraction_info.name,
@@ -114,8 +115,9 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       let areaId = (
         !!this.props.itinerary.cities.find(c => c.id === parseInt(e.target.value)).areas.length
         ? this.props.itinerary.cities.find(c => c.id === parseInt(e.target.value)).areas[0].id
-        : null
+        : ""
       )
+      console.log(e.target.id, e.target.value)
       this.setState({
         [e.target.id]: parseInt(e.target.value),
         areaId: areaId
@@ -171,6 +173,32 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       }
     } // flesh this out
 
+    static getDerivedStateFromProps(props, state) {
+      console.log(!state.cityId, !state.areaId)
+      if (!state.cityId && !state.areaId && !!Object.keys(props.itinerary).length) {  // if there's no city, area, and we have an itinerary...
+        if (!!props.itinerary.cities.length) {                                        // and that itinerary has cities
+          if (!!props.itinerary.cities[0].areas.length) {                             // and that city has areas
+            return state={                                                            // cityId and areaId will be the first possible values
+              cityId: props.itinerary.cities[0].id,
+              areaId: props.itinerary.cities[0].areas[0].id
+            }
+          } else {                                                                    // if that city has no areas, areaId will be blank
+            return state={
+              cityId: props.itinerary.cities[0].id,
+              areaId: ""
+            }
+          }
+        } else {                                                                      // if that itinerary has no cities, both will be blank
+          return state={
+            cityId: "",
+            areaId: ""
+          }
+        }
+      } else {                                                                        // don't change state otherwise
+        return state = {}
+      }
+    }
+
     renderForm() {
       if (this.props.itinerary.cities.length === 0) {
         return (
@@ -183,13 +211,13 @@ export default connect(mapStateToProps, mapDispatchToProps) (
               {this.props.itinerary.cities.map(c => (<option key={c.id} value={c.id}>{c.name}</option>))}
             </select>
             {
-              !this.state.cityId
-              ? (<select id="areaId" onChange={this.handleChange} >
-                  {this.props.itinerary.cities[0].areas.map(a => (<option key={a.id} value={a.id}>{a.name}</option>))}
-                </select>)
-              : (<select id="areaId" onChange={this.handleChange} >
+              !!this.state.areaId
+              ? (
+                <select id="areaId" onChange={this.handleChange} >
                   {this.props.itinerary.cities.find(c => c.id === this.state.cityId).areas.map(a => (<option key={a.id} value={a.id}>{a.name}</option>))}
-                </select>)
+                </select>
+              )
+              : null
             }
             <select id="classification" onChange={this.handleChange} >
               <option value="Food and Drink">Food and Drink</option>
@@ -207,17 +235,11 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     render() {
+      console.log(this.state)
       return (
         <div>
           {!!Object.keys(this.props.itinerary).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
           ?
-            this.state.cityId === ""
-            ? // this feels not react-y
-              this.setState({
-                cityId: this.props.itinerary.cities[0].id,
-                areaId: !!this.props.itinerary.cities[0].areas.length ? this.props.itinerary.cities[0].areas[0].id : ""
-              })
-            :
             (
             <div>
               <div>

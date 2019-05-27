@@ -1,4 +1,5 @@
 import React from 'react'
+import SignInSide from './SignInSide'
 
 class Login extends React.Component {
   handleSubmit = (e) => {
@@ -38,31 +39,33 @@ class Login extends React.Component {
   }
 
   render(){
-   return (
-     <React.Fragment>
-     {
-       !localStorage.token
-       ? (
-         <div>
-           <form>
-             <label>Username</label>
-             <input onChange={this.handleChange} name="username" type="text" />
-             <label>Password</label>
-             <input onChange={this.handleChange} name="password" type="password" />
-             <input type="submit" onClick={this.handleSubmit} />
-           </form>
-           <button onClick={() => this.props.history.push('/create_user')}>Create an account</button>
-         </div>
-       )
-       : (
-         <React.Fragment>
-         <h4>You're already logged in!</h4>
-         <button onClick={this.logout}>Logout</button>
-         </React.Fragment>
-       )
-     }
-     </React.Fragment>
-   )
+    console.log(this.state)
+    return (
+      <React.Fragment>
+        {
+          !localStorage.token
+          ? (
+            <div>
+              <form>
+                <label>Username</label>
+                <input onChange={this.handleChange} name="username" type="text" />
+                <label>Password</label>
+                <input onChange={this.handleChange} name="password" type="password" />
+                <input type="submit" onClick={this.handleSubmit} />
+              </form>
+              <button onClick={() => this.props.history.push('/create_user')}>Create an account</button>
+            </div>
+          )
+          : (
+            <React.Fragment>
+              <h4>You're already logged in!</h4>
+              <button onClick={this.logout}>Logout</button>
+            </React.Fragment>
+          )
+        }
+        <SignInSide handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+      </React.Fragment>
+    )
   }
 }
 

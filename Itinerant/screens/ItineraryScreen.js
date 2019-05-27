@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Button,
   Image,
   Platform,
   ScrollView,
@@ -10,7 +11,7 @@ import {
   View,
   AsyncStorage
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import { WebBrowser, Location, Permissions } from 'expo';
 import City from './City'
 import path from '../components/path'
 
@@ -23,7 +24,8 @@ export default class ItineraryScreen extends React.Component {
 
   state = {
     cities: [],
-    searchTerm: ""
+    searchTerm: "",
+    filter: false
   }
 
   handleSearch = (e) => {
@@ -80,6 +82,28 @@ export default class ItineraryScreen extends React.Component {
     }
   }
 
+  filterByDistance = () => {
+    let itinerary = this.searchedItinerary()
+    if (this.state.filter) {
+      return itinerary
+    } else {
+      return itinerary
+    }
+  }
+
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({ location, filter: true });
+    console.log(location)
+  };
+
   componentDidMount() {
     AsyncStorage.getItem('user').then( user_res => {
       user_info = JSON.parse(user_res)
@@ -111,22 +135,28 @@ export default class ItineraryScreen extends React.Component {
   }
 
   render() {
-    let itinerary = this.searchedItinerary()
+    let itinerary = this.filterByDistance()
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Search Itinerary"
-            value={this.state.searchTerm}
-            onChangeText={this.handleSearch}
-          />
+            <Button
+              onPress={this._getLocationAsync}
+              title="Learn More"
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Search Itinerary"
+              value={this.state.searchTerm}
+              onChangeText={this.handleSearch}
+            />
           </View>
           <View style={styles.getStartedContainer}>
             {itinerary.cities.map( c => (
-              <View>
-                <City {...c} key={c.id}/>
+              <View key={c.id}>
+                <City {...c}/>
               </View>
             ))}
           </View>

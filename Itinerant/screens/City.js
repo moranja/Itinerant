@@ -15,8 +15,8 @@ export default class City extends React.Component {
           {this.props.name}, {this.props.country}
         </Text>
         {this.props.areas.map( a => (
-          <View>
-            <Area {...a} key={a.id}/>
+          <View key={a.id}>
+            <Area {...a}/>
           </View>
         ))}
       </View>

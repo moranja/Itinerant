@@ -11,6 +11,8 @@ import {
   AsyncStorage
 } from 'react-native'
 
+import path from '../components/path'
+
 export default class LoginScreen extends React.Component {
   static navigationOptions = {
     title: "Login Screen",

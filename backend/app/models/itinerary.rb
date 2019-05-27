@@ -20,4 +20,11 @@ class Itinerary < ApplicationRecord
     itinerary_hash
   end
 
+  def attractions
+    self.cities.map{|c| c.areas}.flatten.map{|a| a.attractions}.flatten
+  end
+
+  def attractions_by_distance (lat, lng)
+    self.attractions.sort_by{|att| Math.sqrt((att.latitude.to_i - lat)**2 + (att.longitude.to_i - lng)**2)}
+  end
 end

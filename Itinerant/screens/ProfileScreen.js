@@ -63,7 +63,6 @@ export default class ProfileScreen extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>

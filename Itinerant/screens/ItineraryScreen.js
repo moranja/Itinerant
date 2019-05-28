@@ -102,7 +102,26 @@ export default class ItineraryScreen extends React.Component {
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location, filter: true });
     console.log(location)
+    fetch(`http://${path}:3000/itineraries/${this.state.details.id}/nearest`, {
+      method: "POST",
+      headers:{
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${user_info.auth_token}`
+      },
+      body: JSON.stringify({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        amount: 5
+      })
+    })
+    .then( res => res.json())
+    .then( res => {
+      console.log(res)
+    })
   };
+
+  test = () => {
+  }
 
   componentDidMount() {
     AsyncStorage.getItem('user').then( user_res => {

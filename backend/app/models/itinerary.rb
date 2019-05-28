@@ -22,7 +22,7 @@ class Itinerary < ApplicationRecord
     itinerary_hash
   end
 
-  def attractions_by_distance (lat, lng)
-    self.attractions.sort_by{|att| Math.sqrt((att.latitude.to_i - lat)**2 + (att.longitude.to_i - lng)**2)}
+  def attractions_by_distance (lat, lng, amount)
+    self.attractions.sort_by{|att| Math.sqrt((att.latitude.to_i - lat)**2 + (att.longitude.to_i - lng)**2)}.first(amount)
   end
 end

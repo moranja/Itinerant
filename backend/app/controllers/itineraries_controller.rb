@@ -36,5 +36,11 @@ class ItinerariesController < ApplicationController
     render json: new_itinerary.full_itinerary
   end
 
+  def nearest
+    itinerary = Itinerary.find(params[:id])
+    byebug
+    render json: itinerary.attractions_by_distance(params[:latitude], params[:longitude], params[:amount])
+  end
+
   private
 end

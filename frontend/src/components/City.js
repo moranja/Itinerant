@@ -4,7 +4,6 @@ import Area from './Area'
 import CreatePlanModal from './CreatePlanModal'
 import CreateAreaModal from './CreateAreaModal'
 import { connect } from 'react-redux'
-import DatePicker from 'react-datepicker'
 
 import 'react-datepicker/dist/react-datepicker.css'
 

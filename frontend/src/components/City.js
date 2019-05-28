@@ -3,6 +3,7 @@ import Plan from './Plan'
 import Area from './Area'
 import CreatePlanModal from './CreatePlanModal'
 import CreateAreaModal from './CreateAreaModal'
+import EditCityModal from './EditCityModal'
 import { connect } from 'react-redux'
 
 import 'react-datepicker/dist/react-datepicker.css'
@@ -58,6 +59,32 @@ const mapDispatchToProps = {
         dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
       }
     })
+  },
+  editCity: city_info => dispatch => {
+    const editCity = {
+      city_id: city_info.cityId,
+      name: city_info.name,
+      country: city_info.country,
+      content: city_info.content
+    }
+    fetch(`http://localhost:3000/cities/${city_info.cityId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.token}`
+      },
+      body: JSON.stringify({
+        ...editCity
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.error) {
+        console.log(res.message)
+      } else {
+        dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
+      }
+    })
   }
 }
 
@@ -65,7 +92,10 @@ export default connect(null, mapDispatchToProps) (
   class City extends React.Component {
 
     state = {
-      startDate: ""
+      startDate: "",
+      editName: this.props.name,
+      editCountry: this.props.country,
+      editContent: this.props.content
     }
 
     handleChange = (e) => {
@@ -91,6 +121,17 @@ export default connect(null, mapDispatchToProps) (
       this.props.addAreaFromItinerary(payload)
     }
 
+    handleEditSubmit = (e) => {
+      let payload = {
+        cityId: this.props.id,
+        name: this.state.editName,
+        country: this.state.editCountry,
+        content: this.state.editContent
+      }
+      console.log(payload)
+      this.props.editCity(payload)
+    }
+
     handlePlanSubmit = (e) => {
       e.persist()
       e.preventDefault()
@@ -108,13 +149,15 @@ export default connect(null, mapDispatchToProps) (
         <React.Fragment>
           <div>
             <h2>{this.props.name}, {this.props.country}</h2>
-              <ul>
-                {this.props.plans.map(p => <Plan {...p} key={p.id}/>)}
-              </ul>
-              <CreatePlanModal handleChange={this.handleChange} handlePlanSubmit={this.handlePlanSubmit} handleDateChange={this.handleDateChange} startDate={this.state.startDate}/>
+            <p>{this.props.content}</p>
+            <EditCityModal handleChange={this.handleChange} handleEditSubmit={this.handleEditSubmit} {...this.state}/>
+            <ul>
+              {this.props.plans.map(p => <Plan {...p} key={p.id}/>)}
+            </ul>
+            <CreatePlanModal handleChange={this.handleChange} handlePlanSubmit={this.handlePlanSubmit} handleDateChange={this.handleDateChange} startDate={this.state.startDate}/>
 
-              <br />
-              {this.props.areas.map(a => <Area {...a} key={a.id}/>)}
+            <br />
+            {this.props.areas.map(a => <Area {...a} key={a.id}/>)}
           </div>
           <CreateAreaModal handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
         </React.Fragment>

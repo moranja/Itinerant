@@ -237,6 +237,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     render() {
+      console.log(this.props.itinerary)
       return (
         <div>
           <CssBaseline />

@@ -13,6 +13,20 @@ class CitiesController < ApplicationController
     end
   end
 
+  def update
+    city = City.find(params[:id])
+
+    if city.itinerary.users.map{|u| u.id}.include?(@current_user.id)
+      city.update(city_params)
+      render json: city.itinerary.full_itinerary
+    else
+      render json: {
+        error: true,
+        message: 'You do not have permission to edit this itinerary'
+      }
+    end
+  end
+
   private
 
     def city_params

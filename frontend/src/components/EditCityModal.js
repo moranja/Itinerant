@@ -20,9 +20,10 @@ function CreateCityModal(props) {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add a City
-      </Button>
+      <div onClick={handleClickOpen}>
+        <h2>{props.editName}, {props.editCountry}</h2>
+        <p>{props.editContent}</p>
+      </div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
         <DialogContent>
@@ -32,29 +33,32 @@ function CreateCityModal(props) {
           <TextField
             autoFocus
             margin="none"
-            id="name"
+            id="editName"
             label="City name"
+            value={props.editName}
             onChange={props.handleChange}
             fullWidth
           />
           <TextField
             margin="none"
-            id="country"
+            id="editCountry"
             label="Country"
+            value={props.editCountry}
             onChange={props.handleChange}
             fullWidth
           />
           <TextField
             margin="none"
-            id="description"
+            id="editContent"
             label="Description"
+            value={props.editContent}
             onChange={props.handleChange}
             fullWidth
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={(e) => {handleClose(); props.handleSubmit(e)}} color="primary">
-            Add City
+          <Button onClick={(e) => {console.log("test"); handleClose(); props.handleEditSubmit(e)}} color="primary">
+            Edit City
           </Button>
         </DialogActions>
       </Dialog>

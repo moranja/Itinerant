@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function CreateCityModal(props) {
+function CreateAreaModal(props) {
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -21,29 +21,21 @@ function CreateCityModal(props) {
   return (
     <div>
       <div onClick={handleClickOpen}>
-        <h2>{props.editName}, {props.editCountry}</h2>
+        <h3>{props.editName}</h3>
         <p>{props.editContent}</p>
       </div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Enter City information:
+            Enter Area information:
           </DialogContentText>
           <TextField
             autoFocus
             margin="none"
             id="editName"
-            label="City name"
+            label="Area name"
             value={props.editName}
-            onChange={props.handleChange}
-            fullWidth
-          />
-          <TextField
-            margin="none"
-            id="editCountry"
-            label="Country"
-            value={props.editCountry}
             onChange={props.handleChange}
             fullWidth
           />
@@ -58,7 +50,7 @@ function CreateCityModal(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={(e) => {handleClose(); props.handleEditSubmit(e)}} color="primary">
-            Edit City
+            Edit Area
           </Button>
         </DialogActions>
       </Dialog>
@@ -66,4 +58,4 @@ function CreateCityModal(props) {
   );
 }
 
-export default CreateCityModal;
+export default CreateAreaModal;

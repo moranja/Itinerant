@@ -14,6 +14,20 @@ class AreasController < ApplicationController
     end
   end
 
+  def update
+    area = Area.find(params[:id])
+
+    if area.city.itinerary.users.map{|u| u.id}.include?(@current_user.id)
+      area.update(area_params)
+      render json: area.city.itinerary.full_itinerary
+    else
+      render json: {
+        error: true,
+        message: 'You do not have permission to edit this itinerary'
+      }
+    end
+  end
+
   private
 
     def area_params

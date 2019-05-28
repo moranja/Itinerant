@@ -128,7 +128,6 @@ export default connect(null, mapDispatchToProps) (
         country: this.state.editCountry,
         content: this.state.editContent
       }
-      console.log(payload)
       this.props.editCity(payload)
     }
 
@@ -148,8 +147,6 @@ export default connect(null, mapDispatchToProps) (
       return (
         <React.Fragment>
           <div>
-            <h2>{this.props.name}, {this.props.country}</h2>
-            <p>{this.props.content}</p>
             <EditCityModal handleChange={this.handleChange} handleEditSubmit={this.handleEditSubmit} {...this.state}/>
             <ul>
               {this.props.plans.map(p => <Plan {...p} key={p.id}/>)}

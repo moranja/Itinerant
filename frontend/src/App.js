@@ -3,6 +3,7 @@ import { Router, Route, Switch, Link } from 'react-router-dom'
 import HomePage from './containers/HomePage'
 import Login from './components/Login'
 import CreateUser from './components/CreateUser'
+import Profile from './components/Profile'
 import UserIndex from './containers/UserIndex'
 import ItineraryContainer from './containers/ItineraryContainer'
 import UserContainer from './containers/UserContainer'
@@ -20,11 +21,13 @@ const App = () => (
     ITINERANT&nbsp;
     <Link to={'/'}>Home</Link>&nbsp;
     <Link to={'/users'}>Users</Link>&nbsp;
+    <Link to={'/profile'}>Profile</Link>&nbsp;
     <Link to={'/login'}>Login</Link>&nbsp;
     {/* Routes */}
     <Switch>
       <Route path="/users/:id" component={UserContainer} />
       <Route path="/users" component={UserIndex} />
+      <Route path="/profile" component={Profile} />
       <Route path="/itineraries/:id" component={ItineraryContainer} />
       <Route path="/login" component={Login} />
       <Route path="/create_user" component={CreateUser} />

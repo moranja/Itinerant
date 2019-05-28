@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true
 
   def itinerary_list
-    return self.itineraries.map{|i| {id: i.id, title: i.title}}
+    return self.itineraries.map{|i| {id: i.id, title: i.title, description: i.description, image_url: i.image_url}}
   end
 
 

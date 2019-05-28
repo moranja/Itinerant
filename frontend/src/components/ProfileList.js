@@ -48,64 +48,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function ItineraryAlbum(props) {
+export default function ProfileList(props) {
   const classes = useStyles();
 
   return (
     <React.Fragment>
       <CssBaseline />
       <main>
-        {/* Hero unit */}
-        <div className={classes.heroContent}>
-          <Container maxWidth="md">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Where would you like to go?
-            </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={9}>
-                <Typography variant="h4" align="left" color="textSecondary" paragraph>
-                  Welcome to Itinerant, the best way to plan and organize your upcoming trips.
-                  To get started, select an itinerary from below, or create your own:
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={3}>
-                <form className={classes.container} noValidate autoComplete="off">
-                  <TextField
-                    id="standard-name"
-                    label="Title"
-                    name="title"
-                    className={classes.textField}
-                    value={props.title}
-                    onChange={props.handleChange}
-                    margin="none"
-                  />
-                  <TextField
-                    id="standard-name"
-                    label="Description"
-                    name="description"
-                    className={classes.textField}
-                    value={props.description}
-                    onChange={props.handleChange}
-                    margin="none"
-                  />
-                  <TextField
-                    id="standard-name"
-                    label="Image URL"
-                    name="imageUrl"
-                    className={classes.textField}
-                    value={props.imageUrl}
-                    onChange={props.handleChange}
-                    margin="none"
-                  />
-                  <br />
-                  <Button variant="outlined" className={classes.button} onClick={props.handleSubmit}>
-                    Create
-                  </Button>
-                </form>
-              </Grid>
-            </Grid>
-          </Container>
-        </div>
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>

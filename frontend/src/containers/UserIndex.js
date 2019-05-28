@@ -48,21 +48,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       return (
         <div>
           {
-            !Object.keys(this.props.selected_user).length
-            ?
-              (!!Object.keys(this.props.users).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
-              ? (
-                <ul>
-                  {this.props.users.map((u,index) => <li key={index} onClick={() => history.push(`/users/${u.id}`)}>{u.username}</li>)}
-                </ul>
-                )
-              : (<h2>...</h2>))
-            : <h3>{this.props.selected_user.name}</h3>
+            (!!Object.keys(this.props.users).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
+            ? (
+              <ul>
+                {this.props.users.map((u,index) => <li key={index} onClick={() => history.push(`/users/${u.id}`)}>{u.username}</li>)}
+              </ul>
+              )
+            : (<h2>...</h2>))
           }
         </div>
-      ) // The form here should be a find or create style dropdown...
+      )
     }
   }
 )
-
-// export default App;

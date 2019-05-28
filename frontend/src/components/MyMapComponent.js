@@ -136,7 +136,7 @@ const MapWithASearchBox = compose(
       >
         {
           index === 0
-          ? (<InfoWindow onCloseClick={props.onToggleOpen}>
+          ? (<InfoWindow onCloseClick={props.onToggleOpen}> // Clicking on the x closes the window, and I have no clue why. Can't find any hint of it in the documentation or googling. Would love to just turn that off.
             <div>
               {marker.place_info.name}
               <br />

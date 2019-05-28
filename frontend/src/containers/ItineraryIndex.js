@@ -1,4 +1,5 @@
 import React from 'react'
+import ItineraryTile from '../components/ItineraryTile'
 import { connect } from 'react-redux'
 import history from '../history'
 
@@ -56,14 +57,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     render() {
       return (
         <React.Fragment>
-          <ul>
-            {this.props.itineraries.map((i,index) => <li key={index} onClick={() => history.push(`/itineraries/${i.id}`)}>{i.title}</li>)}
-          </ul>
-          <form>
-            <label>Title:&nbsp;</label>
-            <input onChange={this.handleChange} name="title" type="text" />
-            <input type="submit" onClick={this.handleSubmit} />
-          </form>
+          <ItineraryTile itineraries={this.props.itineraries} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
         </React.Fragment>
       )
     }

@@ -58,14 +58,14 @@ export default function ItineraryAlbum(props) {
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
-          <Container maxWidth="sm">
+          <Container maxWidth="md">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              ITINERANT
+              Where would you like to go?
             </Typography>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={9}>
-                <Typography variant="h5" align="left" color="textSecondary" paragraph>
-                  Welcome to itinerant, the best way to plan and organize your upcoming trips.
+                <Typography variant="h4" align="left" color="textSecondary" paragraph>
+                  Welcome to Itinerant, the best way to plan and organize your upcoming trips.
                   To get started, select an itinerary from below, or create your own:
                 </Typography>
               </Grid>
@@ -98,6 +98,7 @@ export default function ItineraryAlbum(props) {
                     onChange={props.handleChange}
                     margin="none"
                   />
+                  <br />
                   <Button variant="outlined" className={classes.button} onClick={props.handleSubmit}>
                     Create
                   </Button>

@@ -174,7 +174,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     } // flesh this out
 
     static getDerivedStateFromProps(props, state) {
-      console.log(!state.cityId, !state.areaId)
       if (!state.cityId && !state.areaId && !!Object.keys(props.itinerary).length) {  // if there's no city, area, and we have an itinerary...
         if (!!props.itinerary.cities.length) {                                        // and that itinerary has cities
           if (!!props.itinerary.cities[0].areas.length) {                             // and that city has areas
@@ -235,7 +234,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     render() {
-      console.log(this.state)
       return (
         <div>
           {!!Object.keys(this.props.itinerary).length //Tests if this.state has any keys, if not the fetch hasn't completed yet

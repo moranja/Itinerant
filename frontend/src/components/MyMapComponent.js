@@ -96,12 +96,13 @@ const MapWithASearchBox = compose(
   withScriptjs,
   withGoogleMap
 )((props) =>
+
   <GoogleMap
     ref={props.onMapMounted}
     defaultZoom={12}
     center={props.center}
     onBoundsChanged={props.onBoundsChanged}
-    onCenterChanged={props.onCenterChanged} // lol this is why the map wouldn't drag
+    onCenterChanged={props.onCenterChanged}
   >
     <SearchBox
       ref={props.onSearchBoxMounted}

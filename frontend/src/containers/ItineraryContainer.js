@@ -4,6 +4,12 @@ import Itinerary from '../components/Itinerary'
 import MyMapComponent from '../components/MyMapComponent'
 import history from '../history'
 
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+
 const mapStateToProps = (state) => ({
   itinerary: state.selected_itinerary
 })
@@ -236,22 +242,22 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     render() {
       return (
         <div>
+          <CssBaseline />
           {!!Object.keys(this.props.itinerary).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
           ?
             (
             <div>
-              <div>
-                {this.canEdit()}
-              </div>
-              <div style={{display: "flex"}}>
-                <div style={{flex: "1"}}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={5}>
                   <MyMapComponent isMarkerShown={false} addAnAttraction={this.addAnAttraction}/>
                   {this.renderForm()}
-                </div>
-                <div style={{flex: "1"}}>
+                  <br />
+                  {this.canEdit()}
+                </Grid>
+                <Grid item xs={12} sm={7}>
                   <Itinerary {...this.props.itinerary} />
-                </div>
-              </div>
+                </Grid>
+              </Grid>
             </div>
             )
           : (<h2>loading...</h2>)

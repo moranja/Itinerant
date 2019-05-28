@@ -1,6 +1,15 @@
 import React from 'react'
 import City from './City'
+import CreateCityModal from './CreateCityModal'
 import { connect } from 'react-redux'
+
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+
+
 
 const mapStateToProps = (state) => ({
   itinerary: state.selected_itinerary
@@ -122,16 +131,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
           </ul>
           <h4>{itinerary.details.vital_info}</h4>
           {itinerary.cities.map((c,index) => <City {...c} key={c.id}/>)}
-
-
-          <form onSubmit={this.handleSubmit}>
-            New City:
-            <br />
-            <input type="text" placeholder="Name" id="name" onChange={this.handleChange}/>
-            <input type="text" placeholder="Country" id="country" onChange={this.handleChange}/>
-            <input type="text" placeholder="Description" id="content" onChange={this.handleChange}/>
-            <input type="submit" />
-          </form>
+          <CreateCityModal handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
 
           <h4>{itinerary.details.helpful_info}</h4>
           <h4>{itinerary.details.notes}</h4>

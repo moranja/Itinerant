@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function CreateCityModal(props) {
+function CreateAreaModal(props) {
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -18,30 +18,22 @@ function CreateCityModal(props) {
     setOpen(false)
   }
 
-  console.log(props)
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add a City
+        Add an Area
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Enter City information:
+            Enter Area information:
           </DialogContentText>
           <TextField
             autoFocus
             margin="none"
             id="name"
-            label="City name"
-            onChange={props.handleChange}
-            fullWidth
-          />
-          <TextField
-            margin="none"
-            id="country"
-            label="Country"
+            label="Area name"
             onChange={props.handleChange}
             fullWidth
           />
@@ -55,7 +47,7 @@ function CreateCityModal(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={(e) => {handleClose(); props.handleSubmit(e)}} color="primary">
-            Add City
+            Add Area
           </Button>
         </DialogActions>
       </Dialog>
@@ -63,4 +55,4 @@ function CreateCityModal(props) {
   );
 }
 
-export default CreateCityModal;
+export default CreateAreaModal;

@@ -7,7 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function CreateCityModal(props) {
+import DatePicker from 'react-datepicker'
+
+function CreatePlanModal(props) {
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -18,30 +20,26 @@ function CreateCityModal(props) {
     setOpen(false)
   }
 
-  console.log(props)
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add a City
+        Make a Plan
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Enter City information:
+            Enter Plan information:
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="none"
-            id="name"
-            label="City name"
-            onChange={props.handleChange}
-            fullWidth
+          <DatePicker
+            placeholderText="Click to select a date"
+            selected={props.startDate}
+            onChange={props.handleDateChange}
           />
           <TextField
             margin="none"
-            id="country"
-            label="Country"
+            id="time"
+            label="Approximate time"
             onChange={props.handleChange}
             fullWidth
           />
@@ -54,8 +52,8 @@ function CreateCityModal(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={(e) => {handleClose(); props.handleSubmit(e)}} color="primary">
-            Add City
+          <Button onClick={(e) => {handleClose(); props.handlePlanSubmit(e)}} color="primary">
+            Add Plan
           </Button>
         </DialogActions>
       </Dialog>
@@ -63,4 +61,4 @@ function CreateCityModal(props) {
   );
 }
 
-export default CreateCityModal;
+export default CreatePlanModal;

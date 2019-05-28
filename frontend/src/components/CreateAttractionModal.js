@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function CreateCityModal(props) {
+function CreateAttractionModal(props) {
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -18,30 +18,31 @@ function CreateCityModal(props) {
     setOpen(false)
   }
 
-  console.log(props)
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add a City
+        Add an Attraction
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Enter City information:
+            Enter Attraction information:
           </DialogContentText>
           <TextField
             autoFocus
             margin="none"
             id="name"
-            label="City name"
+            label="Attraction name"
+            value={props.name}
             onChange={props.handleChange}
             fullWidth
           />
           <TextField
             margin="none"
-            id="country"
-            label="Country"
+            id="classification"
+            label="Classification"
+            value={props.classification}
             onChange={props.handleChange}
             fullWidth
           />
@@ -49,13 +50,14 @@ function CreateCityModal(props) {
             margin="none"
             id="description"
             label="Description"
+            value={props.description}
             onChange={props.handleChange}
             fullWidth
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={(e) => {handleClose(); props.handleSubmit(e)}} color="primary">
-            Add City
+            Add Attraction
           </Button>
         </DialogActions>
       </Dialog>
@@ -63,4 +65,4 @@ function CreateCityModal(props) {
   );
 }
 
-export default CreateCityModal;
+export default CreateAttractionModal;

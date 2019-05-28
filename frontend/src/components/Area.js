@@ -1,5 +1,6 @@
 import React from 'react'
 import Attraction from './Attraction'
+import CreateAttractionModal from './CreateAttractionModal'
 import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => ({
@@ -38,6 +39,12 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps) (
   class Area extends React.Component {
 
+    state = {
+      name: "",
+      classification: "",
+      description: ""
+    }
+
     handleChange = (e) => {
       this.setState({[e.target.id]: e.target.value})
     }
@@ -63,14 +70,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
           <ul>
             {this.props.attractions.map(a => <Attraction {...a} key={a.id}/>)}
           </ul>
-          <form onSubmit={this.handleSubmit}>
-            New Attraction:
-            <br />
-            <input type="text" placeholder="Name" id="name" onChange={this.handleChange}/>
-            <input type="text" placeholder="Classification" id="classification" onChange={this.handleChange}/>
-            <input type="text" placeholder="Description" id="description" onChange={this.handleChange}/>
-            <input type="submit" />
-          </form>
+          <CreateAttractionModal handleChange={this.handleChange} handleSubmit={this.handleSubmit} {...this.state}/>
         </React.Fragment>
       )
     }

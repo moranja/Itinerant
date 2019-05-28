@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { WebBrowser, Location, Permissions } from 'expo';
 import City from './City'
+import Attraction from './Attraction'
 import path from '../components/path'
 
 import { MonoText } from '../components/StyledText';
@@ -24,8 +25,7 @@ export default class ItineraryScreen extends React.Component {
 
   state = {
     cities: [],
-    searchTerm: "",
-    filter: false
+    searchTerm: ""
   }
 
   handleSearch = (e) => {
@@ -40,58 +40,23 @@ export default class ItineraryScreen extends React.Component {
     if (searchTerm === "") {
       return {...this.state, ...this.props.itinerary}
     } else {
-      let searchedCities = this.state.cities.map(c => {
-        if (c.name.toLowerCase().includes(searchTerm)) {
-          return {...c, plans: []} // If the city name matches, return the whole city
+      let searchedAttractions = this.state.attractions.map(at => {
+        if (
+          at.name.toLowerCase().includes(searchTerm)
+          || at.classification.toLowerCase().includes(searchTerm)
+          || at.description.toLowerCase().includes(searchTerm)
+        ) {
+          return at
         } else {
-          let city = {...c, plans: []}
-          let searchedAreas = city.areas.map(a => {
-            if (a.name.toLowerCase().includes(searchTerm)) {
-              return a
-            } else {
-              let area = {...a}
-              let searchedAttractions = area.attractions.map(at => {
-                if (
-                  at.name.toLowerCase().includes(searchTerm)
-                  || at.classification.toLowerCase().includes(searchTerm)
-                  || at.description.toLowerCase().includes(searchTerm)
-                ) {
-                  return at
-                } else {
-                  return null
-                }
-              })
-              let filteredAttractions = searchedAttractions.filter(Boolean)
-              if (filteredAttractions.length !== 0) {
-                return {...area, attractions: [...filteredAttractions]} // If we get any hits on attraction, return the city, area, and attraction
-              } else {
-                return null
-              }
-            }
-          })
-          let filteredAreas = searchedAreas.filter(Boolean)
-          if (filteredAreas.length !== 0) {
-            return {...city, areas: [...filteredAreas]} // If we get any hits on area name, return the city and those areas
-          } else {
-            return null
-          }
+          return null
         }
       })
-      let filteredCities = searchedCities.filter(Boolean)
-      return {schedule: [], details: {id: this.state.details.id, title: this.state.details.title}, cities: [...filteredCities]}
+      let filteredAttractions = searchedAttractions.filter(Boolean)
+      return {searchTerm: searchTerm, details: {id: this.state.details.id, title: this.state.details.title}, attractions: [...filteredAttractions]}
     }
   }
 
-  filterByDistance = () => {
-    let itinerary = this.searchedItinerary()
-    if (this.state.filter) {
-      return itinerary
-    } else {
-      return itinerary
-    }
-  }
-
-  _getLocationAsync = async () => {
+  sortByDistance = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
       this.setState({
@@ -100,7 +65,6 @@ export default class ItineraryScreen extends React.Component {
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    this.setState({ location, filter: true });
     console.log(location)
     fetch(`http://${path}:3000/itineraries/${this.state.details.id}/nearest`, {
       method: "POST",
@@ -110,17 +74,18 @@ export default class ItineraryScreen extends React.Component {
       },
       body: JSON.stringify({
         latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        amount: 5
+        longitude: location.coords.longitude
       })
     })
     .then( res => res.json())
     .then( res => {
       console.log(res)
+      this.setState({
+         location,
+         filter: true,
+         attractions: res
+       })
     })
-  };
-
-  test = () => {
   }
 
   componentDidMount() {
@@ -144,6 +109,7 @@ export default class ItineraryScreen extends React.Component {
           } else {
             this.setState({
               cities: res.cities,
+              attractions: res.attractions,
               details: res.details,
               schedule: res.schedule
             })
@@ -154,17 +120,26 @@ export default class ItineraryScreen extends React.Component {
   }
 
   render() {
-    let itinerary = this.filterByDistance()
+    let itinerary = this.searchedItinerary()
+    console.log(itinerary)
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View>
-            <Button
-              onPress={this._getLocationAsync}
-              title="Learn More"
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button"
-            />
+            {
+              !itinerary.searchTerm
+              ?
+                null
+              :
+                (
+                  <Button
+                    onPress={this.sortByDistance}
+                    title="Sort by Distance"
+                    color="#841584"
+                    accessibilityLabel="Learn more about this purple button"
+                  />
+                )
+            }
             <TextInput
               style={styles.textInput}
               placeholder="Search Itinerary"
@@ -172,13 +147,29 @@ export default class ItineraryScreen extends React.Component {
               onChangeText={this.handleSearch}
             />
           </View>
-          <View style={styles.getStartedContainer}>
-            {itinerary.cities.map( c => (
-              <View key={c.id}>
-                <City {...c}/>
-              </View>
-            ))}
-          </View>
+          {
+            !itinerary.searchTerm
+            ?
+              (
+                <View style={styles.getStartedContainer}>
+                  {itinerary.cities.map( c => (
+                    <View key={c.id}>
+                      <City {...c}/>
+                    </View>
+                  ))}
+                </View>
+              )
+            :
+              (
+                <View style={styles.getStartedContainer}>
+                  {itinerary.attractions.map( a => (
+                    <View key={a.id}>
+                      <Attraction {...a}/>
+                    </View>
+                  ))}
+                </View>
+              )
+          }
         </ScrollView>
       </View>
     );
@@ -273,3 +264,55 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
 });
+
+
+
+
+
+//
+// searchedItinerary = () => {
+//   const searchTerm = this.state.searchTerm.toLowerCase()
+//   if (searchTerm === "") {
+//     return {...this.state, ...this.props.itinerary}
+//   } else {
+//     let searchedCities = this.state.cities.map(c => {
+//       if (c.name.toLowerCase().includes(searchTerm)) {
+//         return {...c, plans: []} // If the city name matches, return the whole city
+//       } else {
+//         let city = {...c, plans: []}
+//         let searchedAreas = city.areas.map(a => {
+//           if (a.name.toLowerCase().includes(searchTerm)) {
+//             return a
+//           } else {
+//             let area = {...a}
+//             let searchedAttractions = area.attractions.map(at => {
+//               if (
+//                 at.name.toLowerCase().includes(searchTerm)
+//                 || at.classification.toLowerCase().includes(searchTerm)
+//                 || at.description.toLowerCase().includes(searchTerm)
+//               ) {
+//                 return at
+//               } else {
+//                 return null
+//               }
+//             })
+//             let filteredAttractions = searchedAttractions.filter(Boolean)
+//             if (filteredAttractions.length !== 0) {
+//               return {...area, attractions: [...filteredAttractions]} // If we get any hits on attraction, return the city, area, and attraction
+//             } else {
+//               return null
+//             }
+//           }
+//         })
+//         let filteredAreas = searchedAreas.filter(Boolean)
+//         if (filteredAreas.length !== 0) {
+//           return {...city, areas: [...filteredAreas]} // If we get any hits on area name, return the city and those areas
+//         } else {
+//           return null
+//         }
+//       }
+//     })
+//     let filteredCities = searchedCities.filter(Boolean)
+//     return {schedule: [], details: {id: this.state.details.id, title: this.state.details.title}, cities: [...filteredCities]}
+//   }
+// }

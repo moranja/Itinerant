@@ -6,11 +6,16 @@ class Itinerary < ApplicationRecord
   has_many :attractions, through: :areas
   has_many :plans, through: :cities
 
+  def attractions_by_distance (lat, lng)
+    self.attractions.sort_by{|att| Math.sqrt((att.latitude.to_f - lat)**2 + (att.longitude.to_f - lng)**2)}
+  end
+
   def full_itinerary
     itinerary_hash = {}
     itinerary_hash[:details] = self
     itinerary_hash[:schedule] = self.plans.group_by{|i| i.date}
     itinerary_hash[:users] = self.users
+    itinerary_hash[:attractions] = self.attractions
     itinerary_hash[:cities] = []
     self.cities.each do |city|
       area_array = []
@@ -20,9 +25,5 @@ class Itinerary < ApplicationRecord
       itinerary_hash[:cities].push(id: city.id, name: city.name, country: city.country, content: city.content, areas: area_array, plans: city.plans)
     end
     itinerary_hash
-  end
-
-  def attractions_by_distance (lat, lng, amount)
-    self.attractions.sort_by{|att| Math.sqrt((att.latitude.to_i - lat)**2 + (att.longitude.to_i - lng)**2)}.first(amount)
   end
 end

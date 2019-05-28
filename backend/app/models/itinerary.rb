@@ -2,6 +2,8 @@ class Itinerary < ApplicationRecord
   has_many :user_itineraries
   has_many :users, through: :user_itineraries
   has_many :cities
+  has_many :areas, through: :cities
+  has_many :attractions, through: :areas
   has_many :plans, through: :cities
 
   def full_itinerary
@@ -18,10 +20,6 @@ class Itinerary < ApplicationRecord
       itinerary_hash[:cities].push(id: city.id, name: city.name, country: city.country, content: city.content, areas: area_array, plans: city.plans)
     end
     itinerary_hash
-  end
-
-  def attractions
-    self.cities.map{|c| c.areas}.flatten.map{|a| a.attractions}.flatten
   end
 
   def attractions_by_distance (lat, lng)

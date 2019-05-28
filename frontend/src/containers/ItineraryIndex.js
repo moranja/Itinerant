@@ -57,8 +57,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
+      console.log(this.state)
       return (
-        <ItineraryTile itineraries={this.props.itineraries} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+        <ItineraryTile itineraries={this.props.itineraries} handleChange={this.handleChange} handleSubmit={this.handleSubmit} {...this.state}/>
       )
     }
   }

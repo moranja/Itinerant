@@ -16,7 +16,7 @@ adam.password = "password"
 adam.save
 
 # Create Japan Itinerary
-japan_itinerary = Itinerary.create(title: "10 days in Japan!", vital_info: "Flight info, hotel reservations, etc", helpful_info: "train tables, tour reservations", notes: "Check out this New York Times article...")
+japan_itinerary = Itinerary.create(title: "10 days in Japan!", vital_info: "Flight info, hotel reservations, etc", helpful_info: "train tables, tour reservations", notes: "Check out this New York Times article...", description: "Visiting Kyoto, Tokyo, Hakone and Osaka on our first trip to Japan", image_url: "https://cdn-images-1.medium.com/max/1600/1*NrNiYv3grGH4aSkE2w51zQ.jpeg")
 
 # Join them
 UserItinerary.create(user: alexa, itinerary: japan_itinerary)
@@ -202,3 +202,12 @@ attractions = [
 attractions.each do |att|
   Attraction.create(area: att[:area], name: att[:name], latitude: att[:latitude], longitude: att[:longitude], place_id: att[:place_id], classification: att[:classification], description: att[:description])
 end
+
+
+#=================================================================================
+
+# Create Houston Itinerary
+houston_itinerary = Itinerary.create(title: "Houston Heights", vital_info: "Flight info, hotel reservations, etc", helpful_info: "train tables, tour reservations", notes: "Check out this New York Times article...", description: "A walk up the boulevard in the cultural capital of the South.", image_url: "https://scontent-dfw5-1.xx.fbcdn.net/v/t31.0-8/30171615_1657692390986955_7965322445269873040_o.jpg?_nc_cat=104&_nc_oc=AQkYlyRqYxRtPzta2mRT8omGw2DtjafxzChjquEjKlRvnUCqn77YaC10h3NmgVUchlU&_nc_ht=scontent-dfw5-1.xx&oh=16e5f29334e2a7be99b579fd6f0bc83a&oe=5D9FB925")
+
+# Join them
+UserItinerary.create(user: alexa, itinerary: houston_itinerary)

@@ -2,7 +2,7 @@ class ItinerariesController < ApplicationController
   skip_before_action  :logged_in?, only: [ :index, :show ]
 
   def create
-    itinerary = Itinerary.create(title: params[:title])
+    itinerary = Itinerary.create(title: params[:title], description: params[:description], image_url: params[:image_url])
     UserItinerary.create(user_id: @current_user.id, itinerary_id: itinerary.id)
     render json: itinerary.full_itinerary
   end

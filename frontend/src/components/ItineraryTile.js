@@ -11,7 +11,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import history from '../history'
 
 const useStyles = makeStyles(theme => ({
@@ -46,7 +45,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function ItineraryAlbum(props) {
   const classes = useStyles();
@@ -56,13 +54,6 @@ export default function ItineraryAlbum(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            ITINERANT
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
@@ -77,6 +68,10 @@ export default function ItineraryAlbum(props) {
             <form>
               <label>Title:&nbsp;</label>
               <input onChange={props.handleChange} name="title" type="text" />
+              <label>Description:&nbsp;</label>
+              <input onChange={props.handleChange} name="description" type="text" />
+              <label>Image URL:&nbsp;</label>
+              <input onChange={props.handleChange} name="imageUrl" type="text" />
               <input type="submit" onClick={props.handleSubmit} />
             </form>
           </Container>
@@ -85,11 +80,11 @@ export default function ItineraryAlbum(props) {
           {/* End hero unit */}
           <Grid container spacing={4}>
             {props.itineraries.map(card => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+              <Grid item key={card.id} xs={12} sm={6}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
+                    image={card.image_url}
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>
@@ -111,16 +106,6 @@ export default function ItineraryAlbum(props) {
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
-        </Typography>
-      </footer>
-      {/* End footer */}
     </React.Fragment>
   );
 }

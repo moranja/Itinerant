@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 2019_05_15_191915) do
     t.text "vital_info"
     t.text "helpful_info"
     t.text "notes"
+    t.text "description"
+    t.text "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

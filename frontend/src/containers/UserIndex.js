@@ -38,7 +38,7 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  class ItineraryIndex extends React.Component {
+  class UserIndex extends React.Component {
 
     componentDidMount() {
       this.props.loadUsers()

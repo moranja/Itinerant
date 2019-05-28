@@ -1,7 +1,6 @@
 import React from 'react'
 import ItineraryTile from '../components/ItineraryTile'
 import { connect } from 'react-redux'
-import history from '../history'
 
 const mapStateToProps = (state) => ({
   itineraries: state.itineraries
@@ -35,11 +34,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           "Authorization": `Bearer ${localStorage.token}`
         },
         body: JSON.stringify({
-          title: this.state.title
+          title: this.state.title,
+          description: this.state.description,
+          image_url: this.state.imageUrl
         })
       })
       .then( res => res.json())
       .then( res => {
+        console.log(res)
         this.props.history.push(`/itineraries/${res.details.id}`)
       })
     }
@@ -56,9 +58,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     render() {
       return (
-        <React.Fragment>
-          <ItineraryTile itineraries={this.props.itineraries} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-        </React.Fragment>
+        <ItineraryTile itineraries={this.props.itineraries} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
       )
     }
   }

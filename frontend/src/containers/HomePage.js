@@ -1,10 +1,7 @@
 import React from 'react'
 import ItineraryIndex from '../containers/ItineraryIndex'
 
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -50,9 +47,6 @@ const HomePage = (props) => {
       <CssBaseline />
       <Grid item xs={12} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            ITINERANT
-          </Typography>
           <React.Fragment>
             <ItineraryIndex history={props.history}/>
           </React.Fragment>

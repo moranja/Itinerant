@@ -24,11 +24,8 @@ function CreateCityModal(props) {
         Add a City
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Enter City information:</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Enter City information:
-          </DialogContentText>
           <TextField
             autoFocus
             margin="none"

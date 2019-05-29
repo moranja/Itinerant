@@ -103,8 +103,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     render() {
       return (
         <React.Fragment>
-          <h3>{this.props.name}</h3>
-          <p>{this.props.content}</p>
           <EditAreaModal handleChange={this.handleChange} handleEditSubmit={this.handleEditSubmit} {...this.state} />
           <ul>
             {this.props.attractions.map(a => <Attraction {...a} key={a.id}/>)}

@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   appBarText: {
-    color: "black"
+    color: "inherit"
   }
 }));
 

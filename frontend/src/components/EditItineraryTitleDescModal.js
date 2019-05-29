@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function CreateAttractionModal(props) {
+function EditItineraryTitleDescModal(props) {
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -21,25 +21,18 @@ function CreateAttractionModal(props) {
   return (
     <div>
       <div onClick={handleClickOpen}>
-        <li>{`${props.editName} (${props.editClassification}): ${props.editDescription}`}</li>
+        <h2>{props.editTitle}</h2>
+        <h3>{props.editDescription}</h3>
       </div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Enter Attraction information:</DialogTitle>
+        <DialogTitle id="form-dialog-title">Enter Itinerary information:</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="none"
-            id="editName"
-            label="Attraction name"
-            value={props.editName}
-            onChange={props.handleChange}
-            fullWidth
-          />
-          <TextField
-            margin="none"
-            id="editClassification"
-            label="Classification"
-            value={props.editClassification}
+            id="editTitle"
+            label="Title"
+            value={props.editTitle}
             onChange={props.handleChange}
             fullWidth
           />
@@ -51,10 +44,43 @@ function CreateAttractionModal(props) {
             onChange={props.handleChange}
             fullWidth
           />
+          <TextField
+            autoFocus
+            margin="none"
+            id="editVitalInfo"
+            multiline
+            rows="4"
+            label="Vital Info"
+            value={props.editVitalInfo}
+            onChange={props.handleChange}
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="none"
+            id="editHelpfulInfo"
+            multiline
+            rows="4"
+            label="Helpful Info"
+            value={props.editHelpfulInfo}
+            onChange={props.handleChange}
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="none"
+            id="editNotes"
+            multiline
+            rows="4"
+            label="Notes"
+            value={props.editNotes}
+            onChange={props.handleChange}
+            fullWidth
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={(e) => {handleClose(); props.handleEditSubmit(e)}} color="primary">
-            Edit Attraction
+            Edit Itinerary
           </Button>
         </DialogActions>
       </Dialog>
@@ -62,4 +88,4 @@ function CreateAttractionModal(props) {
   );
 }
 
-export default CreateAttractionModal;
+export default EditItineraryTitleDescModal;

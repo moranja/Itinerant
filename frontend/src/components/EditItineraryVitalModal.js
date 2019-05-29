@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function CreateAttractionModal(props) {
+function EditItineraryVitalModal(props) {
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -21,40 +21,26 @@ function CreateAttractionModal(props) {
   return (
     <div>
       <div onClick={handleClickOpen}>
-        <li>{`${props.editName} (${props.editClassification}): ${props.editDescription}`}</li>
+      <h4>{props.editVitalInfo}</h4>
       </div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Enter Attraction information:</DialogTitle>
+        <DialogTitle id="form-dialog-title">Enter Itinerary information:</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="none"
-            id="editName"
-            label="Attraction name"
-            value={props.editName}
-            onChange={props.handleChange}
-            fullWidth
-          />
-          <TextField
-            margin="none"
-            id="editClassification"
-            label="Classification"
-            value={props.editClassification}
-            onChange={props.handleChange}
-            fullWidth
-          />
-          <TextField
-            margin="none"
-            id="editDescription"
-            label="Description"
-            value={props.editDescription}
+            id="editVitalInfo"
+            multiline
+            rows="4"
+            label="Vital Info"
+            value={props.editVitalInfo}
             onChange={props.handleChange}
             fullWidth
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={(e) => {handleClose(); props.handleEditSubmit(e)}} color="primary">
-            Edit Attraction
+            Edit Itinerary
           </Button>
         </DialogActions>
       </Dialog>
@@ -62,4 +48,4 @@ function CreateAttractionModal(props) {
   );
 }
 
-export default CreateAttractionModal;
+export default EditItineraryVitalModal;

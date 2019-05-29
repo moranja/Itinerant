@@ -1,9 +1,12 @@
 import React from 'react'
 import City from './City'
 import CreateCityModal from './CreateCityModal'
+import EditItineraryTitleDescModal from './EditItineraryTitleDescModal'
+import EditItineraryVitalModal from './EditItineraryVitalModal'
+import EditItineraryHelpfulModal from './EditItineraryHelpfulModal'
+import EditItineraryNotesModal from './EditItineraryNotesModal'
 import TextField from '@material-ui/core/TextField'
 import { connect } from 'react-redux'
-
 
 
 const mapStateToProps = (state) => ({
@@ -36,6 +39,34 @@ const mapDispatchToProps = {
         dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
       }
     })
+  },
+  editItinerary: itinerary_info => dispatch => {
+    const editItinerary = {
+      itinerary_id: itinerary_info.itineraryId,
+      title: itinerary_info.title,
+      description: itinerary_info.description,
+      vital_info: itinerary_info.vitalInfo,
+      helpful_info: itinerary_info.helpfulInfo,
+      notes: itinerary_info.notes
+    }
+    fetch(`http://localhost:3000/itineraries/${itinerary_info.itineraryId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.token}`
+      },
+      body: JSON.stringify({
+        ...editItinerary
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.error) {
+        console.log(res.message)
+      } else {
+        dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
+      }
+    })
   }
 }
 
@@ -43,7 +74,12 @@ export default connect(mapStateToProps, mapDispatchToProps) (
   class Itinerary extends React.Component {
 
     state = {
-      searchTerm: ""
+      searchTerm: "",
+      editTitle: this.props.itinerary.details.title,
+      editDescription: this.props.itinerary.details.description,
+      editVitalInfo: this.props.itinerary.details.vital_info,
+      editHelpfulInfo: this.props.itinerary.details.helpful_info,
+      editNotes: this.props.itinerary.details.notes
     }
 
     handleChange = (e) => {
@@ -60,6 +96,19 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         content: this.state.content
       }
       this.props.addCityFromItinerary(payload)
+    }
+
+    handleEditSubmit = (e) => {
+      let payload = {
+        itineraryId: this.props.itinerary.details.id,
+        title: this.state.editTitle,
+        description: this.state.editDescription,
+        vitalInfo: this.state.editVitalInfo,
+        helpfulInfo: this.state.editHelpfulInfo,
+        notes: this.state.editNotes,
+      }
+      console.log(payload)
+      this.props.editItinerary(payload)
     }
 
     handleSearch = (e) => {
@@ -126,16 +175,36 @@ export default connect(mapStateToProps, mapDispatchToProps) (
             label="Search your itinerary:"
             onChange={this.handleSearch}
           />
-          <h2>{itinerary.details.title}</h2>
+          <EditItineraryTitleDescModal
+            editTitle={this.state.editTitle}
+            editDescription={this.state.editDescription}
+            editVitalInfo={this.state.editVitalInfo}
+            editHelpfulInfo={this.state.editHelpfulInfo}
+            editNotes={this.state.editNotes}
+            handleChange={this.handleChange}
+            handleEditSubmit={this.handleEditSubmit}
+          />
           <ul>
             {Object.keys(itinerary.schedule).map((d,index) => (<li key={index}>{d}</li>))}
           </ul>
-          <h4>{itinerary.details.vital_info}</h4>
+          <EditItineraryVitalModal
+            editVitalInfo={this.state.editVitalInfo}
+            handleChange={this.handleChange}
+            handleEditSubmit={this.handleEditSubmit}
+          />
           {itinerary.cities.map((c,index) => <City {...c} key={c.id}/>)}
           <CreateCityModal handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
 
-          <h4>{itinerary.details.helpful_info}</h4>
-          <h4>{itinerary.details.notes}</h4>
+          <EditItineraryHelpfulModal
+            editHelpfulInfo={this.state.editHelpfulInfo}
+            handleChange={this.handleChange}
+            handleEditSubmit={this.handleEditSubmit}
+          />
+          <EditItineraryNotesModal
+            editNotes={this.state.editNotes}
+            handleChange={this.handleChange}
+            handleEditSubmit={this.handleEditSubmit}
+          />
         </div>
       )
     }

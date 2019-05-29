@@ -16,6 +16,17 @@ class ItinerariesController < ApplicationController
   end
 
   def update
+    itinerary = Itinerary.find(params[:id])
+
+    if itinerary.users.map{|u| u.id}.include?(@current_user.id)
+      itinerary.update(itinerary_params)
+      render json: itinerary.full_itinerary
+    else
+      render json: {
+        error: true,
+        message: 'You do not have permission to edit this itinerary'
+      }
+    end
   end
 
   def copy
@@ -39,4 +50,10 @@ class ItinerariesController < ApplicationController
   def nearest
     render json: Itinerary.find(params[:id]).attractions_by_distance(params[:latitude], params[:longitude])
   end
+
+  private
+
+    def itinerary_params
+      params.permit(:title, :description, :vital_info, :helpful_info, :notes)
+    end
 end

@@ -26,11 +26,8 @@ function CreatePlanModal(props) {
         Make a Plan
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Enter Plan information:</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Enter Plan information:
-          </DialogContentText>
           <DatePicker
             placeholderText="Click to select a date"
             selected={props.startDate}

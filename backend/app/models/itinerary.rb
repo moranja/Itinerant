@@ -6,6 +6,14 @@ class Itinerary < ApplicationRecord
   has_many :attractions, through: :areas
   has_many :plans, through: :cities
 
+  before_save :default_values
+
+  def default_values
+    self.vital_info ||= "Flight info, hotel reservations, etc"
+    self.helpful_info ||= "Train tables, tour reservations, etc"
+    self.notes ||= "Check out this New York Times article..."
+  end
+
   def attractions_by_distance (lat, lng)
     self.attractions.sort_by{|att| Math.sqrt((att.latitude.to_f - lat)**2 + (att.longitude.to_f - lng)**2)}
   end

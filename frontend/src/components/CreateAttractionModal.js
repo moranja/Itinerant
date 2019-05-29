@@ -24,11 +24,8 @@ function CreateAttractionModal(props) {
         Add an Attraction
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Enter Attraction information:</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Enter Attraction information:
-          </DialogContentText>
           <TextField
             autoFocus
             margin="none"

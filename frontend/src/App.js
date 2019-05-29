@@ -11,8 +11,8 @@ import UserContainer from './containers/UserContainer'
 import history from './history'
 
 const App = () => (
-  <div style={{ backgroundColor: "#bcedad"}}>
-  <Router history={history} style={{ backgroundColor: "#bcedad"}}>
+  <div style={{ backgroundColor: "#393b3a"}}>
+  <Router history={history} style={{ backgroundColor: "#393b3a"}}>
     {/* Sends you to login page if you're not logged in */}
     {
       !localStorage.token

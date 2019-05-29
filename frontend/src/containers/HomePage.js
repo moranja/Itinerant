@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     flex: "1",
-    backgroundColor: "#bcedad",
+    backgroundColor: "#393b3a",
     backgroundSize: "100%"
   },
   image: {

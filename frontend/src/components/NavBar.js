@@ -19,7 +19,7 @@ function DenseAppBar() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: "#a3d9fd" }}>
+      <AppBar position="static" style={{ backgroundColor: "#923c2d" }}>
         <Toolbar variant="dense">
           <Typography variant="h6" className={classes.appBarText} onClick={() => history.push(`/`)}>
             Home

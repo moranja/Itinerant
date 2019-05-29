@@ -61,14 +61,12 @@ const MapWithASearchBox = compose(
           //     bounds.extend(place.geometry.location)
           //   }
           // });
-          console.log(places)
           const nextMarkers = places.map(place => ({
             position: place.geometry.location,
             place_info: place
           }));
           const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
 
-          console.log(nextCenter, nextMarkers)
 
           this.setState({
             center: nextCenter,
@@ -139,7 +137,7 @@ const MapWithASearchBox = compose(
         {
           index === 0
           ? (
-            <InfoWindow onCloseClick={props.onToggleOpen}> {/*Clicking on the x closes the window, and I have no clue why. Can't find any hint of it in the documentation or googling. Would love to just turn that off.*/}
+            <InfoWindow onCloseClick={props.onToggleOpen}>
               <div>
                 {marker.place_info.name}
                 <br />

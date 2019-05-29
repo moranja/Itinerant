@@ -1,5 +1,6 @@
 import React from 'react'
 import ProfileList from './ProfileList'
+import NavBar from './NavBar'
 import { connect } from 'react-redux'
 
 
@@ -32,7 +33,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     render() {
       return (
         <React.Fragment>
-        <br /><br />
+        <NavBar />
           {
             !!Object.keys(this.props.user).length
             ?

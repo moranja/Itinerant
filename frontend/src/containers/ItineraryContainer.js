@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Itinerary from '../components/Itinerary'
 import MyMapComponent from '../components/MyMapComponent'
+import NavBar from '../components/NavBar'
 import history from '../history'
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -240,6 +241,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       console.log(this.props.itinerary)
       return (
         <div>
+          <NavBar />
           <CssBaseline />
           {!!Object.keys(this.props.itinerary).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
           ?
@@ -252,8 +254,9 @@ export default connect(mapStateToProps, mapDispatchToProps) (
                     padding: "20px",
 
                     position: "absolute",
-                    top: "10%",
-                    left: "10%",
+                    top: "7%",
+                    left: "7%",
+                    width: "500px",
 
                     margin: "10px 0 0 10px",
                   }}>

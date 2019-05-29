@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
+import NavBar from '../components/NavBar'
 
 const useStyles = makeStyles(theme => ({
   background: {
@@ -44,6 +45,8 @@ const HomePage = (props) => {
   const classes = useStyles();
 
   return (
+    <div>
+      <NavBar />
       <Container component="main">
         <CssBaseline />
         <Grid item xs={12} component={Paper} elevation={6} style={{ backgroundColor: "#eae9e7"}} square>
@@ -54,6 +57,7 @@ const HomePage = (props) => {
           </div>
         </Grid>
       </Container>
+    </div>
   )
 }
 

@@ -19,7 +19,6 @@ const App = () => (
       ? history.push('/login')
       : null
     }
-    <NavBar />
     <Switch>
       <Route path="/users/:id" component={UserContainer} />
       <Route path="/users" component={UserIndex} />

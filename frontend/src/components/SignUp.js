@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
@@ -10,6 +11,13 @@ import Container from '@material-ui/core/Container';
 import history from '../history'
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    height: '100vh',
+    justifyContent: "center"
+  },
+  interior: {
+    padding: '10px'
+  },
   '@global': {
     body: {
       backgroundColor: theme.palette.common.white,
@@ -38,8 +46,9 @@ export default function SignIn( props ) {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Grid container component="main" className={classes.root}>
       <CssBaseline />
+      <Grid item component={Paper} elevation={6} square  style={{ backgroundColor: "#eae9e7"}} className={classes.interior}>
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
           Sign up
@@ -104,6 +113,7 @@ export default function SignIn( props ) {
           </Grid>
         </form>
       </div>
-    </Container>
+      </Grid>
+    </Grid>
   );
 }

@@ -12,7 +12,7 @@ import history from '../history'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '95vh',
+    height: '100vh',
   },
   image: {
     backgroundImage: 'url(https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1574&q=80)',

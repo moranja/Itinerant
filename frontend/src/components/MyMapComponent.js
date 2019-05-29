@@ -48,6 +48,15 @@ const MapWithASearchBox = compose(
         onSearchBoxMounted: ref => {
           refs.searchBox = ref;
         },
+        onMarkerMounted: ref => {
+          refs.marker = ref;
+          console.log(refs)
+        },
+        onInfoWindowMounted: ref => {
+          refs.infoWindow = ref;
+
+          console.log(refs)
+        },
         onPlacesChanged: () => {
           const places = refs.searchBox.getPlaces()
           this.props.addAnAttraction(places) // Add logic here to scrape the places object for the information I want
@@ -66,7 +75,6 @@ const MapWithASearchBox = compose(
             place_info: place
           }));
           const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
-
 
           this.setState({
             center: nextCenter,
@@ -130,14 +138,15 @@ const MapWithASearchBox = compose(
     </SearchBox>
     {props.markers.map((marker, index) =>
       <Marker
+        ref={index == 0 ? props.onMarkerMounted : null}
         key={index}
         position={marker.position}
         onClick={() => props.markerWasClicked(props.markers, marker)}
       >
-        {
+        { // Entering a search term with no results unmounts the marker, and the infoWindow, allowing subsequent searches to display the infoWindow
           index === 0
           ? (
-            <InfoWindow onCloseClick={props.onToggleOpen}>
+            <InfoWindow onCloseClick={props.onToggleOpen} ref={props.onInfoWindowMounted}>
               <div>
                 {marker.place_info.name}
                 <br />

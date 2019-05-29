@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+//import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import DatePicker from 'react-datepicker'
@@ -26,11 +26,8 @@ function CreatePlanModal(props) {
         <li>{`${props.formattedDate}, ${props.editTime}: ${props.editContent}`}</li>
       </div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Enter Plan information:</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Enter Plan information:
-          </DialogContentText>
           <DatePicker
             placeholderText="Click to select a date"
             selected={props.editDate}

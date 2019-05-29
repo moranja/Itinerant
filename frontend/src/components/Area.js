@@ -1,6 +1,5 @@
 import React from 'react'
 import Attraction from './Attraction'
-import CreateAttractionModal from './CreateAttractionModal'
 import EditAreaModal from './EditAreaModal'
 import { connect } from 'react-redux'
 

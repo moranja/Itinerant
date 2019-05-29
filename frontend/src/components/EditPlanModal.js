@@ -49,6 +49,13 @@ function CreatePlanModal(props) {
             onChange={props.handleChange}
             fullWidth
           />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </DialogContent>
         <DialogActions>
           <Button onClick={(e) => {handleClose(); props.handleEditSubmit(e)}} color="primary">

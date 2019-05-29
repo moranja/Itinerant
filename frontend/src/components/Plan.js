@@ -65,7 +65,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         time: this.state.editTime,
         content: this.state.editContent
       }
-      console.log(payload)
       this.props.editPlan(payload)
     }
 

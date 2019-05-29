@@ -103,7 +103,8 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     state = {
       cityId: "",
       areaId: "",
-      classification: "Food and Drink"
+      classification: "Food and Drink",
+      description: ""
     }
 
     addAnAttraction = (place_info) => {
@@ -126,18 +127,21 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       })
     } // had to make a custom changer so it would set the areaId when you switch cities to the first area in that city
 
-    handleSubmit = (e) => {
+    handleSubmit = (e, areaId) => {
       e.persist()
       e.preventDefault()
       console.log(this.state.attraction)
+      console.log(areaId)
       let payload = {
         ...this.state.attraction,
-        areaId: this.state.areaId,
+        areaId: areaId,
         description: this.state.description,
         itineraryId: this.props.itinerary.details.id,
         classification: this.state.classification
       }
+      console.log(payload)
       this.props.addAttractionFromMap(payload)
+      this.setState({ description: "", classification: "Food and Drink"})
     }
 
     handleAddUser = (e) => {
@@ -210,7 +214,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         )
       } else {
         return (
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={(e) => this.handleSubmit(e, areaId)}>
             <select id="cityId" onChange={this.handleCityChange} >
               {this.props.itinerary.cities.map(c => (<option key={c.id} value={c.id}>{c.name}</option>))}
             </select>
@@ -231,7 +235,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
               <option value="Other">Other</option>
             </select>
             <br />
-            <input type="text" placeholder="Description" id="description" onChange={this.handleChange} />
+            <input type="text" placeholder="Description" id="description" value={this.state.description} onChange={this.handleChange} />
             <input type="submit"/>
           </form>
         )

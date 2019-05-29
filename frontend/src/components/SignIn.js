@@ -12,7 +12,7 @@ import history from '../history'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100vh',
+    height: '95vh',
   },
   image: {
     backgroundImage: 'url(https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1574&q=80)',
@@ -46,7 +46,7 @@ export default function SignIn( props ) {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square  style={{ backgroundColor: "#eae9e7"}}>
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             Sign in

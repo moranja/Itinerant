@@ -33,11 +33,10 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       return (
         <React.Fragment>
         <br /><br />
-          <h1>Welcome, {this.props.user.name}. Here are your itineraries:</h1>
           {
             !!Object.keys(this.props.user).length
             ?
-              (<ProfileList itineraries={this.props.user.itinerary_list} />)
+              (<ProfileList itineraries={this.props.user.itinerary_list} name={this.props.user.name}/>)
             :
               null
           }

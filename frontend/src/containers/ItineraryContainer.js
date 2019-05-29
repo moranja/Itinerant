@@ -246,14 +246,31 @@ export default connect(mapStateToProps, mapDispatchToProps) (
             (
             <div>
               <Grid container spacing={3}>
-                <Grid item xs={12} sm={5}>
-                  <MyMapComponent isMarkerShown={false} addAnAttraction={this.addAnAttraction}/>
-                  {this.renderForm()}
-                  <br />
-                  {this.canEdit()}
+                <Grid item xs={12} sm={5} style={{position: "relative"}}>
+                  <div style={{
+                    backgroundColor: "#eae9e7",
+                    padding: "20px",
+
+                    position: "absolute",
+                    top: "10%",
+                    left: "10%",
+
+                    margin: "10px 0 0 10px",
+                  }}>
+                    <MyMapComponent isMarkerShown={false} addAnAttraction={this.addAnAttraction}/>
+                    {this.renderForm()}
+                    <br />
+                    {this.canEdit()}
+                  </div>
                 </Grid>
                 <Grid item xs={12} sm={7}>
-                  <Itinerary {...this.props.itinerary} />
+                  <div style={{
+                    backgroundColor: "#eae9e7",
+                    height: "100vh",
+                    padding: "20px",
+                    overflow: "scroll"}}>
+                    <Itinerary {...this.props.itinerary} />
+                  </div>
                 </Grid>
               </Grid>
             </div>

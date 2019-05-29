@@ -27,12 +27,6 @@ function DenseAppBar() {
           &nbsp;
           &nbsp;
           &nbsp;
-          <Typography variant="h6" className={classes.appBarText} onClick={() => history.push(`/users`)}>
-            Users
-          </Typography>
-          &nbsp;
-          &nbsp;
-          &nbsp;
           <Typography variant="h6" className={classes.appBarText} onClick={() => history.push(`/profile`)}>
             Profile
           </Typography>

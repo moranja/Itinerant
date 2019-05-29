@@ -109,7 +109,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
           <ul>
             {this.props.attractions.map(a => <Attraction {...a} key={a.id}/>)}
           </ul>
-          <CreateAttractionModal handleChange={this.handleChange} handleSubmit={this.handleSubmit} {...this.state}/>
         </React.Fragment>
       )
     }

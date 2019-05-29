@@ -1,6 +1,7 @@
 import React from 'react'
 import City from './City'
 import CreateCityModal from './CreateCityModal'
+import TextField from '@material-ui/core/TextField'
 import { connect } from 'react-redux'
 
 
@@ -118,7 +119,13 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       let itinerary = this.searchedItinerary()
       return (
         <div>
-          <input type="text" placeholder="Search Itinerary" id="searchTerm" onChange={this.handleSearch} />
+          <TextField
+            autoFocus
+            margin="none"
+            id="searchTerm"
+            label="Search your itinerary:"
+            onChange={this.handleSearch}
+          />
           <h2>{itinerary.details.title}</h2>
           <ul>
             {Object.keys(itinerary.schedule).map((d,index) => (<li key={index}>{d}</li>))}

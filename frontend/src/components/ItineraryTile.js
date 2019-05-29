@@ -56,14 +56,14 @@ export default function ItineraryAlbum(props) {
       <CssBaseline />
       <main>
         {/* Hero unit */}
-        <div className={classes.heroContent}>
+        <div className={classes.heroContent} style={{ backgroundColor: "#eae9e7"}}>
           <Container maxWidth="md">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Where would you like to go?
             </Typography>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={9}>
-                <Typography variant="h4" align="left" color="textSecondary" paragraph>
+                <Typography variant="h4" align="left" paragraph>
                   Welcome to Itinerant, the best way to plan and organize your upcoming trips.
                   To get started, select an itinerary from below, or create your own:
                 </Typography>

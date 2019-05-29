@@ -8,8 +8,12 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    height: '100vh',
+  background: {
+    display: "flex",
+    flexDirection: "column",
+    flex: "1",
+    backgroundColor: "#bcedad",
+    backgroundSize: "100%"
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/random)',
@@ -18,7 +22,6 @@ const useStyles = makeStyles(theme => ({
     backgroundPosition: 'center',
   },
   paper: {
-    margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -41,16 +44,16 @@ const HomePage = (props) => {
   const classes = useStyles();
 
   return (
-    <Container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={12} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <React.Fragment>
-            <ItineraryIndex history={props.history}/>
-          </React.Fragment>
-        </div>
-      </Grid>
-    </Container>
+      <Container component="main">
+        <CssBaseline />
+        <Grid item xs={12} component={Paper} elevation={6} style={{ backgroundColor: "#eae9e7"}} square>
+          <div className={classes.paper}>
+            <React.Fragment>
+              <ItineraryIndex history={props.history}/>
+            </React.Fragment>
+          </div>
+        </Grid>
+      </Container>
   )
 }
 

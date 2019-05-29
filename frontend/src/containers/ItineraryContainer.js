@@ -120,7 +120,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         ? this.props.itinerary.cities.find(c => c.id === parseInt(e.target.value)).areas[0].id
         : ""
       )
-      console.log(e.target.id, e.target.value)
       this.setState({
         [e.target.id]: parseInt(e.target.value),
         areaId: areaId
@@ -176,32 +175,35 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       }
     } // flesh this out
 
-    static getDerivedStateFromProps(props, state) {
-      if (!state.cityId && !state.areaId && !!Object.keys(props.itinerary).length) {  // if there's no city, area, and we have an itinerary...
-        if (!!props.itinerary.cities.length) {                                        // and that itinerary has cities
-          if (!!props.itinerary.cities[0].areas.length) {                             // and that city has areas
-            return state={                                                            // cityId and areaId will be the first possible values
-              cityId: props.itinerary.cities[0].id,
-              areaId: props.itinerary.cities[0].areas[0].id
-            }
-          } else {                                                                    // if that city has no areas, areaId will be blank
-            return state={
-              cityId: props.itinerary.cities[0].id,
-              areaId: ""
-            }
-          }
-        } else {                                                                      // if that itinerary has no cities, both will be blank
-          return state={
-            cityId: "",
-            areaId: ""
-          }
-        }
-      } else {                                                                        // don't change state otherwise
-        return state = {}
-      }
-    }
+    // static getDerivedStateFromProps(props, state) {
+    //   console.log(props, state)
+    //   if (!state.cityId && !state.areaId && !!Object.keys(props.itinerary).length) {  // if there's no city, area, and we have an itinerary...
+    //     if (!!props.itinerary.cities.length) {                                        // and that itinerary has cities
+    //       if (!!props.itinerary.cities[0].areas.length) {                             // and that city has areas
+    //         return state={                                                            // cityId and areaId will be the first possible values
+    //           cityId: props.itinerary.cities[0].id,
+    //           areaId: props.itinerary.cities[0].areas[0].id
+    //         }
+    //       } else {                                                                    // if that city has no areas, areaId will be blank
+    //         return state={
+    //           cityId: props.itinerary.cities[0].id,
+    //           areaId: ""
+    //         }
+    //       }
+    //     } else {                                                                      // if that itinerary has no cities, both will be blank
+    //       return state={
+    //         cityId: "",
+    //         areaId: ""
+    //       }
+    //     }
+    //   } else {                                                                        // don't change state otherwise
+    //     return state = {}
+    //   }
+    // }
 
-    renderForm() {
+    // I think this is obsolete
+
+    renderForm(cityId, areaId) {
       if (this.props.itinerary.cities.length === 0) {
         return (
           <h3>Add a City and an Area to get started adding attractions from the map</h3>
@@ -213,10 +215,10 @@ export default connect(mapStateToProps, mapDispatchToProps) (
               {this.props.itinerary.cities.map(c => (<option key={c.id} value={c.id}>{c.name}</option>))}
             </select>
             {
-              !!this.state.areaId
+              !!areaId
               ? (
                 <select id="areaId" onChange={this.handleChange} >
-                  {this.props.itinerary.cities.find(c => c.id === this.state.cityId).areas.map(a => (<option key={a.id} value={a.id}>{a.name}</option>))}
+                  {this.props.itinerary.cities.find(c => c.id === cityId).areas.map(a => (<option key={a.id} value={a.id}>{a.name}</option>))}
                 </select>
               )
               : null
@@ -237,7 +239,27 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     render() {
-      console.log(this.props.itinerary)
+      let cityId
+      let areaId
+
+      if (!!this.state.cityId) {
+        cityId=this.state.cityId
+        if (!this.state.areaId && !!this.props.itinerary.cities.find( c => c.id === cityId).areas.length) {
+          areaId=this.props.itinerary.cities.find( c => c.id === cityId).areas[0].id
+        } else {
+          areaId=this.state.areaId
+        }
+      } else if (this.props.itinerary.cities) {
+        if (!!this.props.itinerary.cities.length) {
+          if (!!this.props.itinerary.cities[0].areas.length) {
+            cityId=this.props.itinerary.cities[0].id
+            areaId=this.props.itinerary.cities[0].areas[0].id
+          } else {
+            cityId=this.props.itinerary.cities[0].id
+          }
+        }
+      }
+
       return (
         <div>
           <NavBar />
@@ -260,7 +282,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
                     margin: "10px 0 0 10px",
                   }}>
                     <MyMapComponent isMarkerShown={false} addAnAttraction={this.addAnAttraction}/>
-                    {this.renderForm()}
+                    {this.renderForm(cityId, areaId)}
                     <br />
                     {this.canEdit()}
                   </div>

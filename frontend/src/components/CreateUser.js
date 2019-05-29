@@ -35,7 +35,6 @@ class CreateUser extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <SignUp handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
     )
@@ -46,7 +45,7 @@ export default CreateUser
 
 
 
-// 
+//
 // <React.Fragment>
 //   <form>
 //     <label>Username</label>

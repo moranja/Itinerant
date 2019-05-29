@@ -74,7 +74,6 @@ const mapDispatchToProps = {
     })
   },
   copyItinerary: payload => dispatch => {
-    console.log(payload)
     fetch(`http://localhost:3000/copyItinerary/`, {
       method: "POST",
       headers: {
@@ -92,7 +91,7 @@ const mapDispatchToProps = {
       //
       // This doesn't work the way I'd expect, creates the new page and changes the path, but doesn't actually load it...
       //
-      history.push(`/users/${localStorage.userId}`)
+      history.push('/profile')
       // also breaking?
     })
   }

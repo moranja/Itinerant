@@ -31,7 +31,7 @@ class ItinerariesController < ApplicationController
 
   def copy
     itinerary = Itinerary.find(params[:id])
-    new_itinerary = Itinerary.create(title: itinerary.title, notes: itinerary.notes)
+    new_itinerary = Itinerary.create(title: "#{@current_user.username}'s copy of #{itinerary.title}", notes: itinerary.notes, image_url: itinerary.image_url)
     itinerary.cities.each do |c|
       new_city = City.create(itinerary_id: new_itinerary.id, name: c.name, country: c.country, content: c.content)
       c.areas.each do |a|

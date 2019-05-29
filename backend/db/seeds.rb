@@ -24,14 +24,14 @@ UserItinerary.create(user: alexa, itinerary: japan_itinerary)
 # Cities Hash
 cities = [
   {
-    name: "Kyoto",
-    country: "Japan",
-    content: "Kyoto, once the capital of Japan, is a city on the island of Honshu. It's famous for its numerous classical Buddhist temples, as well as gardens, imperial palaces, Shinto shrines and traditional wooden houses. It’s also known for formal traditions such as kaiseki dining, consisting of multiple courses of precise dishes, and geisha, female entertainers often found in the Gion district."
-  },
-  {
     name: "Tokyo",
     country: "Japan",
     content: "Tokyo, Japan’s busy capital, mixes the ultramodern and the traditional, from neon-lit skyscrapers to historic temples. The opulent Meiji Shinto Shrine is known for its towering gate and surrounding woods. The Imperial Palace sits amid large public gardens. The city's many museums offer exhibits ranging from classical art (in the Tokyo National Museum) to a reconstructed kabuki theater (in the Edo-Tokyo Museum)."
+  },
+  {
+    name: "Kyoto",
+    country: "Japan",
+    content: "Kyoto, once the capital of Japan, is a city on the island of Honshu. It's famous for its numerous classical Buddhist temples, as well as gardens, imperial palaces, Shinto shrines and traditional wooden houses. It’s also known for formal traditions such as kaiseki dining, consisting of multiple courses of precise dishes, and geisha, female entertainers often found in the Gion district."
   },
   {
     name: "Osaka",
@@ -50,8 +50,8 @@ cities = [
 # end
 
 # Create the cities
-kyoto = City.create(itinerary: japan_itinerary, name: cities[0][:name], country: cities[0][:country], content: cities[0][:content])
-tokyo = City.create(itinerary: japan_itinerary, name: cities[1][:name], country: cities[1][:country], content: cities[1][:content])
+tokyo = City.create(itinerary: japan_itinerary, name: cities[0][:name], country: cities[0][:country], content: cities[0][:content])
+kyoto = City.create(itinerary: japan_itinerary, name: cities[1][:name], country: cities[1][:country], content: cities[1][:content])
 osaka = City.create(itinerary: japan_itinerary, name: cities[2][:name], country: cities[2][:country], content: cities[2][:content])
 hakone = City.create(itinerary: japan_itinerary, name: cities[3][:name], country: cities[3][:country], content: cities[3][:content])
 

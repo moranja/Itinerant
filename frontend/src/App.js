@@ -6,7 +6,6 @@ import CreateUser from './components/CreateUser'
 import Profile from './components/Profile'
 import UserIndex from './containers/UserIndex'
 import ItineraryContainer from './containers/ItineraryContainer'
-import NavBar from './components/NavBar'
 import UserContainer from './containers/UserContainer'
 import history from './history'
 

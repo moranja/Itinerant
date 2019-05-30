@@ -15,13 +15,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function DenseAppBar() {
+function DenseAppBar(props) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <AppBar position="static" style={{ backgroundColor: "#923c2d" }}>
         <Toolbar variant="dense">
-          <Typography variant="h6" className={classes.appBarText} onClick={() => history.push(`/`)}>
+          <Typography variant="h6" className={classes.appBarText} onClick={() => {history.push(`/`); props.clearItinerary()}}>
             Home
           </Typography>
           &nbsp;

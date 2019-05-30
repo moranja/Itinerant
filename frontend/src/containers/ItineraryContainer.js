@@ -95,7 +95,8 @@ const mapDispatchToProps = {
       history.push('/profile')
       // also breaking?
     })
-  }
+  },
+  clearItinerary: () => ({ type: "CLEAR_SELECTED_ITINERARY" })
 }
 
 export default connect(mapStateToProps, mapDispatchToProps) (
@@ -152,6 +153,10 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         username: this.state.username,
         itineraryId: this.props.itinerary.details.id
       })
+    }
+
+    clearItinerary = () => {
+      this.props.clearItinerary()
     }
 
     componentDidMount() {
@@ -265,9 +270,11 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         }
       }
 
+      console.log(this.props.itinerary)
+
       return (
         <div>
-          <NavBar />
+          <NavBar clearItinerary={this.clearItinerary} />
           <CssBaseline />
           {!!Object.keys(this.props.itinerary).length //Tests if this.state has any keys, if not the fetch hasn't completed yet
           ?

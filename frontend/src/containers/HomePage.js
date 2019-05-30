@@ -46,7 +46,7 @@ const HomePage = (props) => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar clearItinerary={() => {}}/>
       <Container component="main">
         <CssBaseline />
         <Grid item xs={12} component={Paper} elevation={6} style={{ backgroundColor: "#eae9e7"}} square>

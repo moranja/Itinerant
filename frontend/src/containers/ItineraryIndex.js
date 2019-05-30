@@ -42,7 +42,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       })
       .then( res => res.json())
       .then( res => {
-        console.log(res)
         if (res.error) {
           this.props.history.push('/login')
         } else {

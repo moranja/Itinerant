@@ -18,7 +18,6 @@ const mapDispatchToProps = {
       }) // change this to request from the selected itinerary eventually....
       .then(res => res.json())
       .then(users => {
-        console.log(users)
         dispatch({ type: "USER_LIST", payload: users })
       })
     }

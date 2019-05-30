@@ -20,6 +20,7 @@ japan_itinerary = Itinerary.create(title: "10 days in Japan!", vital_info: "Flig
 
 # Join them
 UserItinerary.create(user: alexa, itinerary: japan_itinerary)
+UserItinerary.create(user: adam, itinerary: japan_itinerary)
 
 # Cities Hash
 cities = [

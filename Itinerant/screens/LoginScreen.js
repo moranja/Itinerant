@@ -33,7 +33,6 @@ export default class LoginScreen extends React.Component {
   }
 
   handleSubmit = (e) => {
-    console.log(this.state.username)
     fetch(`http://${path}:3000/login`, {
       method: 'POST',
       headers:{
@@ -58,7 +57,6 @@ export default class LoginScreen extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View>

@@ -33,7 +33,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     render() {
       return (
         <React.Fragment>
-        <NavBar />
+        <NavBar clearItinerary={() => {}}/>
           {
             !!Object.keys(this.props.user).length
             ?

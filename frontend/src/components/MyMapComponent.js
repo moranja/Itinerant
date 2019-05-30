@@ -68,12 +68,6 @@ const MapWithASearchBox = compose(
         },
         onMarkerMounted: ref => {
           refs.marker = ref;
-          console.log(refs)
-        },
-        onInfoWindowMounted: ref => {
-          refs.infoWindow = ref;
-
-          console.log(refs)
         },
         onPlacesChanged: () => {
           const places = refs.searchBox.getPlaces()
@@ -164,7 +158,7 @@ const MapWithASearchBox = compose(
         { // Entering a search term with no results unmounts the marker, and the infoWindow, allowing subsequent searches to display the infoWindow
           index === 0
           ? (
-            <InfoWindow onCloseClick={props.onToggleOpen} ref={props.onInfoWindowMounted}>
+            <InfoWindow onCloseClick={props.onToggleOpen}>
               <div>
                 {marker.place_info.name}
                 <br />

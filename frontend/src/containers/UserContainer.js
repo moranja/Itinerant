@@ -16,7 +16,6 @@ const mapDispatchToProps = {
       }) // change this to request from the selected itinerary eventually....
       .then(res => res.json())
       .then(user => {
-        console.log(user)
         dispatch({ type: "SELECT_USER", payload: user })
       })
     }
@@ -30,7 +29,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     render() {
-      console.log(this.props)
       return (
         <React.Fragment>
         <br /><br />

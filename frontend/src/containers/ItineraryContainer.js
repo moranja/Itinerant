@@ -15,7 +15,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   addAttractionFromMap: attraction_info => dispatch => {
-    console.log(attraction_info)
     const newAttraction = {
       area_id: attraction_info.areaId,
       name: attraction_info.name,
@@ -127,8 +126,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     handleSubmit = (e, areaId) => {
       e.persist()
       e.preventDefault()
-      console.log(this.state.attraction)
-      console.log(areaId)
       let payload = {
         ...this.state.attraction,
         areaId: areaId,
@@ -136,7 +133,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         itineraryId: this.props.itinerary.details.id,
         classification: this.state.classification
       }
-      console.log(payload)
       this.props.addAttractionFromMap(payload)
       this.setState({ description: "", classification: "Food and Drink"})
     }
@@ -265,7 +261,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         }
       }
 
-      console.log(this.props.itinerary)
 
       return (
         <div>

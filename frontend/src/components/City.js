@@ -125,7 +125,6 @@ export default connect(null, mapDispatchToProps) (
     }
 
     handleDateChange = (date) => {
-      console.log(date)
       this.setState({
         startDate: date,
         formatted_date: [date.getFullYear(), date.getMonth()+1, date.getDate()].join('-')

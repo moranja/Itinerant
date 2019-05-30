@@ -36,7 +36,6 @@ export default class ItineraryScreen extends React.Component {
   }
 
   handleSearch = (e) => {
-    console.log(e)
     if (e !== undefined) { // Checks for no search term
       this.setState({searchTerm: e})
     }
@@ -72,7 +71,6 @@ export default class ItineraryScreen extends React.Component {
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    console.log(location)
     fetch(`http://${path}:3000/itineraries/${this.state.details.id}/nearest`, {
       method: "POST",
       headers:{
@@ -86,7 +84,6 @@ export default class ItineraryScreen extends React.Component {
     })
     .then( res => res.json())
     .then( res => {
-      console.log(res)
       this.setState({
          location,
          filter: true,
@@ -99,7 +96,6 @@ export default class ItineraryScreen extends React.Component {
     AsyncStorage.getItem('user').then( user_res => {
       user_info = JSON.parse(user_res)
       AsyncStorage.getItem('itinerary').then( itinerary_res => {
-        console.log(itinerary_res)
         fetch(`http://${path}:3000/itineraries/${itinerary_res}`, {
           headers:{
             "Authorization": `Bearer ${user_info.auth_token}`
@@ -128,7 +124,6 @@ export default class ItineraryScreen extends React.Component {
 
   render() {
     let itinerary = this.searchedItinerary()
-    console.log(itinerary)
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>

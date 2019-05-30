@@ -1,7 +1,7 @@
 class CreateAttractions < ActiveRecord::Migration[5.2]
   def change
     create_table :attractions do |t|
-      t.belongs_to :area, foreign_key: true
+      t.belongs_to :area, foreign_key: {on_delete: :cascade}
       t.string :name
       t.string :latitude
       t.string :longitude

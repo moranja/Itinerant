@@ -33,6 +33,22 @@ const mapDispatchToProps = {
         dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
       }
     })
+  },
+  deleteAttraction: attractionId => dispatch => {
+    fetch(`http://${path}:3000/attractions/${attractionId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${localStorage.token}`
+      }
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.error) {
+        console.log(res.message)
+      } else {
+        dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
+      }
+    })
   }
 }
 
@@ -58,10 +74,14 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       this.props.editAttraction(payload)
     }
 
+    handleDelete = () => {
+      this.props.deleteAttraction(this.props.id)
+    }
+
 
     render() {
       return (
-        <EditAttractionModal handleChange={this.handleChange} handleEditSubmit={this.handleEditSubmit} {...this.state} />
+        <EditAttractionModal handleChange={this.handleChange} handleEditSubmit={this.handleEditSubmit} handleDelete={this.handleDelete} {...this.state} />
       )
     }
   }

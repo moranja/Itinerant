@@ -60,6 +60,22 @@ const mapDispatchToProps = {
         dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
       }
     })
+  },
+  deleteArea: areaId => dispatch => {
+    fetch(`http://${path}:3000/areas/${areaId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${localStorage.token}`
+      }
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.error) {
+        console.log(res.message)
+      } else {
+        dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
+      }
+    })
   }
 }
 
@@ -100,10 +116,14 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       this.props.editArea(payload)
     }
 
+    handleDelete = () => {
+      this.props.deleteArea(this.props.id)
+    }
+
     render() {
       return (
         <React.Fragment>
-          <EditAreaModal handleChange={this.handleChange} handleEditSubmit={this.handleEditSubmit} {...this.state} />
+          <EditAreaModal handleChange={this.handleChange} handleEditSubmit={this.handleEditSubmit} handleDelete={this.handleDelete} {...this.state} />
           <ul>
             {this.props.attractions.map(a => <Attraction {...a} key={a.id}/>)}
           </ul>

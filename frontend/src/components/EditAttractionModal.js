@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 //import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function CreateAttractionModal(props) {
+function EditAttractionModal(props) {
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -53,8 +53,11 @@ function CreateAttractionModal(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={(e) => {handleClose(); props.handleEditSubmit(e)}} color="primary">
+          <Button onClick={(e) => {handleClose(); props.handleEditSubmit()}} color="primary">
             Edit Attraction
+          </Button>
+          <Button onClick={(e) => {handleClose(); props.handleDelete()}} color="primary">
+            Delete Attraction
           </Button>
         </DialogActions>
       </Dialog>
@@ -62,4 +65,4 @@ function CreateAttractionModal(props) {
   );
 }
 
-export default CreateAttractionModal;
+export default EditAttractionModal;

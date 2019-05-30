@@ -46,8 +46,11 @@ function CreateAreaModal(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={(e) => {handleClose(); props.handleEditSubmit(e)}} color="primary">
+          <Button onClick={(e) => {handleClose(); props.handleEditSubmit()}} color="primary">
             Edit Area
+          </Button>
+          <Button onClick={(e) => {handleClose(); props.handleDelete()}} color="primary">
+            Delete Area
           </Button>
         </DialogActions>
       </Dialog>

@@ -28,6 +28,22 @@ class AreasController < ApplicationController
     end
   end
 
+  def destroy
+    area = Area.find(params[:id])
+    byebug
+
+    itinerary = area.city.itinerary
+    if itinerary.users.map{|u| u.id}.include?(@current_user.id)
+      area.destroy
+      render json: itinerary.full_itinerary
+    else
+      render json: {
+        error: true,
+        message: 'You do not have permission to edit this itinerary'
+      }
+    end
+  end
+
   private
 
     def area_params

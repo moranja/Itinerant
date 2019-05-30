@@ -155,7 +155,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     marginTop: 80,
-
   },
   welcomeContainer: {
     alignItems: 'center',

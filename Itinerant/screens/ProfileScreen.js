@@ -16,7 +16,14 @@ import { MonoText } from '../components/StyledText';
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
-    title: "profile",
+    title: "Profile",
+    headerStyle: {
+      backgroundColor: '#923c2d',
+    },
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+    headerTintColor: '#fff',
   };
 
   state = {
@@ -83,17 +90,14 @@ export default class ProfileScreen extends React.Component {
                   <Text style={styles.saveButtonText}>Open</Text>
                 </TouchableOpacity>
               </View>
-
             ))}
-
             <View>
-
-            <TouchableOpacity
-              style={styles.saveButton}
-              onPress={() => this.logOut()}
-            >
-              <Text style={styles.saveButtonText}>Log Out</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.saveButton}
+                onPress={() => this.logOut()}
+              >
+                <Text style={styles.saveButtonText}>Log Out</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
@@ -105,7 +109,7 @@ export default class ProfileScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eae9e7',
   },
   developmentModeText: {
     marginBottom: 20,

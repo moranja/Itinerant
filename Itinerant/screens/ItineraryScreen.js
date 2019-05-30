@@ -21,6 +21,13 @@ import { MonoText } from '../components/StyledText';
 export default class ItineraryScreen extends React.Component {
   static navigationOptions = {
     title: "Itinerary",
+    headerStyle: {
+      backgroundColor: '#923c2d',
+    },
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+    headerTintColor: '#fff',
   };
 
   state = {
@@ -132,12 +139,12 @@ export default class ItineraryScreen extends React.Component {
                 null
               :
                 (
-                  <Button
+                  <TouchableOpacity
+                    style={styles.sortButton}
                     onPress={this.sortByDistance}
-                    title="Sort by Distance"
-                    color="#841584"
-                    accessibilityLabel="Learn more about this purple button"
-                  />
+                  >
+                    <Text style={styles.sortButtonText}>Sort by distance</Text>
+                  </TouchableOpacity>
                 )
             }
             <TextInput
@@ -180,6 +187,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  sortButton: {
+    borderWidth: 1,
+    borderColor: '#923c2d',
+    backgroundColor: '#923c2d',
+    padding: 15,
+    margin: 5
+  },
+  sortButtonText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    textAlign: 'center'
   },
   developmentModeText: {
     marginBottom: 20,

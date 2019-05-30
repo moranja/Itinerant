@@ -35,12 +35,8 @@ export default class HomeScreen extends React.Component {
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.getStartedContainer}>
             <View>
-              <MonoText style={styles.codeHighlightText}>Whoaaaa</MonoText>
+              <Image source={require("../assets/images/earthLoadingIcon.gif")} />
             </View>
-
-            <Text style={styles.getStartedText}>
-              Whoa
-            </Text>
           </View>
         </ScrollView>
       </View>

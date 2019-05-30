@@ -34,6 +34,22 @@ const mapDispatchToProps = {
         dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
       }
     })
+  },
+  deletePlan: planId => dispatch => {
+    fetch(`http://${path}:3000/plans/${planId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${localStorage.token}`
+      }
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.error) {
+        console.log(res.message)
+      } else {
+        dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
+      }
+    })
   }
 }
 
@@ -69,9 +85,13 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       this.props.editPlan(payload)
     }
 
+    handleDelete = () => {
+      this.props.deletePlan(this.props.id)
+    }
+
     render() {
       return (
-        <EditPlanModal handleChange={this.handleChange} handleDateChange={this.handleDateChange} handleEditSubmit={this.handleEditSubmit} {...this.state} />
+        <EditPlanModal handleChange={this.handleChange} handleDelete={this.handleDelete} handleDateChange={this.handleDateChange} handleEditSubmit={this.handleEditSubmit} {...this.state} />
       )
     }
   }

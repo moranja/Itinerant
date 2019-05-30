@@ -43,7 +43,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       .then( res => res.json())
       .then( res => {
         console.log(res)
-        this.props.history.push(`/itineraries/${res.details.id}`)
+        if (res.error) {
+          this.props.history.push('/login')
+        } else {
+          this.props.history.push(`/itineraries/${res.details.id}`)
+        }
       })
     }
 

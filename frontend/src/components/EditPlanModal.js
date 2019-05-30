@@ -58,8 +58,11 @@ function CreatePlanModal(props) {
           <br />
         </DialogContent>
         <DialogActions>
-          <Button onClick={(e) => {handleClose(); props.handleEditSubmit(e)}} color="primary">
-            Add Plan
+          <Button onClick={(e) => {handleClose(); props.handleEditSubmit()}} color="primary">
+            Edit Plan
+          </Button>
+          <Button onClick={(e) => {handleClose(); props.handleDelete()}} color="primary">
+            Delete Plan
           </Button>
         </DialogActions>
       </Dialog>

@@ -21,7 +21,7 @@ export default class LoginScreen extends React.Component {
   state = {
     name: "",
     password: "",
-    error: "test"
+    error: ""
   }
 
   handleNameChange = (username) => {
@@ -61,10 +61,16 @@ export default class LoginScreen extends React.Component {
     console.log(this.state)
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <View>
+          <Text style={styles.welcomeText}>
+            Welcome to Itinerant
+          </Text>
+        </View>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.textInput}
             placeholder="Username"
+            autoCapitalize = 'none'
             maxLength={20}
             value={this.state.username}
             onChangeText={this.handleNameChange}
@@ -72,6 +78,8 @@ export default class LoginScreen extends React.Component {
           <TextInput
             style={styles.textInput}
             placeholder="Password"
+            autoCapitalize = 'none'
+            secureTextEntry={true}
             maxLength={20}
             value={this.state.password}
             onChangeText={this.handlePasswordChange}
@@ -80,11 +88,11 @@ export default class LoginScreen extends React.Component {
             style={styles.saveButton}
             onPress={this.handleSubmit}
           >
-            <Text style={styles.saveButtonText}>Save</Text>
+            <Text style={styles.saveButtonText}>Log In</Text>
           </TouchableOpacity>
         </View>
-        <View>
-          <Text>
+        <View style={styles.inputContainer}>
+          <Text style={styles.errorMessageText}>
             {this.state.error}
           </Text>
         </View>
@@ -96,8 +104,8 @@ export default class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
   saveButton: {
     borderWidth: 1,
-    borderColor: '#007BFF',
-    backgroundColor: '#007BFF',
+    borderColor: '#923c2d',
+    backgroundColor: '#923c2d',
     padding: 15,
     margin: 5
   },
@@ -106,8 +114,24 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center'
   },
-inputContainer: {
+  inputContainer: {
     paddingTop: 15
+  },
+  errorMessageText: {
+    marginTop: 50,
+    marginBottom: 20,
+    color: 'red',
+    fontSize: 20,
+    lineHeight: 19,
+    textAlign: 'center',
+  },
+  welcomeText: {
+    marginTop: 50,
+    marginBottom: 20,
+    color: '#393b3a',
+    fontSize: 20,
+    lineHeight: 19,
+    textAlign: 'center',
   },
   textInput: {
     borderColor: '#CCCCCC',
@@ -120,7 +144,7 @@ inputContainer: {
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eae9e7',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -130,7 +154,8 @@ inputContainer: {
     textAlign: 'center',
   },
   contentContainer: {
-    paddingTop: 30,
+    marginTop: 80,
+
   },
   welcomeContainer: {
     alignItems: 'center',

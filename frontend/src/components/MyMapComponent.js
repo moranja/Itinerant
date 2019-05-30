@@ -138,7 +138,7 @@ const MapWithASearchBox = compose(
     </SearchBox>
     {props.markers.map((marker, index) =>
       <Marker
-        ref={index == 0 ? props.onMarkerMounted : null}
+        ref={index === 0 ? props.onMarkerMounted : null}
         key={index}
         position={marker.position}
         onClick={() => props.markerWasClicked(props.markers, marker)}

@@ -43,7 +43,7 @@ function CreateCityModal(props) {
           />
           <TextField
             margin="none"
-            id="description"
+            id="content"
             label="Description"
             onChange={props.handleChange}
             fullWidth

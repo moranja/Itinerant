@@ -94,6 +94,9 @@ export default connect(mapStateToProps, mapDispatchToProps) (
 
     state = {
       searchTerm: "",
+      name: "",
+      country: "",
+      content: "",
       editTitle: this.props.itinerary.details.title,
       editDescription: this.props.itinerary.details.description,
       editVitalInfo: this.props.itinerary.details.vital_info,
@@ -115,6 +118,11 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         content: this.state.content
       }
       this.props.addCityFromItinerary(payload)
+      this.setState({
+        name: "",
+        country: "",
+        content: ""
+      })
     }
 
     handleEditSubmit = () => {

@@ -110,6 +110,11 @@ export default connect(null, mapDispatchToProps) (
 
     state = {
       startDate: "",
+      name: "",
+      content: "",
+      date: "",
+      time: "",
+      description: "",
       editName: this.props.name,
       editCountry: this.props.country,
       editContent: this.props.content
@@ -135,6 +140,10 @@ export default connect(null, mapDispatchToProps) (
         name: this.state.name,
         content: this.state.content
       }
+      this.setState({
+        name: "",
+        content: ""
+      })
       this.props.addAreaFromItinerary(payload)
     }
 
@@ -157,6 +166,11 @@ export default connect(null, mapDispatchToProps) (
         time: this.state.time,
         content: this.state.description
       }
+      this.setState({
+        date: "",
+        time: "",
+        description: ""
+      })
       this.props.addPlan(payload)
     }
 

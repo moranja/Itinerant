@@ -24,11 +24,33 @@ const MapWithASearchBox = compose(
   lifecycle({
     componentWillMount() {
       const refs = {}
+      let userLat = 41.9
+      let userLng = -87.624
+      const showPosition = (position) => {
+        userLat = position.coords.latitude
+        userLng = position.coords.longitude
+
+        this.setState({
+          center: {
+            lat: userLat,
+            lng: userLng
+          }
+        })
+      }
+
+      if(navigator.geolocation) {
+        console.log("geo")
+        let test = navigator.geolocation.getCurrentPosition(showPosition)
+        // console.log(test)
+      }
+
+      console.log(userLat, userLng)
 
       this.setState({
         bounds: null,
         center: {
-          lat: 41.9, lng: -87.624
+          lat: userLat,
+          lng: userLng
         },
         markers: [], // **?????
         onMapMounted: ref => {

@@ -19,6 +19,8 @@ const reducer = (state = {
       return {...state, users: [...action.payload], user: {}}
     case "SELECT_USER":
       return {...state, user: action.payload}
+    case "CLEAR_SELECTED_ITINERARY":
+      return {...state, selected_itinerary: {}}
 
     // case "ADD_ATTRACTION":
     //   console.log(action.payload)

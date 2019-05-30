@@ -86,6 +86,22 @@ const mapDispatchToProps = {
         dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
       }
     })
+  },
+  deleteCity: cityId => dispatch => {
+    fetch(`http://${path}:3000/cities/${cityId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${localStorage.token}`
+      }
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.error) {
+        console.log(res.message)
+      } else {
+        dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
+      }
+    })
   }
 }
 
@@ -144,11 +160,15 @@ export default connect(null, mapDispatchToProps) (
       this.props.addPlan(payload)
     }
 
+    handleDelete = () => {
+      this.props.deleteCity(this.props.id)
+    }
+
     render() {
       return (
         <React.Fragment>
           <div>
-            <EditCityModal handleChange={this.handleChange} handleEditSubmit={this.handleEditSubmit} {...this.state}/>
+            <EditCityModal handleChange={this.handleChange} handleEditSubmit={this.handleEditSubmit} handleDelete={this.handleDelete} {...this.state}/>
             <ul>
               {this.props.plans.map(p => <Plan {...p} key={p.id}/>)}
             </ul>

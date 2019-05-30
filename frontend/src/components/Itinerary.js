@@ -8,6 +8,7 @@ import EditItineraryNotesModal from './EditItineraryNotesModal'
 import TextField from '@material-ui/core/TextField'
 import { connect } from 'react-redux'
 import path from '../path'
+import history from '../history'
 
 
 const mapStateToProps = (state) => ({
@@ -68,6 +69,23 @@ const mapDispatchToProps = {
         dispatch({ type: "LOAD_SELECTED_ITINERARY", payload: res})
       }
     })
+  },
+  deleteItinerary: itineraryId => dispatch => {
+    fetch(`http://${path}:3000/itineraries/${itineraryId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${localStorage.token}`
+      }
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.error) {
+        console.log(res.message)
+      } else {
+        dispatch({ type: "CLEAR_SELECTED_ITINERARY", payload: res})
+        history.push('/home')
+      }
+    })
   }
 }
 
@@ -99,7 +117,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       this.props.addCityFromItinerary(payload)
     }
 
-    handleEditSubmit = (e) => {
+    handleEditSubmit = () => {
       let payload = {
         itineraryId: this.props.itinerary.details.id,
         title: this.state.editTitle,
@@ -110,6 +128,10 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       }
       console.log(payload)
       this.props.editItinerary(payload)
+    }
+
+    handleDelete = () => {
+      this.props.deleteItinerary(this.props.itinerary.details.id)
     }
 
     handleSearch = (e) => {
@@ -184,6 +206,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
             editNotes={this.state.editNotes}
             handleChange={this.handleChange}
             handleEditSubmit={this.handleEditSubmit}
+            handleDelete={this.handleDelete}
           />
           <ul>
             {Object.keys(itinerary.schedule).map((d,index) => (<li key={index}>{d}</li>))}

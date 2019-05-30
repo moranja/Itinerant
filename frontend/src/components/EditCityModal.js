@@ -54,8 +54,11 @@ function CreateCityModal(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={(e) => {handleClose(); props.handleEditSubmit(e)}} color="primary">
+          <Button onClick={(e) => {handleClose(); props.handleEditSubmit()}} color="primary">
             Edit City
+          </Button>
+          <Button onClick={(e) => {handleClose(); props.handleDelete()}} color="primary">
+            Delete City
           </Button>
         </DialogActions>
       </Dialog>

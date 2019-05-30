@@ -30,7 +30,6 @@ class AreasController < ApplicationController
 
   def destroy
     area = Area.find(params[:id])
-    byebug
 
     itinerary = area.city.itinerary
     if itinerary.users.map{|u| u.id}.include?(@current_user.id)

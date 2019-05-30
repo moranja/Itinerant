@@ -47,6 +47,20 @@ class ItinerariesController < ApplicationController
     render json: new_itinerary.full_itinerary
   end
 
+  def destroy
+    itinerary = Itinerary.find(params[:id])
+
+    if itinerary.users.map{|u| u.id}.include?(@current_user.id)
+      itinerary.destroy
+      render json: {error: false}
+    else
+      render json: {
+        error: true,
+        message: 'You do not have permission to edit this itinerary'
+      }
+    end
+  end
+
   def nearest
     render json: Itinerary.find(params[:id]).attractions_by_distance(params[:latitude], params[:longitude])
   end

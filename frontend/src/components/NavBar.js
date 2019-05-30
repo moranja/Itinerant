@@ -27,7 +27,7 @@ function DenseAppBar(props) {
           &nbsp;
           &nbsp;
           &nbsp;
-          <Typography variant="h6" className={classes.appBarText} onClick={() => history.push(`/profile`)}>
+          <Typography variant="h6" className={classes.appBarText} onClick={() => {history.push(`/profile`); props.clearItinerary()}}>
             Profile
           </Typography>
           &nbsp;

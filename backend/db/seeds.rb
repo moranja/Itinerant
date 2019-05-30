@@ -397,7 +397,23 @@ UserItinerary.create(user: alexa, itinerary: greece)
 uk_malta = Itinerary.create(title: "Ireland, England, & Malta", vital_info: "Flight info, hotel reservations, etc", helpful_info: "train tables, tour reservations", notes: "Check out this New York Times article...", description: "Meeting the family in London, with some stops before and after for ourselves", image_url: "https://cdn.londonandpartners.com/visit/general-london/areas/river/76709-640x360-houses-of-parliament-and-london-eye-on-thames-from-above-640.jpg")
 
 # Join it
-UserItinerary.create(user: alexa, itinerary: greece)
+UserItinerary.create(user: alexa, itinerary: uk_malta)
+
+#=================================================================================
+
+# Create Itinerary
+iceland = Itinerary.create(title: "A long weekend in Iceland", vital_info: "Flight info, hotel reservations, etc", helpful_info: "train tables, tour reservations", notes: "Check out this New York Times article...", description: "Seeing the beautiful land of fire and ice and hunting the Aurora Borealis", image_url: "https://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/1544200275/northern-lights-kirkjufell-mountain-snaefellsnes-iceland-ICELANDLIGHTS1218.jpg?itok=hZwXB01a")
+
+# Join it
+UserItinerary.create(user: alexa, itinerary: iceland)
+
+#=================================================================================
+
+# Create Itinerary
+italy = Itinerary.create(title: "Visiting Italy with my parents", vital_info: "Flight info, hotel reservations, etc", helpful_info: "train tables, tour reservations", notes: "Check out this New York Times article...", description: "Returning to some of my favorite places in Italy with my parents", image_url: "https://live.staticflickr.com/3753/9311590822_7bc867de1d_b.jpg")
+
+# Join it
+UserItinerary.create(user: alexa, itinerary: italy)
 
 #=================================================================================
 

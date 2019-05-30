@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 2019_05_15_191915) do
 
   create_table "plans", force: :cascade do |t|
     t.integer "city_id"
-    t.boolean "brief"
     t.date "date"
     t.string "time"
     t.string "content"

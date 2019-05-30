@@ -11,7 +11,7 @@ alexa = User.create(username: "lexietx", name: "Alexa")
 alexa.password = "password"
 alexa.save
 
-adam = User.create(username: "jamoran", name: "Adam")
+adam = User.create(username: "moranja", name: "Adam")
 adam.password = "password"
 adam.save
 
@@ -55,40 +55,23 @@ kyoto = City.create(itinerary: japan_itinerary, name: cities[1][:name], country:
 osaka = City.create(itinerary: japan_itinerary, name: cities[2][:name], country: cities[2][:country], content: cities[2][:content])
 hakone = City.create(itinerary: japan_itinerary, name: cities[3][:name], country: cities[3][:country], content: cities[3][:content])
 
-# # Create the brief schedule
-# Plan.create(city: osaka, brief: true, date: "2017-10-21")
-# Plan.create(city: kyoto, brief: true, date: "2017-10-21")
-# Plan.create(city: kyoto, brief: true, date: "2017-10-22")
-# Plan.create(city: kyoto, brief: true, date: "2017-10-23")
-# Plan.create(city: kyoto, brief: true, date: "2017-10-24")
-# Plan.create(city: kyoto, brief: true, date: "2017-10-25")
-# Plan.create(city: tokyo, brief: true, date: "2017-10-25")
-# Plan.create(city: tokyo, brief: true, date: "2017-10-26")
-# Plan.create(city: tokyo, brief: true, date: "2017-10-27")
-# Plan.create(city: tokyo, brief: true, date: "2017-10-28")
-# Plan.create(city: tokyo, brief: true, date: "2017-10-29")
-# Plan.create(city: hakone, brief: true, date: "2017-10-29")
-# Plan.create(city: hakone, brief: true, date: "2017-10-30")
-# Plan.create(city: osaka, brief: true, date: "2017-10-30")
-# Plan.create(city: osaka, brief: true, date: "2017-10-31") Unnecessary, brief probably unnecessary as well
-
 # Create the detailed schedule
-Plan.create(city: tokyo, brief: false, date: "2017-10-25", time: "midday", content: "Shibuya crossing and street food")
-Plan.create(city: tokyo, brief: false, date: "2017-10-25", time: "afternoon", content: "Shop along Omote-sando")
-Plan.create(city: tokyo, brief: false, date: "2017-10-25", time: "evening", content: "Harajuku people watching and dinner")
-Plan.create(city: tokyo, brief: false, date: "2017-10-25", time: "night", content: "Barhopping in Golden Gai, Shinjuku")
+Plan.create(city: tokyo, date: "2017-10-25", time: "midday", content: "Shibuya crossing and street food")
+Plan.create(city: tokyo, date: "2017-10-25", time: "afternoon", content: "Shop along Omote-sando")
+Plan.create(city: tokyo, date: "2017-10-25", time: "evening", content: "Harajuku people watching and dinner")
+Plan.create(city: tokyo, date: "2017-10-25", time: "night", content: "Barhopping in Golden Gai, Shinjuku")
 
-Plan.create(city: tokyo, brief: false, date: "2017-10-26", time: "morning", content: "Tsukiji fish market for breakfast")
-Plan.create(city: tokyo, brief: false, date: "2017-10-26", time: "midday", content: "Ginza Shopping and Imperial Palace")
-Plan.create(city: tokyo, brief: false, date: "2017-10-26", time: "afternoon", content: "Nerd out in Akihabara")
+Plan.create(city: tokyo, date: "2017-10-26", time: "morning", content: "Tsukiji fish market for breakfast")
+Plan.create(city: tokyo, date: "2017-10-26", time: "midday", content: "Ginza Shopping and Imperial Palace")
+Plan.create(city: tokyo, date: "2017-10-26", time: "afternoon", content: "Nerd out in Akihabara")
 
-Plan.create(city: tokyo, brief: false, date: "2017-10-27", time: "morning", content: "Asakusa temple")
-Plan.create(city: tokyo, brief: false, date: "2017-10-27", time: "midday", content: "Asahi Beer Headquarters")
-Plan.create(city: tokyo, brief: false, date: "2017-10-27", time: "afternoon", content: "Tokyo Skytree")
-Plan.create(city: tokyo, brief: false, date: "2017-10-27", time: "evening", content: "Robot Restaurant at 7!")
-Plan.create(city: tokyo, brief: false, date: "2017-10-27", time: "night", content: "Shinjuku nightlife")
+Plan.create(city: tokyo, date: "2017-10-27", time: "morning", content: "Asakusa temple")
+Plan.create(city: tokyo, date: "2017-10-27", time: "midday", content: "Asahi Beer Headquarters")
+Plan.create(city: tokyo, date: "2017-10-27", time: "afternoon", content: "Tokyo Skytree")
+Plan.create(city: tokyo, date: "2017-10-27", time: "evening", content: "Robot Restaurant at 7!")
+Plan.create(city: tokyo, date: "2017-10-27", time: "night", content: "Shinjuku nightlife")
 
-Plan.create(city: tokyo, brief: false, date: "2017-10-28", time: "afternoon", content: "Roppongi Hills?")
+Plan.create(city: tokyo, date: "2017-10-28", time: "afternoon", content: "Roppongi Hills?")
 
 # Create Areas
 shibuya = Area.create(city: tokyo, name: "Shibuya", content: "Bustling modern area famous for the Shibuya Crossing, the busiest crosswalk in the world!")

@@ -39,12 +39,8 @@ const MapWithASearchBox = compose(
       }
 
       if(navigator.geolocation) {
-        console.log("geo")
-        let test = navigator.geolocation.getCurrentPosition(showPosition)
-        // console.log(test)
+        navigator.geolocation.getCurrentPosition(showPosition)
       }
-
-      console.log(userLat, userLng)
 
       this.setState({
         bounds: null,

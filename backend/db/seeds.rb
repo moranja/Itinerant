@@ -77,7 +77,7 @@ Plan.create(city: tokyo, date: "2017-10-28", time: "afternoon", content: "Roppon
 shibuya = Area.create(city: tokyo, name: "Shibuya", content: "Bustling modern area famous for the Shibuya Crossing, the busiest crosswalk in the world!")
 harajuku = Area.create(city: tokyo, name: "Harajuku", content: "Unique area with interesting people-watching opportunities")
 roppongi = Area.create(city: tokyo, name: "Roppongi", content: "Upscale, modern area with a more western feel")
-shinuku = Area.create(city: tokyo, name: "Shinjuku", content: "Neon capital of Tokyo's nightlife")
+shinjuku = Area.create(city: tokyo, name: "Shinjuku", content: "Neon capital of Tokyo's nightlife")
 akihabara = Area.create(city: tokyo, name: "Akihabara", content: "Mecca for nerdy gaming stuff")
 central_tokyo = Area.create(city: tokyo, name: "Central Tokyo", content: "Ginza, the Imperial Palace, and the Tsukiji Fish Market")
 asakusa = Area.create(city: tokyo, name: "Asakusa", content: "Massive temple surrounded by interesting shops")
@@ -179,6 +179,186 @@ attractions = [
     hours: nil,
     cost: nil,
     description: "popular sushi place with wait"
+  },
+  {
+    area: shibuya,
+    name: "Shibuya Crossing",
+    classification: "Attraction",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "Busiest crosswalk in the world"
+  },
+  {
+    area: shibuya,
+    name: "Hachiko Statue",
+    classification: "Attraction",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "Movie based on this sad tale"
+  },
+  {
+    area: shibuya,
+    name: "Center Gai",
+    classification: "Nightlife",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "Bar hopping"
+  },
+  {
+    area: harajuku,
+    name: "Yai Yai",
+    classification: "Food and Drink",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "Okonomiyaki"
+  },
+  {
+    area: harajuku,
+    name: "Calbee Plus",
+    classification: "Food and Drink",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "potato snacks on Takeshita Dori"
+  },
+  {
+    area: harajuku,
+    name: "Glaciel",
+    classification: "Food and Drink",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "Ice cream cakes"
+  },
+  {
+    area: harajuku,
+    name: "Maisen",
+    classification: "Food and Drink",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "Excellent tonkatsu"
+  },
+  {
+    area: harajuku,
+    name: "Harajuku Taproom",
+    classification: "Food and Drink",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "Craft beer"
+  },
+  {
+    area: harajuku,
+    name: "100 Yen stores",
+    classification: "Shopping",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "check out the popular Japanese version of dollar stores"
+  },
+  {
+    area: roppongi,
+    name: "Gonpachi",
+    classification: "Food and Drink",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "Upscale izakaya, inspiration for a scene in Kill Bill"
+  },
+  {
+    area: roppongi,
+    name: "Warayakiya",
+    classification: "Food and Drink",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "cool izakaya, make reservations"
+  },
+  {
+    area: roppongi,
+    name: "Tokyo tower",
+    classification: "Attraction",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "most famous observation tower, modeled after the Eiffel tower"
+  },
+  {
+    area: shinjuku,
+    name: "Torikawa Nagamasa",
+    classification: "Food and Drink",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "incredible yakitori!"
+  },
+  {
+    area: shinjuku,
+    name: "New York Bar",
+    classification: "Food and Drink",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "Swanky hotel bar, seen in 'Lost in Translation'"
+  },
+  {
+    area: shinjuku,
+    name: "Golden Gai",
+    classification: "Nightlife",
+    latitude: "35.65834099999999",
+    longitude: "139.69898579999995",
+    place_id: "ChIJo4dGzFeLGGARO7BvenQ8U3s",
+    address: nil,
+    hours: nil,
+    cost: nil,
+    description: "Really cool spot to bar hop, tons of tiny bars with a lot of character!"
   }
 ]
 
@@ -189,8 +369,42 @@ end
 
 #=================================================================================
 
+# Create Itinerary
+west_coast = Itinerary.create(title: "Family reunion in San Fran, then PNW", vital_info: "Flight info, hotel reservations, etc", helpful_info: "train tables, tour reservations", notes: "Check out this New York Times article...", description: "Our first trip to San Francisco, Portland, and Seattle", image_url: "https://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/landmark-images/golden-gate_web.jpg")
+
+# Join it
+UserItinerary.create(user: alexa, itinerary: west_coast)
+
+#=================================================================================
+
+# Create Itinerary
+barcelona = Itinerary.create(title: "Honeymoon in Barcelona", vital_info: "Flight info, hotel reservations, etc", helpful_info: "train tables, tour reservations", notes: "Check out this New York Times article...", description: "Two weeks wining and dining in Barcelona", image_url: "https://hotelarclarambla.com/wp-content/uploads/2018/01/hotel-arc-la-rambla-conoce-sagrada-familia.jpg")
+
+# Join it
+UserItinerary.create(user: alexa, itinerary: barcelona)
+
+#=================================================================================
+
+# Create Itinerary
+greece = Itinerary.create(title: "Island hopping in Greece", vital_info: "Flight info, hotel reservations, etc", helpful_info: "train tables, tour reservations", notes: "Check out this New York Times article...", description: "History and beaches!", image_url: "https://www.discovergreece.com/~/media/images/article-background-images/santorini-the-one-and-only/santorini-view.ashx")
+
+# Join it
+UserItinerary.create(user: alexa, itinerary: greece)
+
+#=================================================================================
+
+# Create Itinerary
+uk_malta = Itinerary.create(title: "Ireland, England, & Malta", vital_info: "Flight info, hotel reservations, etc", helpful_info: "train tables, tour reservations", notes: "Check out this New York Times article...", description: "Meeting the family in London, with some stops before and after for ourselves", image_url: "https://cdn.londonandpartners.com/visit/general-london/areas/river/76709-640x360-houses-of-parliament-and-london-eye-on-thames-from-above-640.jpg")
+
+# Join it
+UserItinerary.create(user: alexa, itinerary: greece)
+
+#=================================================================================
+
 # Create Houston Itinerary
 houston_itinerary = Itinerary.create(title: "Houston Heights", vital_info: "Flight info, hotel reservations, etc", helpful_info: "train tables, tour reservations", notes: "Check out this New York Times article...", description: "A walk up the boulevard in the cultural capital of the South.", image_url: "https://scontent-dfw5-1.xx.fbcdn.net/v/t31.0-8/30171615_1657692390986955_7965322445269873040_o.jpg?_nc_cat=104&_nc_oc=AQkYlyRqYxRtPzta2mRT8omGw2DtjafxzChjquEjKlRvnUCqn77YaC10h3NmgVUchlU&_nc_ht=scontent-dfw5-1.xx&oh=16e5f29334e2a7be99b579fd6f0bc83a&oe=5D9FB925")
 
-# Join them
+# Join it
 UserItinerary.create(user: alexa, itinerary: houston_itinerary)
+
+#=================================================================================

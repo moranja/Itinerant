@@ -148,7 +148,7 @@ export default class ItineraryScreen extends React.Component {
                 )
             }
             <TextInput
-              style={styles.textInput}
+              style={styles.searchTextInput}
               placeholder="Search Itinerary"
               value={this.state.searchTerm}
               onChangeText={this.handleSearch}
@@ -158,7 +158,7 @@ export default class ItineraryScreen extends React.Component {
             !itinerary.searchTerm
             ?
               (
-                <View style={styles.getStartedContainer}>
+                <View>
                   {itinerary.cities.map( c => (
                     <View key={c.id}>
                       <City {...c}/>
@@ -168,7 +168,7 @@ export default class ItineraryScreen extends React.Component {
               )
             :
               (
-                <View style={styles.getStartedContainer}>
+                <View>
                   {itinerary.attractions.map( a => (
                     <View key={a.id}>
                       <Attraction {...a}/>
@@ -187,6 +187,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  searchTextInput: {
+    marginBottom: 5,
+    marginLeft: 25,
+
   },
   sortButton: {
     borderWidth: 1,

@@ -2,7 +2,8 @@ import React from 'react';
 import {
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  StyleSheet
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -25,20 +26,47 @@ export default class Attraction extends React.Component {
 
   render() {
     return (
-      <View >
-        <Text>
-          {`${this.props.name} (${this.props.classification}): ${this.props.description}`}
-        </Text>
-        <View>
+      <View style={styles.attractionView}>
         <TouchableOpacity
           onPress={() => this.openInMaps(this.place_id)}
-        >
-          <Text>Testing</Text>
-          <Text>Testing</Text>
-          <Text>Testing</Text>
+          >
+          <Text style={styles.attractionText}>
+            {`${this.props.name} (${this.props.classification}): ${this.props.description}`}
+          </Text>
         </TouchableOpacity>
-        </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  sortButton: {
+    borderWidth: 1,
+    borderColor: '#923c2d',
+    backgroundColor: '#923c2d',
+    padding: 15,
+    margin: 5
+  },
+  sortButtonText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  attractionText: {
+    color: '#393b3a',
+    marginLeft: 24,
+    fontSize: 16,
+    textAlign: 'left',
+  },
+  attractionView: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  contentContainer: {
+    paddingTop: 30,
+  }
+});

@@ -73,43 +73,58 @@ export default class ProfileScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.getStartedContainer}>
-            <View>
-              <MonoText style={styles.codeHighlightText}>Whoaaaa</MonoText>
-            </View>
+          <View>
 
             {this.state.itineraries.map( i => (
-              <View key={i.id}>
-                <Text style={styles.getStartedText}>
-                  {i.title}
-                </Text>
+              <View style={styles.itineraryView} key={i.id}>
                 <TouchableOpacity
-                  style={styles.saveButton}
                   onPress={() => this.handleSubmit(i.id)}
                 >
-                  <Text style={styles.saveButtonText}>Open</Text>
+                  <Text style={styles.itineraryText}>{i.title}</Text>
                 </TouchableOpacity>
               </View>
             ))}
-            <View>
-              <TouchableOpacity
-                style={styles.saveButton}
-                onPress={() => this.logOut()}
-              >
-                <Text style={styles.saveButtonText}>Log Out</Text>
-              </TouchableOpacity>
-            </View>
           </View>
         </ScrollView>
+        <View>
+          <TouchableOpacity
+            style={styles.saveButton}
+            onPress={() => this.logOut()}
+          >
+            <Text style={styles.saveButtonText}>Log Out</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  saveButton: {
+    borderWidth: 1,
+    borderColor: '#923c2d',
+    backgroundColor: '#923c2d',
+    padding: 15,
+    margin: 5
+  },
+  saveButtonText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    textAlign: 'center'
+  },
   container: {
     flex: 1,
     backgroundColor: '#eae9e7',
+  },
+  itineraryText: {
+    color: '#393b3a',
+    marginLeft: 12,
+    fontSize: 30,
+    textAlign: 'left',
+  },
+  itineraryView: {
+    marginTop: 15,
+    marginBottom: 15,
   },
   developmentModeText: {
     marginBottom: 20,

@@ -2,7 +2,7 @@ import React from 'react'
 import ProfileList from './ProfileList'
 import NavBar from './NavBar'
 import { connect } from 'react-redux'
-
+import path from '../path'
 
 const mapStateToProps = (state) => ({
   user: state.user
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   loadUser: () => {
     return dispatch => {
-      fetch(`http://localhost:3000/users/${localStorage.userId}`, {
+      fetch(`http://${path}:3000/users/${localStorage.userId}`, {
         headers: {
           "Authorization": `Bearer ${localStorage.token}`
         }

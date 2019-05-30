@@ -2,6 +2,7 @@ import React from 'react'
 
 import EditPlanModal from './EditPlanModal'
 import { connect } from 'react-redux'
+import path from '../path'
 
 const mapStateToProps = (state) => ({
   itinerary: state.selected_itinerary
@@ -15,7 +16,7 @@ const mapDispatchToProps = {
       time: plan_info.time,
       content: plan_info.content
     }
-    fetch(`http://localhost:3000/plans/${plan_info.planId}`, {
+    fetch(`http://${path}:3000/plans/${plan_info.planId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

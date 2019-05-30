@@ -2,6 +2,7 @@ import React from 'react'
 import Attraction from './Attraction'
 import EditAreaModal from './EditAreaModal'
 import { connect } from 'react-redux'
+import path from '../path.js'
 
 const mapStateToProps = (state) => ({
   itinerary: state.selected_itinerary
@@ -15,7 +16,7 @@ const mapDispatchToProps = {
       classification: attraction_info.classification,
       description: attraction_info.description
     }
-    fetch(`http://localhost:3000/attractions/`, {
+    fetch(`http://${path}:3000/attractions/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +42,7 @@ const mapDispatchToProps = {
       country: area_info.country,
       content: area_info.content
     }
-    fetch(`http://localhost:3000/areas/${area_info.areaId}`, {
+    fetch(`http://${path}:3000/areas/${area_info.areaId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

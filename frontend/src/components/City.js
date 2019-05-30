@@ -5,6 +5,7 @@ import CreatePlanModal from './CreatePlanModal'
 import CreateAreaModal from './CreateAreaModal'
 import EditCityModal from './EditCityModal'
 import { connect } from 'react-redux'
+import path from '../path'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -15,7 +16,7 @@ const mapDispatchToProps = {
       name: area_info.name,
       content: area_info.content
     }
-    fetch(`http://localhost:3000/areas`, {
+    fetch(`http://${path}:3000/areas`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +42,7 @@ const mapDispatchToProps = {
       time: plan_info.time,
       content: plan_info.content
     }
-    fetch(`http://localhost:3000/plans`, {
+    fetch(`http://${path}:3000/plans`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +68,7 @@ const mapDispatchToProps = {
       country: city_info.country,
       content: city_info.content
     }
-    fetch(`http://localhost:3000/cities/${city_info.cityId}`, {
+    fetch(`http://${path}:3000/cities/${city_info.cityId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

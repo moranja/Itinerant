@@ -1,6 +1,7 @@
 import React from 'react'
 import EditAttractionModal from './EditAttractionModal'
 import { connect } from 'react-redux'
+import path from '../path'
 
 const mapStateToProps = (state) => ({
   itinerary: state.selected_itinerary
@@ -14,7 +15,7 @@ const mapDispatchToProps = {
       classification: attraction_info.classification,
       description: attraction_info.description
     }
-    fetch(`http://localhost:3000/attractions/${attraction_info.attractionId}`, {
+    fetch(`http://${path}:3000/attractions/${attraction_info.attractionId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

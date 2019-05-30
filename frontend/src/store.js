@@ -1,6 +1,7 @@
 import { createStore, compose, applyMiddleware } from 'redux'
 import ReduxThunk from 'redux-thunk'
 // import history from './history'
+// import path from '../path'
 
 
 const reducer = (state = {
@@ -28,7 +29,7 @@ const reducer = (state = {
     //     classification: action.payload.types[0],
     //     description: action.payload.description
     //   }
-    //   fetch(`http://localhost:3000/itineraries/${action.payload.itineraryId}`, {
+    //   fetch(`http://${path}:3000/itineraries/${action.payload.itineraryId}`, {
     //     method: "PATCH",
     //     headers: {
     //       "Content-Type": "application/json"

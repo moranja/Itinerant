@@ -1,10 +1,11 @@
 import React from 'react'
 import SignUp from './SignUp'
+import path from '../path'
 
 class CreateUser extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
-    fetch('http://localhost:3000/users/', {
+    fetch(`http://${path}:3000/users/`, {
       method: 'POST',
       headers:{
         'Content-Type':'application/json'

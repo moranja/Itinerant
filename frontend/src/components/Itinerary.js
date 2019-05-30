@@ -7,6 +7,7 @@ import EditItineraryHelpfulModal from './EditItineraryHelpfulModal'
 import EditItineraryNotesModal from './EditItineraryNotesModal'
 import TextField from '@material-ui/core/TextField'
 import { connect } from 'react-redux'
+import path from '../path'
 
 
 const mapStateToProps = (state) => ({
@@ -21,7 +22,7 @@ const mapDispatchToProps = {
       country: city_info.country,
       content: city_info.content
     }
-    fetch(`http://localhost:3000/cities`, {
+    fetch(`http://${path}:3000/cities`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +50,7 @@ const mapDispatchToProps = {
       helpful_info: itinerary_info.helpfulInfo,
       notes: itinerary_info.notes
     }
-    fetch(`http://localhost:3000/itineraries/${itinerary_info.itineraryId}`, {
+    fetch(`http://${path}:3000/itineraries/${itinerary_info.itineraryId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

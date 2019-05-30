@@ -1,10 +1,11 @@
 import React from 'react'
 import SignIn from './SignIn'
+import path from '../path'
 
 class Login extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
-    fetch('http://localhost:3000/login', {
+    fetch(`http://${path}:3000/login`, {
       method: 'POST',
       headers:{
         'Content-Type':'application/json'

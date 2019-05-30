@@ -87,13 +87,8 @@ const mapDispatchToProps = {
     })
     .then(res => res.json())
     .then(res => {
-      // console.log(res.details.id)
-      // history.push(`/itineraries/${res.details.id}`)
-      //
-      // This doesn't work the way I'd expect, creates the new page and changes the path, but doesn't actually load it...
-      //
+      dispatch({ type: "CLEAR_SELECTED_ITINERARY" })
       history.push('/profile')
-      // also breaking?
     })
   },
   clearItinerary: () => ({ type: "CLEAR_SELECTED_ITINERARY" })

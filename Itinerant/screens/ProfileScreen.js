@@ -7,7 +7,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  AsyncStorage
+  AsyncStorage,
+  RefreshControl
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import path from '../components/path'
@@ -27,7 +28,8 @@ export default class ProfileScreen extends React.Component {
   };
 
   state = {
-    itineraries: []
+    itineraries: [],
+    refreshing: false
   }
 
   handleSubmit = (id) => {
@@ -42,8 +44,12 @@ export default class ProfileScreen extends React.Component {
     })
   }
 
+  onRefresh = async () => {
+    await this.setState({refreshing: true})
+    this.fetchItineraries()
+  }
 
-  componentDidMount() {
+  fetchItineraries = () => {
     AsyncStorage.getItem('user').then( res => {
       user_info = JSON.parse(res)
       fetch(`http://${path}:3000/users/${user_info.id}`, {
@@ -62,19 +68,56 @@ export default class ProfileScreen extends React.Component {
         } else {
           this.setState({
             username: res.username,
-            itineraries: res.itinerary_list
+            itineraries: res.itinerary_list,
+            refreshing: false
           })
         }
       })
     })
   }
 
+  // fetchItineraries = () => {
+  //   AsyncStorage.getItem('user').then( res => {
+  //     user_info = JSON.parse(res)
+  //     fetch(`http://${path}:3000/users/${user_info.id}`, {
+  //       headers:{
+  //         "Authorization": `Bearer ${user_info.auth_token}`
+  //       }
+  //     })
+  //     .then( res => res.json())
+  //     .then( res => {
+  //       if (res.error) {
+  //         console.log(res.error)
+  //         AsyncStorage.removeItem('user')
+  //         .then(res => {
+  //           this.props.navigation.navigate('Login')
+  //         })
+  //       } else {
+  //         this.setState({
+  //           username: res.username,
+  //           itineraries: res.itinerary_list
+  //         })
+  //       }
+  //     })
+  //   })
+  // }
+
+
+  componentDidMount() {
+    this.fetchItineraries()
+  }
+
   render() {
+    console.log(this.state.refreshing)
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer} refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this.onRefresh}
+          />
+        }>
           <View>
-
             {this.state.itineraries.map( i => (
               <View style={styles.itineraryView} key={i.id}>
                 <TouchableOpacity

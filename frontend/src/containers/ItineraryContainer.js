@@ -243,8 +243,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       let cityId
       let areaId
 
-      console.log(this.state, cityId, areaId)
-
       if (!!this.state.cityId) {
         cityId=this.state.cityId
         if (!this.state.areaId && !!this.props.itinerary.cities.find( c => c.id === cityId).areas.length) {

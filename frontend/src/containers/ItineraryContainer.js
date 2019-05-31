@@ -243,6 +243,8 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       let cityId
       let areaId
 
+      console.log(this.state, cityId, areaId)
+
       if (!!this.state.cityId) {
         cityId=this.state.cityId
         if (!this.state.areaId && !!this.props.itinerary.cities.find( c => c.id === cityId).areas.length) {
@@ -252,7 +254,11 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         }
       } else if (this.props.itinerary.cities) {
         if (!!this.props.itinerary.cities.length) {
-          if (!!this.props.itinerary.cities[0].areas.length) {
+          if (!!this.state.areaId) {
+            cityId=this.props.itinerary.cities[0].id
+            areaId=this.state.areaId
+          }
+          else if (!!this.props.itinerary.cities[0].areas.length) {
             cityId=this.props.itinerary.cities[0].id
             areaId=this.props.itinerary.cities[0].areas[0].id
           } else {

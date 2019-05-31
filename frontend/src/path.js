@@ -1,3 +1,3 @@
-const path = "10.185.3.13"
+const path = "localhost"
 
 export default path

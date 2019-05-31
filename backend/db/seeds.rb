@@ -383,6 +383,7 @@ barcelona = Itinerary.create(title: "Honeymoon in Barcelona", vital_info: "Fligh
 
 # Join it
 UserItinerary.create(user: alexa, itinerary: barcelona)
+UserItinerary.create(user: adam, itinerary: barcelona)
 
 #=================================================================================
 
@@ -391,6 +392,7 @@ greece = Itinerary.create(title: "Island hopping in Greece", vital_info: "Flight
 
 # Join it
 UserItinerary.create(user: alexa, itinerary: greece)
+UserItinerary.create(user: adam, itinerary: greece)
 
 #=================================================================================
 
@@ -407,6 +409,7 @@ iceland = Itinerary.create(title: "A long weekend in Iceland", vital_info: "Flig
 
 # Join it
 UserItinerary.create(user: alexa, itinerary: iceland)
+UserItinerary.create(user: adam, itinerary: iceland)
 
 #=================================================================================
 

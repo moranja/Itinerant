@@ -195,9 +195,20 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       }
     }
 
+    vitalInfo = () => {
+      if (!!this.props.itinerary.users.filter(u => u.id === parseInt(localStorage.userId)).length) {
+        return (
+          <EditItineraryVitalModal
+            editVitalInfo={this.state.editVitalInfo}
+            handleChange={this.handleChange}
+            handleEditSubmit={this.handleEditSubmit}
+          />
+        )
+      }
+    } // flesh this out
+
     render() {
       let itinerary = this.searchedItinerary()
-      console.log(itinerary)
       return (
         <div>
           <TextField
@@ -220,11 +231,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
           <ul>
             {itinerary.schedule.map((d,index) => (<li key={index}>{d}</li>))}
           </ul>
-          <EditItineraryVitalModal
-            editVitalInfo={this.state.editVitalInfo}
-            handleChange={this.handleChange}
-            handleEditSubmit={this.handleEditSubmit}
-          />
+          {this.vitalInfo()}
           {itinerary.cities.map((c,index) => <City {...c} key={c.id}/>)}
           <CreateCityModal handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
 

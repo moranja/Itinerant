@@ -197,6 +197,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
 
     render() {
       let itinerary = this.searchedItinerary()
+      console.log(itinerary)
       return (
         <div>
           <TextField
@@ -217,7 +218,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
             handleDelete={this.handleDelete}
           />
           <ul>
-            {Object.keys(itinerary.schedule).map((d,index) => (<li key={index}>{d}</li>))}
+            {itinerary.schedule.map((d,index) => (<li key={index}>{d}</li>))}
           </ul>
           <EditItineraryVitalModal
             editVitalInfo={this.state.editVitalInfo}

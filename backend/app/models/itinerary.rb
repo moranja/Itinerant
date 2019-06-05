@@ -18,10 +18,14 @@ class Itinerary < ApplicationRecord
     self.attractions.sort_by{|att| Math.sqrt((att.latitude.to_f - lat)**2 + (att.longitude.to_f - lng)**2)}
   end
 
+  def plans_by_date
+    self.plans.group_by{|i| i.date}.keys.sort
+  end
+
   def full_itinerary
     itinerary_hash = {}
     itinerary_hash[:details] = self
-    itinerary_hash[:schedule] = self.plans.group_by{|i| i.date}
+    itinerary_hash[:schedule] = self.plans_by_date
     itinerary_hash[:users] = self.users
     itinerary_hash[:attractions] = self.attractions
     itinerary_hash[:cities] = []

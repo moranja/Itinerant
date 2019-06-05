@@ -69,7 +69,6 @@ export default class ItineraryScreen extends React.Component {
         errorMessage: 'Permission to access location was denied',
       });
     }
-
     let location = await Location.getCurrentPositionAsync({});
     fetch(`http://${path}:3000/itineraries/${this.state.details.id}/nearest`, {
       method: "POST",

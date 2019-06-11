@@ -20,7 +20,8 @@ const mapDispatchToProps = {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.token}`
+        "Authorization": `Bearer ${localStorage.token}`,
+        "X-Requested-With": "XMLHttpRequest"
       },
       body: JSON.stringify({
         ...editArea
@@ -39,7 +40,8 @@ const mapDispatchToProps = {
     fetch(`http://${path}${port}/attractions/${attractionId}`, {
       method: "DELETE",
       headers: {
-        "Authorization": `Bearer ${localStorage.token}`
+        "Authorization": `Bearer ${localStorage.token}`,
+        "X-Requested-With": "XMLHttpRequest"
       }
     })
     .then(res => res.json())

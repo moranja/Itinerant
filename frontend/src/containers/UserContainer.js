@@ -12,7 +12,8 @@ const mapDispatchToProps = {
     return dispatch => {
       fetch(`http://${path}${port}/users/${id}`, {
         headers: {
-          "Authorization": `Bearer ${localStorage.token}`
+          "Authorization": `Bearer ${localStorage.token}`,
+          "X-Requested-With": "XMLHttpRequest"
         }
       }) // change this to request from the selected itinerary eventually....
       .then(res => res.json())

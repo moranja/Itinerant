@@ -34,7 +34,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         method: 'POST',
         headers:{
           'Content-Type':'application/json',
-          "Authorization": `Bearer ${localStorage.token}`
+          "Authorization": `Bearer ${localStorage.token}`,
+          "X-Requested-With": "XMLHttpRequest"
         },
         body: JSON.stringify({
           title: this.state.title,

@@ -14,7 +14,8 @@ const mapDispatchToProps = {
     return dispatch => {
       fetch(`http://${path}${port}/users/${localStorage.userId}`, {
         headers: {
-          "Authorization": `Bearer ${localStorage.token}`
+          "Authorization": `Bearer ${localStorage.token}`,
+          "X-Requested-With": "XMLHttpRequest"
         }
       })
       .then(res => res.json())

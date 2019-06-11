@@ -9,7 +9,8 @@ class CreateUser extends React.Component {
     fetch(`http://${path}${port}/users/`, {
       method: 'POST',
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        "X-Requested-With": "XMLHttpRequest"
       },
       body: JSON.stringify({
         username: this.state.username,

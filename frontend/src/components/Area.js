@@ -21,7 +21,8 @@ const mapDispatchToProps = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.token}`
+        "Authorization": `Bearer ${localStorage.token}`,
+        "X-Requested-With": "XMLHttpRequest"
       },
       body: JSON.stringify({
         ...newAttraction
@@ -47,7 +48,8 @@ const mapDispatchToProps = {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.token}`
+        "Authorization": `Bearer ${localStorage.token}`,
+        "X-Requested-With": "XMLHttpRequest"
       },
       body: JSON.stringify({
         ...editArea

@@ -54,7 +54,8 @@ export default class ProfileScreen extends React.Component {
       user_info = JSON.parse(res)
       fetch(`http://${path}:3000/users/${user_info.id}`, {
         headers:{
-          "Authorization": `Bearer ${user_info.auth_token}`
+          "Authorization": `Bearer ${user_info.auth_token}`,
+          "X-Requested-With": "XMLHttpRequest"
         }
       })
       .then( res => res.json())

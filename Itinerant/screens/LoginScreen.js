@@ -36,7 +36,8 @@ export default class LoginScreen extends React.Component {
     fetch(`http://${path}:3000/login`, {
       method: 'POST',
       headers:{
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        "X-Requested-With": "XMLHttpRequest"
       },
       body: JSON.stringify({
         username: this.state.username,

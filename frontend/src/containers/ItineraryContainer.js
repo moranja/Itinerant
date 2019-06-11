@@ -32,7 +32,8 @@ const mapDispatchToProps = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.token}`
+        "Authorization": `Bearer ${localStorage.token}`,
+        "X-Requested-With": "XMLHttpRequest"
       },
       body: JSON.stringify({
         ...newAttraction
@@ -60,7 +61,8 @@ const mapDispatchToProps = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.token}`
+        "Authorization": `Bearer ${localStorage.token}`,
+        "X-Requested-With": "XMLHttpRequest"
       },
       body: JSON.stringify({
         ...payload
@@ -80,7 +82,8 @@ const mapDispatchToProps = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.token}`
+        "Authorization": `Bearer ${localStorage.token}`,
+        "X-Requested-With": "XMLHttpRequest"
       },
       body: JSON.stringify({
         id: payload

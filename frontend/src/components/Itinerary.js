@@ -28,7 +28,8 @@ const mapDispatchToProps = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.token}`
+        "Authorization": `Bearer ${localStorage.token}`,
+        "X-Requested-With": "XMLHttpRequest"
       },
       body: JSON.stringify({
         ...newCity
@@ -56,7 +57,8 @@ const mapDispatchToProps = {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.token}`
+        "Authorization": `Bearer ${localStorage.token}`,
+        "X-Requested-With": "XMLHttpRequest"
       },
       body: JSON.stringify({
         ...editItinerary
@@ -75,7 +77,8 @@ const mapDispatchToProps = {
     fetch(`http://${path}${port}/itineraries/${itineraryId}`, {
       method: "DELETE",
       headers: {
-        "Authorization": `Bearer ${localStorage.token}`
+        "Authorization": `Bearer ${localStorage.token}`,
+        "X-Requested-With": "XMLHttpRequest"
       }
     })
     .then(res => res.json())

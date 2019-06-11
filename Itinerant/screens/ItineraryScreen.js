@@ -74,7 +74,8 @@ export default class ItineraryScreen extends React.Component {
       method: "POST",
       headers:{
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${user_info.auth_token}`
+        "Authorization": `Bearer ${user_info.auth_token}`,
+        "X-Requested-With": "XMLHttpRequest"
       },
       body: JSON.stringify({
         latitude: location.coords.latitude,
@@ -97,7 +98,8 @@ export default class ItineraryScreen extends React.Component {
       AsyncStorage.getItem('itinerary').then( itinerary_res => {
         fetch(`http://${path}:3000/itineraries/${itinerary_res}`, {
           headers:{
-            "Authorization": `Bearer ${user_info.auth_token}`
+            "Authorization": `Bearer ${user_info.auth_token}`,
+            "X-Requested-With": "XMLHttpRequest"
           }
         })
         .then( res => res.json())

@@ -8,6 +8,7 @@ import EditItineraryNotesModal from './EditItineraryNotesModal'
 import TextField from '@material-ui/core/TextField'
 import { connect } from 'react-redux'
 import path from '../path'
+import port from '../port'
 import history from '../history'
 
 
@@ -23,7 +24,7 @@ const mapDispatchToProps = {
       country: city_info.country,
       content: city_info.content
     }
-    fetch(`http://${path}:3000/cities`, {
+    fetch(`http://${path}${port}/cities`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +52,7 @@ const mapDispatchToProps = {
       helpful_info: itinerary_info.helpfulInfo,
       notes: itinerary_info.notes
     }
-    fetch(`http://${path}:3000/itineraries/${itinerary_info.itineraryId}`, {
+    fetch(`http://${path}${port}/itineraries/${itinerary_info.itineraryId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +72,7 @@ const mapDispatchToProps = {
     })
   },
   deleteItinerary: itineraryId => dispatch => {
-    fetch(`http://${path}:3000/itineraries/${itineraryId}`, {
+    fetch(`http://${path}${port}/itineraries/${itineraryId}`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${localStorage.token}`

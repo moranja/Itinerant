@@ -6,6 +6,7 @@ import CreateAreaModal from './CreateAreaModal'
 import EditCityModal from './EditCityModal'
 import { connect } from 'react-redux'
 import path from '../path'
+import port from '../port'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -16,7 +17,7 @@ const mapDispatchToProps = {
       name: area_info.name,
       content: area_info.content
     }
-    fetch(`http://${path}:3000/areas`, {
+    fetch(`http://${path}${port}/areas`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +43,7 @@ const mapDispatchToProps = {
       time: plan_info.time,
       content: plan_info.content
     }
-    fetch(`http://${path}:3000/plans`, {
+    fetch(`http://${path}${port}/plans`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +69,7 @@ const mapDispatchToProps = {
       country: city_info.country,
       content: city_info.content
     }
-    fetch(`http://${path}:3000/cities/${city_info.cityId}`, {
+    fetch(`http://${path}${port}/cities/${city_info.cityId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +89,7 @@ const mapDispatchToProps = {
     })
   },
   deleteCity: cityId => dispatch => {
-    fetch(`http://${path}:3000/cities/${cityId}`, {
+    fetch(`http://${path}${port}/cities/${cityId}`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${localStorage.token}`

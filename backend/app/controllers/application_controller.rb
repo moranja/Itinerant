@@ -39,4 +39,8 @@ class ApplicationController < ActionController::Base
       }
     end
   end
+
+  def react_app
+      render :file => 'public/index.html'
+  end
 end

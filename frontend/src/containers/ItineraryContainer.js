@@ -8,6 +8,7 @@ import history from '../history'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import path from '../path'
+import port from '../port'
 
 const mapStateToProps = (state) => ({
   itinerary: state.selected_itinerary
@@ -27,7 +28,7 @@ const mapDispatchToProps = {
       classification: attraction_info.classification,
       description: attraction_info.description
     }
-    fetch(`http://${path}:3000/attractions/`, {
+    fetch(`http://${path}${port}/attractions/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +43,7 @@ const mapDispatchToProps = {
   },
   loadItinerary: (id) => {
     return dispatch => {
-      fetch(`http://${path}:3000/itineraries/${id}`, {
+      fetch(`http://${path}${port}/itineraries/${id}`, {
         headers: {
           "Authorization": `Bearer ${localStorage.token}`
         }
@@ -54,7 +55,7 @@ const mapDispatchToProps = {
     }
   },
   addCollaborator: payload => dispatch => {
-    fetch(`http://${path}:3000/user_itineraries/`, {
+    fetch(`http://${path}${port}/user_itineraries/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +75,7 @@ const mapDispatchToProps = {
     })
   },
   copyItinerary: payload => dispatch => {
-    fetch(`http://${path}:3000/copyItinerary/`, {
+    fetch(`http://${path}${port}/copyItinerary/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

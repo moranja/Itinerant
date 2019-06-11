@@ -2,6 +2,7 @@ import React from 'react'
 import EditAttractionModal from './EditAttractionModal'
 import { connect } from 'react-redux'
 import path from '../path'
+import port from '../port'
 
 const mapStateToProps = (state) => ({
   itinerary: state.selected_itinerary
@@ -15,7 +16,7 @@ const mapDispatchToProps = {
       classification: attraction_info.classification,
       description: attraction_info.description
     }
-    fetch(`http://${path}:3000/attractions/${attraction_info.attractionId}`, {
+    fetch(`http://${path}${port}/attractions/${attraction_info.attractionId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +36,7 @@ const mapDispatchToProps = {
     })
   },
   deleteAttraction: attractionId => dispatch => {
-    fetch(`http://${path}:3000/attractions/${attractionId}`, {
+    fetch(`http://${path}${port}/attractions/${attractionId}`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${localStorage.token}`

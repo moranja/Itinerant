@@ -2,6 +2,7 @@ import React from 'react'
 import ItineraryTile from '../components/ItineraryTile'
 import { connect } from 'react-redux'
 import path from '../path'
+import port from '../port'
 
 const mapStateToProps = (state) => ({
   itineraries: state.itineraries
@@ -10,7 +11,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   loadItineraries: () => {
     return dispatch => {
-      fetch(`http://${path}:3000/itineraries/`, {
+      fetch(`http://${path}${port}/itineraries/`, {
         headers: {
           "Authorization": `Bearer ${localStorage.token}`
         }
@@ -28,7 +29,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     handleSubmit = (e) => {
       e.preventDefault()
-      fetch(`http://${path}:3000/itineraries/`, {
+      fetch(`http://${path}${port}/itineraries/`, {
         method: 'POST',
         headers:{
           'Content-Type':'application/json',

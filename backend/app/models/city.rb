@@ -6,7 +6,6 @@ class City < ApplicationRecord
 
   def plans_by_date
     result = self.plans.sort_by{|p| p.date}
-    byebug
     return result
   end
 

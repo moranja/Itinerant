@@ -3,6 +3,7 @@ import Attraction from './Attraction'
 import EditAreaModal from './EditAreaModal'
 import { connect } from 'react-redux'
 import path from '../path.js'
+import port from '../port.js'
 
 const mapStateToProps = (state) => ({
   itinerary: state.selected_itinerary
@@ -16,7 +17,7 @@ const mapDispatchToProps = {
       classification: attraction_info.classification,
       description: attraction_info.description
     }
-    fetch(`http://${path}:3000/attractions/`, {
+    fetch(`http://${path}${port}/attractions/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +43,7 @@ const mapDispatchToProps = {
       country: area_info.country,
       content: area_info.content
     }
-    fetch(`http://${path}:3000/areas/${area_info.areaId}`, {
+    fetch(`http://${path}${port}/areas/${area_info.areaId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +63,7 @@ const mapDispatchToProps = {
     })
   },
   deleteArea: areaId => dispatch => {
-    fetch(`http://${path}:3000/areas/${areaId}`, {
+    fetch(`http://${path}${port}/areas/${areaId}`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${localStorage.token}`

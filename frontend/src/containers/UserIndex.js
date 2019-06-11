@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import history from '../history'
 import path from '../path'
+import port from '../port'
 
 const mapStateToProps = (state) => ({
   users: state.users,
@@ -11,7 +12,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   loadUsers: () => {
     return dispatch => {
-      fetch(`http://${path}:3000/users/`, {
+      fetch(`http://${path}${port}/users/`, {
         headers: {
           "Authorization": `Bearer ${localStorage.token}`
         }
@@ -24,7 +25,7 @@ const mapDispatchToProps = {
   },
   selectUser: (id) => {
     return dispatch => {
-      fetch(`http://${path}:3000/users/${id}`, {
+      fetch(`http://${path}${port}/users/${id}`, {
         headers: {
           "Authorization": `Bearer ${localStorage.token}`
         }

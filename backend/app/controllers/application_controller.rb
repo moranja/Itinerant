@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   attr_reader :current_user
 
   before_action :logged_in?
+  skip_before_action :logged_in?, only: :react_app
 
   def logged_in?
     begin

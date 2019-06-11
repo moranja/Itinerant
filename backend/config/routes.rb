@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :areas
   resources :cities
   resources :plans
-  resources :itineraries
+  resources :itineraries#, constraints: ->(request) do
+  #   request.xhr? && !request.format.html?
+  # end
   resources :user_itineraries
   resources :users
 

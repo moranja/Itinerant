@@ -1,3 +1,3 @@
-const path = "34.66.186.39"
+const path = "10.185.1.4"
 
 export default path

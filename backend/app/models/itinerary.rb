@@ -39,8 +39,9 @@ class Itinerary < ApplicationRecord
     itinerary_hash
   end
 
-  def self.export_attractions(file_name)
+  def export_attractions(file_name)
     CSV.open("csv/#{file_name}.csv", "w+") do |csv|
+      byebug
       # title_row = School_Day.all.map {|sd| sd.date}
       # title_row.unshift("Students")
       # csv << title_row

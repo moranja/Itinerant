@@ -41,11 +41,17 @@ class Itinerary < ApplicationRecord
 
   def export_attractions(file_name)
     CSV.open("csv/#{file_name}.csv", "w+") do |csv|
-      byebug
-      csv << ["Name", "Lat/Lng", "Address", "Hours", "Cost", "Classification", "Description"]
-      keys = [name, lat_lng, address, hours, cost, classification, description]
+      csv << ["Name", "Lat/Lng", "Address", "Cost", "Classification", "Description"]
+      keys = ["name", "lat_lng", "address", "cost", "classification", "description"]
       self.attractions.each do |att|
         attraction_array = []
+        keys.each do |k|
+          attraction_array.push(att[k])
+        end
+        csv << attraction_array
+      end
+      byebug
+
 
       # Student.find_each do |student|
       #   if student.is_teacher

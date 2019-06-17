@@ -41,25 +41,16 @@ class Itinerary < ApplicationRecord
 
   def export_attractions(file_name)
     CSV.open("csv/#{file_name}.csv", "w+") do |csv|
-      csv << ["Name", "Lat/Lng", "Address", "Cost", "Classification", "Description"]
-      keys = ["name", "lat_lng", "address", "cost", "classification", "description"]
+      csv << ["Latitude, Longitude", "Name", "Address", "Cost", "Classification", "Description"]
+      keys = ["name", "address", "cost", "classification", "description"]
       self.attractions.each do |att|
         attraction_array = []
+        attraction_array.push(att.lat_lng)
         keys.each do |k|
           attraction_array.push(att[k])
         end
         csv << attraction_array
       end
-      byebug
-
-
-      # Student.find_each do |student|
-      #   if student.is_teacher
-      #   else
-      #     array_test = student.attendances.map {|x| x.arrival_time.in_time_zone("Central Time (US & Canada)")}
-      #     array_test.unshift(student.full_name)
-      #     csv << array_test
-      # end
     end
-  end
+  end # This correctly exports attractions in a format that is easily imported into Google's My Maps. Now to get the site to give it to the user...
 end

@@ -25,8 +25,8 @@ const MapWithASearchBox = compose(
   lifecycle({
     componentWillMount() {
       const refs = {}
-      let userLat = 41.9
-      let userLng = -87.624
+      let userLat = 29.7604
+      let userLng = -95.3698
       const showPosition = (position) => {
         userLat = position.coords.latitude
         userLng = position.coords.longitude

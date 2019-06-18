@@ -10,6 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import path from '../path'
 import port from '../port'
 
+import { CSVLink } from "react-csv"
+
 const mapStateToProps = (state) => ({
   itinerary: state.selected_itinerary
 })
@@ -105,7 +107,8 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       cityId: "",
       areaId: "",
       classification: "Food and Drink",
-      description: ""
+      description: "",
+      csvData: []
     }
 
     addAnAttraction = (place_info) => {
@@ -164,7 +167,9 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       })
       .then(res => res.json())
       .then(res => {
-        console.log(res)
+        this.setState({
+          csvData: res
+        })
       })
     }
 
@@ -310,6 +315,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
                     <br />
                     {this.canEdit()}
                     <button onClick={this.fetchCSV}>Test</button>
+                    <CSVLink data={this.state.csvData}>Download me</CSVLink>;
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={7}>

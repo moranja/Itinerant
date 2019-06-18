@@ -156,16 +156,11 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     fetchCSV = () => {
-      fetch(`http://${path}${port}/csv/`, {
-        method: "POST",
+      fetch(`http://${path}${port}/itineraries/${this.props.itinerary.details.id}/csv/`, {
         headers: {
-          "Content-Type": "application/json",
           "Authorization": `Bearer ${localStorage.token}`,
           "X-Requested-With": "XMLHttpRequest"
-        },
-        body: JSON.stringify({
-          id: this.props.itinerary.details.id
-        })
+        }
       })
       .then(res => res.json())
       .then(res => {

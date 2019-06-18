@@ -39,7 +39,7 @@ class Itinerary < ApplicationRecord
     itinerary_hash
   end
 
-  def export_attractions(file_name)
+  def export_attractions
     # CSV.open("csv/#{file_name}.csv", "w+") do |csv|
     #   csv << ["Latitude, Longitude", "Name", "Address", "Cost", "Classification", "Description"]
     #   keys = ["name", "address", "cost", "classification", "description"]

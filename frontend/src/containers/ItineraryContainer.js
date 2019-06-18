@@ -315,7 +315,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
                     <br />
                     {this.canEdit()}
                     <button onClick={this.fetchCSV}>Test</button>
-                    <CSVLink data={this.state.csvData}>Download me</CSVLink>;
+                    <CSVLink data={this.state.csvData}>Download me</CSVLink>
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={7}>

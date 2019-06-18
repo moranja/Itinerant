@@ -40,17 +40,29 @@ class Itinerary < ApplicationRecord
   end
 
   def export_attractions(file_name)
-    CSV.open("csv/#{file_name}.csv", "w+") do |csv|
-      csv << ["Latitude, Longitude", "Name", "Address", "Cost", "Classification", "Description"]
-      keys = ["name", "address", "cost", "classification", "description"]
-      self.attractions.each do |att|
-        attraction_array = []
-        attraction_array.push(att.lat_lng)
-        keys.each do |k|
-          attraction_array.push(att[k])
-        end
-        csv << attraction_array
+    # CSV.open("csv/#{file_name}.csv", "w+") do |csv|
+    #   csv << ["Latitude, Longitude", "Name", "Address", "Cost", "Classification", "Description"]
+    #   keys = ["name", "address", "cost", "classification", "description"]
+    #   self.attractions.each do |att|
+    #     attraction_array = []
+    #     attraction_array.push(att.lat_lng)
+    #     keys.each do |k|
+    #       attraction_array.push(att[k])
+    #     end
+    #     csv << attraction_array
+    #   end
+    # end
+    csv = []
+    csv << ["Latitude, Longitude", "Name", "Address", "Cost", "Classification", "Description"]
+    keys = ["name", "address", "cost", "classification", "description"]
+    self.attractions.each do |att|
+      attraction_array = []
+      attraction_array.push(att.lat_lng)
+      keys.each do |k|
+        attraction_array.push(att[k])
       end
+      csv << attraction_array
     end
+    return csv
   end # This correctly exports attractions in a format that is easily imported into Google's My Maps. Now to get the site to give it to the user...
 end

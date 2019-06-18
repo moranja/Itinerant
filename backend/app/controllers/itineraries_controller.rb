@@ -47,6 +47,11 @@ class ItinerariesController < ApplicationController
     render json: new_itinerary.full_itinerary
   end
 
+  def csv
+    itinerary = Itinerary.find(params[:id])
+    render json: itinerary.export_attractions
+  end
+
   def destroy
     itinerary = Itinerary.find(params[:id])
 

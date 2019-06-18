@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
     post '/login', to: 'users#authenticate'
     post '/copyItinerary', to: 'itineraries#copy'
+    post '/csv', to: 'itineraries#csv'
     post '/itineraries/:id/nearest', to: 'itineraries#nearest'
   end
   # All xhr (i.e. fetches) requests get caught by the above and routed accordingly.

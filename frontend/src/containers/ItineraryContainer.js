@@ -155,6 +155,24 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       this.props.clearItinerary()
     }
 
+    fetchCSV = () => {
+      fetch(`http://${path}${port}/csv/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.token}`,
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        body: JSON.stringify({
+          id: this.props.itinerary.details.id
+        })
+      })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+      })
+    }
+
     componentDidMount() {
       this.props.loadItinerary(this.props.match.params.id)
     }
@@ -296,6 +314,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
                     {this.renderForm(cityId, areaId)}
                     <br />
                     {this.canEdit()}
+                    <button onClick={this.fetchCSV}>Test</button>
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={7}>

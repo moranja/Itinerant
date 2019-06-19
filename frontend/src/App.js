@@ -2,6 +2,7 @@ import React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
 import HomePage from './containers/HomePage'
 import Login from './components/Login'
+import Help from './components/Help'
 import CreateUser from './components/CreateUser'
 import Profile from './components/Profile'
 import UserIndex from './containers/UserIndex'
@@ -24,6 +25,7 @@ const App = () => (
       <Route path="/profile" component={Profile} />
       <Route path="/itineraries/:id" component={ItineraryContainer} />
       <Route path="/login" component={Login} />
+      <Route path="/help" component={Help} />
       <Route path="/create_user" component={CreateUser} />
       <Route path="/" component={HomePage} />
     </Switch>

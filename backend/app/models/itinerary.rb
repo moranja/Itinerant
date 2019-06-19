@@ -52,6 +52,8 @@ class Itinerary < ApplicationRecord
     #     csv << attraction_array
     #   end
     # end
+    # this downloads a csv to the server...
+      
     csv = []
     csv << ["Latitude, Longitude", "Name", "Address", "Cost", "Classification", "Description"]
     keys = ["name", "address", "cost", "classification", "description"]

@@ -36,6 +36,12 @@ function DenseAppBar(props) {
           <Typography variant="h6" className={classes.appBarText} onClick={() => history.push(`/login`)}>
             Login
           </Typography>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <Typography variant="h6" className={classes.appBarText} onClick={() => history.push(`/help`)}>
+            Help
+          </Typography>
         </Toolbar>
       </AppBar>
     </div>

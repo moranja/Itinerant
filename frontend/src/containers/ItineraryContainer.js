@@ -116,6 +116,8 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     handleChange = (e) => {
+      e.persist()
+      console.log(e)
       this.setState({[e.target.id]: e.target.value})
     }
 
@@ -142,7 +144,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         classification: this.state.classification
       }
       this.props.addAttractionFromMap(payload)
-      this.setState({ description: "", classification: "Food and Drink"})
+      this.setState({ description: ""})
     }
 
     handleAddUser = (e) => {

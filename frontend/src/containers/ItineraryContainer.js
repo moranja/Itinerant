@@ -108,6 +108,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
       areaId: "",
       classification: "Food and Drink",
       description: "",
+      username: "",
       csvData: []
     }
 
@@ -116,8 +117,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (
     }
 
     handleChange = (e) => {
-      e.persist()
-      console.log(e)
       this.setState({[e.target.id]: e.target.value})
     }
 
@@ -154,6 +153,9 @@ export default connect(mapStateToProps, mapDispatchToProps) (
         username: this.state.username,
         itineraryId: this.props.itinerary.details.id
       })
+      this.setState({
+        username: ""
+      })
     }
 
     clearItinerary = () => {
@@ -186,7 +188,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (
             <h4>Welcome {localStorage.username}, you may edit this page</h4>
             <form onSubmit={this.handleAddUser}>
               <label>Enter another user's username to add them as a collaborator: </label>
-              <input type="text" placeholder="Enter Username" id="username" onChange={this.handleChange} />
+              <input type="text" placeholder="Enter Username" id="username" value={this.state.username} onChange={this.handleChange} />
               <input type="submit" />
             </form>
           </div>

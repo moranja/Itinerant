@@ -67,7 +67,7 @@ export default function ItineraryAlbum(props) {
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {props.itineraries.map(card => (
+            {props.itineraries.reverse().map(card => (
               <Grid item key={card.id} xs={12} sm={6}>
                 <Card className={classes.card}>
                   <CardMedia

@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import path from '../path'
 import port from '../port'
 
-import { CSVLink } from "react-csv"
+// import { CSVLink } from "react-csv"
 
 const mapStateToProps = (state) => ({
   itinerary: state.selected_itinerary
@@ -316,8 +316,11 @@ export default connect(mapStateToProps, mapDispatchToProps) (
                     {this.renderForm(cityId, areaId)}
                     <br />
                     {this.canEdit()}
+                    {/*
                     <button onClick={this.fetchCSV}>Test</button>
                     <CSVLink data={this.state.csvData}>Download me</CSVLink>
+                    feature still in progress...
+                    */}
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={7}>

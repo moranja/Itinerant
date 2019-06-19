@@ -2,6 +2,6 @@
 // const port = ":3000"
 
 // Production port
-const port = ":80"
+const port = ""
 
 export default port

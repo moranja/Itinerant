@@ -15,6 +15,7 @@ import { WebBrowser, Location, Permissions } from 'expo';
 import City from './City'
 import Attraction from './Attraction'
 import path from '../components/path'
+import port from '../components/port'
 
 import { MonoText } from '../components/StyledText';
 
@@ -70,7 +71,7 @@ export default class ItineraryScreen extends React.Component {
       });
     }
     let location = await Location.getCurrentPositionAsync({});
-    fetch(`http://${path}:3000/itineraries/${this.state.details.id}/nearest`, {
+    fetch(`http://${path}${port}/itineraries/${this.state.details.id}/nearest`, {
       method: "POST",
       headers:{
         "Content-Type": "application/json",
@@ -96,7 +97,7 @@ export default class ItineraryScreen extends React.Component {
     AsyncStorage.getItem('user').then( user_res => {
       user_info = JSON.parse(user_res)
       AsyncStorage.getItem('itinerary').then( itinerary_res => {
-        fetch(`http://${path}:3000/itineraries/${itinerary_res}`, {
+        fetch(`http://${path}${port}/itineraries/${itinerary_res}`, {
           headers:{
             "Authorization": `Bearer ${user_info.auth_token}`,
             "X-Requested-With": "XMLHttpRequest"

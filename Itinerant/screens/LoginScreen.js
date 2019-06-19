@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 
 import path from '../components/path'
+import port from '../components/port'
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = {
@@ -33,7 +34,7 @@ export default class LoginScreen extends React.Component {
   }
 
   handleSubmit = (e) => {
-    fetch(`http://${path}:3000/login`, {
+    fetch(`http://${path}${port}/login`, {
       method: 'POST',
       headers:{
         'Content-Type':'application/json',

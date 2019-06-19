@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import path from '../components/path'
+import port from '../components/port'
 
 import { MonoText } from '../components/StyledText';
 
@@ -52,7 +53,7 @@ export default class ProfileScreen extends React.Component {
   fetchItineraries = () => {
     AsyncStorage.getItem('user').then( res => {
       user_info = JSON.parse(res)
-      fetch(`http://${path}:3000/users/${user_info.id}`, {
+      fetch(`http://${path}${port}/users/${user_info.id}`, {
         headers:{
           "Authorization": `Bearer ${user_info.auth_token}`,
           "X-Requested-With": "XMLHttpRequest"
